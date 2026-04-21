@@ -1,0 +1,868 @@
+/* ==========================================
+   1. RESET & VARIABILI
+========================================== */
+:root {
+  --navbar-height: 80px;
+  --active: #207b6e;
+  --text: #fff;
+  --transition: 0.3s ease;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  min-height: 100%; /* Sostituito height per evitare blocchi */
+  font-family: Arial, sans-serif;
+  background: #000;
+  color: #fff;
+  overflow-x: hidden;
+}
+
+/* ==========================================
+   2. NAVBAR & MENU
+========================================== */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--navbar-height);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: transparent;
+  isolation: isolate; 
+}
+
+.navbar-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.75), rgba(0,0,0,0));
+  pointer-events: none;
+}
+
+.menu {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+}
+
+.menu > a,
+.dropdown-toggle {
+  color: var(--text);
+  text-decoration: none;
+  padding: 5px 0;
+  position: relative;
+  font-size: 15px;
+  background: transparent;
+}
+
+/* LINEA HOVER */
+.menu > a::after,
+.dropdown-toggle::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 0%;
+  height: 2px;
+  background: #fff;
+  transition: width 0.3s ease;
+}
+
+.menu > a:hover::after,
+.dropdown:hover .dropdown-toggle::before,
+.menu a.active::after {
+  width: 100%;
+}
+
+/* SOCIAL */
+.social-icons {
+  position: absolute;
+  right: 30px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  gap: 15px;
+}
+
+.social-icon img {
+  width: 20px;
+  height: 20px;
+  transition: 0.3s;
+}
+
+.social-icon:hover img {
+  transform: scale(1.2);
+  opacity: 0.8;
+}
+
+/* ==========================================
+   3. DROPDOWNS & MEGA MENU (MODERNIZED)
+========================================== */
+.mega-dropdown { 
+    position: static; /* Necessario per permettere al menu di espandersi su tutta la larghezza se desiderato */
+}
+
+.mega-menu {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    width: 90vw;
+    max-width: 1100px;
+    padding: 40px;
+    background: rgba(15, 15, 15, 0.98);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 0 0 15px 15px;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.8);
+    z-index: 10000;
+}
+
+.mega-dropdown:hover .mega-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+}
+
+.mega-grid-wrapper {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* 5 colonne fisse */
+    gap: 30px;
+}
+
+.mega-column h4 {
+    font-size: 11px;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+    color: var(--active); /* Colore brand per i titoli */
+    text-transform: uppercase;
+    font-weight: 800;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding-bottom: 8px;
+}
+
+.mega-column a {
+    display: block;
+    padding: 6px 0;
+    color: rgba(255,255,255,0.7);
+    text-decoration: none;
+    font-size: 13px;
+    transition: 0.3s ease;
+    line-height: 1.4;
+}
+
+.mega-column a:hover {
+    color: #fff;
+    transform: translateX(5px);
+}
+
+/* Freccetta dropdown */
+.dropdown-toggle span::after {
+    content: "";
+    display: inline-block;
+    margin-left: 8px;
+    border: solid rgba(255,255,255,0.5);
+    border-width: 0 1.5px 1.5px 0;
+    padding: 2.5px;
+    transform: rotate(45deg) translateY(-2px);
+    transition: 0.3s;
+}
+
+.mega-dropdown:hover .dropdown-toggle span::after {
+    transform: rotate(-135deg) translateY(-2px);
+    border-color: var(--active);
+}
+/* ==========================================================================
+   HERO SLIDER MODERNO (KEN BURNS EFFECT)
+   ========================================================================== */
+.modern-hero-slider {
+    position: relative;
+    width: 100%;
+    height: 100vh; /* Tutto schermo */
+    overflow: hidden;
+    background: #000; /* Sfondo di sicurezza */
+}
+
+/* Contenitore Slide */
+.hero-slides {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+}
+
+.hero-slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 1.5s ease-in-out, visibility 1.5s ease-in-out;
+}
+
+.hero-slide.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Immagine con Effetto Zoom Lento (Ken Burns) */
+.hero-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1.1); /* Parte leggermente zoomata */
+    transition: transform 10s linear; /* Animazione molto lenta */
+}
+
+.hero-slide.active img {
+    transform: scale(1); /* Torna alla dimensione normale */
+}
+
+/* Overlay Scuro per Leggibilità Testo */
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.5) 0%,
+        rgba(0, 0, 0, 0.2) 50%,
+        rgba(0, 0, 0, 0.7) 100%
+    );
+}
+
+/* Contenuto Testuale */
+.hero-content-wrapper {
+    position: relative;
+    z-index: 10; /* Sopra lo slider */
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0 10%;
+    color: #fff;
+}
+
+.hero-content {
+    max-width: 850px;
+    animation: fadeInUpHero 1.2s ease-out 0.5s both; /* Appare dopo un delay */
+}
+
+.hero-tag {
+    color: var(--active);
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    font-size: 13px;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 20px;
+}
+
+.hero-content h1 {
+    font-size: clamp(45px, 8vw, 95px); /* Dimensione dinamica */
+    font-weight: 900;
+    letter-spacing: -3px;
+    line-height: 0.9;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+}
+
+.hero-content p {
+    font-size: clamp(16px, 1.5vw, 20px);
+    line-height: 1.6;
+    opacity: 0.9;
+    max-width: 600px;
+    margin-bottom: 50px;
+}
+
+/* Pulsanti Moderni */
+.hero-btns {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.btn-primary, .btn-secondary {
+    padding: 18px 35px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background-color: var(--active);
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background-color: #fff;
+    color: #000;
+    transform: translateY(-3px);
+}
+
+.btn-secondary {
+    background-color: transparent;
+    border: 2px solid #fff;
+    color: #fff;
+}
+
+.btn-secondary:hover {
+    background-color: rgba(255,255,255,0.1);
+    transform: translateY(-3px);
+}
+
+/* Animazione Ingresso Testo */
+@keyframes fadeInUpHero {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* INDICATORE SCROLL (MOUSE) */
+.scroll-indicator {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    opacity: 0.6;
+    color: #fff;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.mouse {
+    width: 26px;
+    height: 42px;
+    border: 2px solid #fff;
+    border-radius: 15px;
+    position: relative;
+}
+
+.mouse::before {
+    content: "";
+    width: 5px;
+    height: 9px;
+    background: #fff;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 8px;
+    border-radius: 3px;
+    animation: scrollMouseDot 2s infinite;
+}
+
+@keyframes scrollMouseDot {
+    0% { opacity: 1; top: 8px; }
+    100% { opacity: 0; top: 25px; }
+}
+
+/* Responsive Fix */
+@media (max-width: 768px) {
+    .hero-content { padding: 0 5%; text-align: center; display: flex; flex-direction: column; align-items: center; }
+    .hero-btns { justify-content: center; }
+    .hero-content h1 { letter-spacing: -1px; }
+}
+
+/* ==========================================
+   5. PRODOTTI (CAROSELLI BRAND)
+========================================== */
+.prodotti-container {
+  padding: 120px 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.brand-section { margin-bottom: 100px; }
+
+.brand-title {
+  color: #fff;
+  font-size: 32px;
+  margin-bottom: 40px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  border-left: 5px solid var(--active);
+  padding-left: 20px;
+}
+
+.brand-carousel {
+  position: relative;
+  overflow: visible; 
+  padding: 50px 0;
+}
+
+.carousel-track {
+  display: flex;
+  align-items: center;
+  transition: transform 0.7s cubic-bezier(0.19, 1, 0.22, 1);
+  gap: 80px;
+  padding: 0 50%;
+  will-change: transform;
+}
+
+.carousel-img {
+  width: 450px;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 12px;
+  opacity: 0.3;
+  transition: all 0.6s ease;
+  flex-shrink: 0;
+  transform: scale(0.85);
+  cursor: pointer;
+}
+
+.carousel-img.focused {
+  opacity: 1;
+  transform: scale(1.25);
+  z-index: 10;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+}
+
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 60px;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  background: rgba(255,255,255,0.2);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.dot.active { background: var(--active); transform: scale(1.3); }
+
+/* ==========================================
+   6. CONTATTI (MODERN LAYOUT)
+========================================== */
+.c-modern-layout {
+  display: flex;
+  flex-wrap: wrap;
+  min-height: 100vh;
+  padding-top: var(--navbar-height);
+  background: #000;
+}
+
+.c-modern-info {
+  flex: 1;
+  min-width: 350px;
+  padding: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.c-label { color: var(--active); text-transform: uppercase; letter-spacing: 2px; font-size: 14px; }
+.c-title { font-size: 45px; margin: 20px 0; line-height: 1.1; color: #fff; }
+.c-title span { color: var(--active); }
+.c-subtitle { opacity: 0.7; margin-bottom: 40px; font-size: 18px; color: #fff; }
+
+.c-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 40px; }
+.c-item h4 { color: rgba(255,255,255,0.4); text-transform: uppercase; font-size: 12px; margin-bottom: 10px; }
+
+.c-actions { display: flex; gap: 20px; }
+.c-btn { 
+  padding: 15px 30px; 
+  border-radius: 5px; 
+  text-decoration: none; 
+  color: #fff; 
+  font-weight: bold;
+  transition: 0.3s;
+}
+.c-btn.wa { background: #25D366; }
+.c-btn.mail { background: var(--active); }
+
+.c-modern-map { 
+  flex: 1; 
+  min-width: 350px; 
+  min-height: 400px; 
+  filter: grayscale(1) invert(0.9); 
+}
+.c-modern-map iframe { width: 100%; height: 100%; border: none; }
+
+/* =========================
+   HOME INTRO MODERNA
+========================= */
+.home-intro {
+    padding: 120px 60px;
+    background: #000;
+}
+
+.intro-container {
+    max-width: 1300px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 80px;
+    align-items: center;
+}
+
+.label-superior {
+    color: var(--active);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: 14px;
+    display: block;
+    margin-bottom: 20px;
+}
+
+.intro-content h2 {
+    font-size: 48px;
+    line-height: 1.1;
+    margin-bottom: 40px;
+    text-transform: uppercase;
+}
+
+.intro-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+}
+
+.intro-text p {
+    font-size: 17px;
+    line-height: 1.8;
+    opacity: 0.8;
+    margin-bottom: 25px;
+}
+
+.link-scopri {
+    color: #fff;
+    text-decoration: none;
+    border-bottom: 1px solid var(--active);
+    padding-bottom: 5px;
+    transition: 0.3s;
+}
+
+.link-scopri:hover { letter-spacing: 1px; }
+
+.intro-features .feature-item {
+    margin-bottom: 25px;
+}
+
+.feature-item strong {
+    display: block;
+    color: var(--active);
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.feature-item span { opacity: 0.6; font-size: 14px; }
+
+/* SLIDER FIX */
+.slider-box-modern {
+    position: relative;
+    height: 600px;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.slider-controls {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    z-index: 10;
+    display: flex;
+    gap: 10px;
+}
+
+.slider-controls button {
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(5px);
+    border: none;
+    color: #fff;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.slider-controls button:hover { background: var(--active); }
+
+/* =========================
+   CATEGORIE GRID
+========================= */
+.home-categories {
+    padding: 100px 60px;
+    background: #050505;
+}
+
+.cat-header h2 {
+    font-size: 32px;
+    margin-bottom: 50px;
+    text-align: center;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+}
+
+.cat-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.cat-card {
+    position: relative;
+    height: 500px;
+    overflow: hidden;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+.cat-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s ease;
+}
+
+.cat-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 40px;
+    transition: 0.3s;
+}
+
+.cat-card:hover img { transform: scale(1.1); }
+.cat-card:hover .cat-overlay { padding-bottom: 50px; }
+
+.cat-overlay h3 { font-size: 24px; margin-bottom: 5px; }
+.cat-overlay p { color: var(--active); font-weight: bold; text-transform: uppercase; font-size: 12px; letter-spacing: 2px; }
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .intro-container, .intro-grid, .cat-grid { grid-template-columns: 1fr; }
+    .slider-box-modern { height: 400px; }
+}
+
+
+.chi-siamo-restored {
+    padding: 100px 8%;
+    background: #000;
+}
+
+.chi-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 100px; /* Grande spazio tra testo e immagine */
+}
+
+.chi-testo {
+    flex: 1.5; /* Il testo ora ha più spazio (60%) */
+}
+
+.chi-testo h2 {
+    font-size: 38px;
+    letter-spacing: 2px;
+    line-height: 1.2;
+    margin-bottom: 30px;
+    font-weight: 700;
+}
+
+.chi-testo p {
+    font-size: 18px;
+    line-height: 1.8;
+    opacity: 0.8;
+    color: #ccc;
+}
+
+.chi-slider-modern {
+    flex: 1; /* L'immagine è più contenuta (40%) */
+    max-width: 500px; /* Evita che diventi gigantesca su schermi grandi */
+}
+
+.slider-box-modern {
+    position: relative;
+    height: 500px; /* Altezza fissa ed elegante */
+    border-radius: 5px; /* Angoli meno arrotondati = più professionale */
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+}
+
+/* Responsive: su mobile mettiamo uno sotto l'altro */
+@media (max-width: 1024px) {
+    .chi-container {
+        flex-direction: column;
+        gap: 50px;
+    }
+    .chi-testo { text-align: center; }
+}
+
+/* ==========================================
+   7. FOOTER DEFINITIVO (STRUTTURA FORZATA)
+========================================== */
+
+/* Il placeholder deve occupare tutta la larghezza */
+#footer-placeholder {
+    width: 100%;
+    display: block;
+    clear: both; /* Evita che elementi precedenti "spingano" lateralmente */
+    background: #0a0a0a;
+}
+
+.main-footer {
+    width: 100%;
+    background: #0a0a0a;
+    color: #fff;
+    padding: 80px 0; /* Padding verticale */
+    border-top: 1px solid rgba(255,255,255,0.05);
+    box-sizing: border-box;
+}
+
+.footer-container {
+    /* Usiamo un max-width fisso e margin auto per centrare perfettamente */
+    max-width: 1200px; 
+    margin: 0 auto;
+    padding: 0 40px; /* Margine interno per non toccare i bordi su schermi medi */
+    
+    /* Forza la griglia a 4 colonne uguali */
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 40px;
+    align-items: start;
+    box-sizing: border-box;
+}
+
+/* Colonna specifica per il Logo/Bio per dargli un po' più di respiro */
+.footer-col:first-child {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.footer-description {
+    max-width: 280px; /* Evita che il testo si allarghi troppo se centrato */
+    margin: 0 auto 20px;
+}
+
+.footer-col h3.footer-logo {
+    font-size: 20px;
+    letter-spacing: 4px;
+    margin-bottom: 25px;
+    color: var(--active);
+    font-weight: bold;
+}
+
+.footer-col h4 {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 25px;
+    color: rgba(255,255,255,0.4);
+    font-weight: 600;
+}
+
+.footer-col p, .footer-col ul li {
+    font-size: 14px;
+    line-height: 1.8;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 10px;
+}
+
+.footer-col ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-col ul li a {
+    color: inherit;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.footer-col ul li a:hover {
+    color: var(--active);
+}
+
+/* SOCIAL ICONS */
+.footer-social {
+    margin-top: 25px;
+    display: flex;
+    gap: 20px; 
+    justify-content: center; /* Questo centra le icone orizzontalmente */
+    align-items: center;
+    width: 100%; /* Si assicura che il contenitore usi tutto lo spazio della colonna */
+}
+
+.footer-icon {
+    width: 30px;
+    height: 30px;
+    filter: brightness(0) invert(1);
+    opacity: 0.6; /* Leggermente trasparenti di base */
+    transition: all 0.3s ease;
+}
+
+.footer-icon:hover {
+    opacity: 1; /* Diventano bianche accese al passaggio del mouse */
+    transform: translateY(-3px);
+}
+
+/* FOOTER BOTTOM */
+.footer-bottom {
+    width: 100%;
+    max-width: 1200px;
+    margin: 60px auto 0;
+    padding: 30px 40px 0;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.footer-bottom p {
+    font-size: 11px;
+    color: rgba(255,255,255,0.3);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* RESPONSIVE "BLINDATO" */
+@media (max-width: 1024px) {
+    .footer-container {
+        grid-template-columns: repeat(2, 1fr); /* 2x2 su tablet */
+    }
+}
+
+@media (max-width: 700px) {
+    .footer-container {
+        grid-template-columns: 1fr; /* Una colonna su mobile */
+        text-align: center;
+    }
+    .footer-social {
+        justify-content: center; /* Centra icone su mobile */
+    }
+}
