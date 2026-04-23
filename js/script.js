@@ -22,6 +22,21 @@ function highlightActiveLink() {
     });
 }
 
+function initNavbarScroll() {
+    const nav = document.querySelector('.navbar');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+            nav.style.background = 'rgba(0, 0, 0, 0.85)';
+            nav.style.backdropFilter = 'blur(15px)';
+            nav.style.height = '70px'; // Si restringe leggermente
+        } else {
+            nav.style.background = 'transparent';
+            nav.style.backdropFilter = 'blur(0px)';
+            nav.style.height = '80px';
+        }
+    });
+}
+
 /* ==========================================
    HERO SLIDER
 ========================================== */
@@ -42,9 +57,6 @@ function initHeroSlider() {
 }
 
 
-/* ==========================================
-   HISTORY SECTION
-========================================== */
 function initHistorySection() {
     const section = document.querySelector(".history-section");
     const yearEl = document.getElementById("year");
@@ -56,41 +68,48 @@ function initHistorySection() {
 
     let progress = 0;
     let targetProgress = 0;
-
     let isActive = false;
     let isCompleted = false;
+    let lastYear = null;
 
     /* =========================
-       ATTIVAZIONE AL CENTRO
+       INTERSECTION OBSERVER
     ========================= */
-    function checkActivation() {
-        const rect = section.getBoundingClientRect();
-        const center = window.innerHeight / 2;
+    const observer = new IntersectionObserver(
+        (entries) => {
+            entries.forEach(entry => {
+                // Attivazione leggermente anticipata per migliorare il feeling
+                if (entry.isIntersecting && entry.intersectionRatio > 0.4) {
+                    isActive = true;
+                } else if (!entry.isIntersecting) {
+                    isActive = false;
+                }
+            });
+        },
+        { threshold: [0.4] }
+    );
 
-        if (!isActive && rect.top <= center && rect.bottom >= center) {
-            isActive = true;
-        }
-    }
+    observer.observe(section);
 
     /* =========================
-       INPUT NORMALIZZATO
+       INPUT (WHEEL & TOUCH)
     ========================= */
     function onWheel(e) {
         if (!isActive || isCompleted) return;
 
-        const rect = section.getBoundingClientRect();
-        if (rect.top > window.innerHeight || rect.bottom < 0) return;
+        // Se l'utente scrolla verso l'alto all'inizio del countdown, 
+        // permette lo scroll naturale della pagina verso sopra
+        if (e.deltaY < 0 && targetProgress <= 0) return;
 
+        // Blocca lo scroll di sistema solo mentre il countdown è in corso
         e.preventDefault();
 
-        const speed = 0.0008; // più lento e stabile
-        targetProgress += e.deltaY * speed;
-
+        // Incremento velocità (0.001 è più scattante di 0.0005)
+        targetProgress += e.deltaY * 0.001;
         targetProgress = Math.min(Math.max(targetProgress, 0), 1);
     }
 
     let touchStartY = 0;
-
     function onTouchStart(e) {
         touchStartY = e.touches[0].clientY;
     }
@@ -98,51 +117,62 @@ function initHistorySection() {
     function onTouchMove(e) {
         if (!isActive || isCompleted) return;
 
-        const rect = section.getBoundingClientRect();
-        if (rect.top > window.innerHeight || rect.bottom < 0) return;
-
-        const currentY = e.touches[0].clientY;
-        const delta = touchStartY - currentY;
-
-        const speed = 0.0012;
-        targetProgress += delta * speed;
-
-        targetProgress = Math.min(Math.max(targetProgress, 0), 1);
-
-        touchStartY = currentY;
+        const delta = touchStartY - e.touches[0].clientY;
+        
+        // Permette di tornare su se siamo all'inizio
+        if (delta < 0 && targetProgress <= 0) return;
 
         e.preventDefault();
+        
+        targetProgress += delta * 0.0015; // Velocità touch ottimizzata
+        targetProgress = Math.min(Math.max(targetProgress, 0), 1);
+        touchStartY = e.touches[0].clientY;
     }
 
     /* =========================
-       LOOP FLUIDO (KEY!)
+       LOOP DI ANIMAZIONE
     ========================= */
     function animate() {
-        // interpolazione smooth (elimina glitch)
-        progress += (targetProgress - progress) * 0.08;
+        if (!isCompleted) {
+            // Smoothing più rapido (0.1) per ridurre il senso di ritardo
+            progress += (targetProgress - progress) * 0.1;
 
-        /* COUNTDOWN */
-        const ease = 1 - Math.pow(1 - progress, 4);
-        const current = Math.round(start - (start - end) * ease);
-        yearEl.textContent = current;
+            // Impedisce al progresso visuale di tornare indietro rispetto al target
+            if (targetProgress < progress) progress = targetProgress;
 
-        /* FASI */
-        section.classList.toggle("phase-1", progress > 0.05);
-        section.classList.toggle("phase-2", progress > 0.25);
-        section.classList.toggle("phase-3", progress > 0.55);
+            /* COUNTDOWN */
+            // Usiamo un ease-out cubico per un finale più naturale
+            const ease = 1 - Math.pow(1 - progress, 3);
+            const current = Math.round(start - (start - end) * ease);
 
-        if (progress >= 0.999) {
-            yearEl.textContent = end;
-            isCompleted = true;
+            if (current !== lastYear) {
+                yearEl.textContent = current;
+                lastYear = current;
+            }
+
+            /* FASI VISIVE */
+            section.classList.toggle("phase-1", progress > 0.05);
+            section.classList.toggle("phase-2", progress > 0.25);
+            section.classList.toggle("phase-3", progress > 0.55);
+
+            /* COMPLETAMENTO ANTICIPATO */
+            // Sblocca al 98% per evitare di restare bloccati nell'ultimo millimetro di scroll
+            if (progress > 0.98) {
+                progress = 1;
+                yearEl.textContent = end;
+                isCompleted = true;
+                
+                // Rilascia eventuali blocchi (se presenti nel CSS)
+                document.body.style.overflow = "";
+            }
         }
 
         requestAnimationFrame(animate);
     }
 
     /* =========================
-       LISTENERS
+       LISTENER
     ========================= */
-    window.addEventListener("scroll", checkActivation);
     window.addEventListener("wheel", onWheel, { passive: false });
     window.addEventListener("touchstart", onTouchStart, { passive: true });
     window.addEventListener("touchmove", onTouchMove, { passive: false });

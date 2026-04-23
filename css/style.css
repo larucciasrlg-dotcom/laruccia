@@ -6,6 +6,8 @@
   --active: #207b6e;
   --text: #fff;
   --transition: 0.3s ease;
+  --font-titles: 'Fraunces', serif;
+  --font-body: 'Manrope', sans-serif;
 }
 
 * {
@@ -17,15 +19,38 @@
 html, body {
   width: 100%;
   min-height: 100%; /* Sostituito height per evitare blocchi */
-  font-family: Arial, sans-serif;
+  /* 2. Applicazione globale */
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
   background: #000;
   color: #fff;
   overflow-x: hidden;
 }
 
 /* ==========================================
+   CONTAINER GLOBALE (NUOVO)
+========================================== */
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding-left: clamp(20px, 5vw, 60px);
+  padding-right: clamp(20px, 5vw, 60px);
+  box-sizing: border-box;
+}
+
+
+/* 3. Stile specifico per i Titoli (Originale e d'impatto) */
+h1, h2, .history-line, .footer-logo {
+  font-family: var(--font-titles);
+  font-weight: 900; /* Molto spesso per massimizzare l'originalità */
+  letter-spacing: -0.02em; /* Leggermente stretto per un look più editoriale */
+  text-transform: none; /* Fraunces è bellissimo anche in minuscolo */
+}
+
+/* ==========================================
    2. NAVBAR & MENU
 ========================================== */
+
 .navbar {
   position: fixed;
   top: 0;
@@ -37,87 +62,99 @@ html, body {
   justify-content: center;
   align-items: center;
   background: transparent;
+  transition: background 0.5s ease, backdrop-filter 0.5s ease;
   isolation: isolate; 
 }
 
+/* SFUMATURA RIPRISTINATA: assicura la leggibilità dei testi sulla Hero */
 .navbar-overlay {
   position: absolute;
   inset: 0;
-  z-index: 0;
-  background: linear-gradient(to bottom, rgba(0,0,0,0.75), rgba(0,0,0,0));
-  pointer-events: none;
+  z-index: -1;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%);
+  opacity: 1;
+  transition: opacity 0.5s ease;
 }
 
 .menu {
   display: grid;
-  grid-template-columns: auto 1fr auto; /* LOGO | MENU | SOCIAL */
+  grid-template-columns: 180px 1fr 180px;
   align-items: center;
   width: 100%;
-  padding: 0 30px;
-}
-
-.menu-links a,
-.dropdown-toggle {
+  max-width: 1400px;
+  padding: 0 clamp(20px, 5vw, 60px);
+  margin: 0 auto;
   position: relative;
-  display: flex;
-  align-items: center;
-  padding: 5px 0;
-  color: var(--text);
-  text-decoration: none;
-  font-size: 15px;
+  z-index: 1;
 }
 
+/* Stile unico per i Link */
 .menu-links {
   justify-self: center;
   display: flex;
-  gap: 30px;
+  gap: 45px;
   align-items: center;
 }
 
-/* LINEA HOVER */
+/* ==========================================
+   NAVBAR - LINK & TESTI (VERSIONE PULITA)
+========================================== */
+.menu-links a,
+.dropdown-toggle {
+    position: relative;
+    /* Usiamo il font per i testi (più leggibile) */
+    font-family: var(--font-body); 
+    
+    /* Bianco leggermente opaco di base per eleganza */
+    color: rgba(255, 255, 255, 0.7); 
+    
+    text-decoration: none;
+    font-size: 12px; /* Un filo più piccolo è più "luxury" */
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 600; /* Un po' più spesso per compensare la dimensione */
+    
+    transition: color 0.3s ease, opacity 0.3s ease;
+    display: flex;
+    align-items: center;
+    padding: 5px 0;
+    cursor: pointer;
+}
+
+/* Hover: Solo cambio in bianco puro, senza linee o verdi strani */
+.menu-links a:hover,
+.dropdown-toggle:hover {
+    color: #ffffff !important;
+    opacity: 1;
+}
+
+/* Rimuoviamo eventuali rimasugli di linee (::after) se erano rimasti nel file */
 .menu-links a::after,
 .dropdown-toggle::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -6px;
-  width: 0%;
-  height: 2px;
-  background: #fff;
-  transition: width 0.3s ease;
+    display: none !important;
+    content: none !important;
 }
 
-.menu-links a:hover::after,
-.dropdown-toggle:hover::after {
-  width: 100%;
-}
-
-/* SOCIAL */
+/* Social Icons Navbar */
 .social-icons {
   justify-self: end;
   display: flex;
-  gap: 18px;
+  gap: 20px;
   align-items: center;
 }
 
 .social-icon img {
-  width: 26px;
+  width: 26px; /* Ridotto per eleganza */
   height: 26px;
-  transition: 0.3s;
-    filter: brightness(0) invert(1); /* FORZA BIANCO */
+  filter: brightness(0) invert(1);
+  transition: all 0.4s ease;
+  opacity: 0.8;
 }
 
 .social-icon:hover img {
-  transform: scale(1.2);
-}
-
-.social-icons a::after {
-  display: none !important;
-  content: none !important;
-}
-
-.social-icons a {
-  text-decoration: none;
+  transform: translateY(-3px);
+  filter: brightness(0) invert(1) drop-shadow(0 0 5px var(--active));
+  opacity: 1;
 }
 
 /* ==========================================
@@ -131,19 +168,18 @@ html, body {
     position: absolute;
     top: 100%;
     left: 50%;
-    transform: translateX(-50%) translateY(20px);
-    width: 90vw;
-    max-width: 1100px;
-    padding: 40px;
-    background: rgba(15, 15, 15, 0.98);
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 0 0 15px 15px;
+    transform: translateX(-50%) translateY(15px);
+    width: 95vw;
+    max-width: 1200px;
+    padding: 50px;
+    background: rgba(10, 10, 10, 0.95); /* Più scuro */
+    backdrop-filter: blur(30px); /* Sfocatura profonda */
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 4px; /* Meno arrotondato, come il resto del sito */
     opacity: 0;
     visibility: hidden;
-    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-    box-shadow: 0 30px 60px rgba(0,0,0,0.8);
-    z-index: 10000;
+    transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    box-shadow: 0 40px 100px rgba(0,0,0,0.9);
 }
 
 .mega-dropdown:hover .mega-menu {
@@ -188,21 +224,21 @@ html, body {
 .dropdown-toggle span::after {
     content: "";
     display: inline-block;
-    margin-left: 8px;
+    margin-left: 10px;
     border: solid rgba(255,255,255,0.5);
     border-width: 0 1.5px 1.5px 0;
     padding: 2.5px;
     transform: rotate(45deg) translateY(-2px);
-    transition: 0.3s;
+    transition: all 0.3s ease;
 }
 
 .mega-dropdown:hover .dropdown-toggle span::after {
-    transform: rotate(-135deg) translateY(-2px);
-    border-color: var(--active);
+    transform: rotate(-135deg) translateY(2px);
+    border-color: #fff; /* Ora diventa bianca come il testo */
 }
 
 /* ==========================================================================
-   HERO SLIDER MODERNO (LAYOUT DEFINITIVO)
+   HERO SLIDER MODERNO 
 ========================================================================== */
 .modern-hero-slider {
     position: relative;
@@ -283,11 +319,10 @@ html, body {
 
 /* LOGO */
 .hero-logo img {
-    max-width: 320px;
+    max-width: 1300px; /* regola dimensione */
     width: 100%;
     height: auto;
-    margin: 0;
-     animation: fadeUp 1.2s ease-out forwards;
+    margin-bottom: 10px;
 }
 
 /* BOTTONI */
@@ -400,11 +435,6 @@ html, body {
 /* ==========================================
    5. PRODOTTI (CAROSELLI BRAND)
 ========================================== */
-.prodotti-container {
-  padding: 120px 20px;
-  max-width: 1400px;
-  margin: 0 auto;
-}
 
 .brand-section { margin-bottom: 100px; }
 
@@ -473,11 +503,13 @@ html, body {
    6. CONTATTI (MODERN LAYOUT)
 ========================================== */
 .c-modern-layout {
-  display: flex;
-  flex-wrap: wrap;
-  min-height: 100vh;
-  padding-top: var(--navbar-height);
-  background: #000;
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 1600px; /* Leggermente più largo della home per la mappa */
+    margin: 0 auto;
+    min-height: 100vh;
+    padding-top: var(--navbar-height);
+    background: #000;
 }
 
 .c-modern-info {
@@ -517,13 +549,28 @@ html, body {
 }
 .c-modern-map iframe { width: 100%; height: 100%; border: none; }
 
+/* ==========================================
+   SEZIONI ALLINEATE (FIX PRINCIPALE)
+========================================== */
+.home-intro,
+.home-categories,
+.chi-siamo-restored,
+.prodotti-container {
+  width: 100%;
+}
+
+
+.prodotti-container {
+  padding: 120px 0;
+}
+
+.chi-siamo-restored {
+  padding: 100px 0;
+}
+
 /* =========================
    HOME INTRO MODERNA
 ========================= */
-.home-intro {
-    padding: 120px 60px;
-    background: #000;
-}
 
 .intro-container {
     max-width: 1300px;
@@ -591,9 +638,12 @@ html, body {
 /* =========================
    CATEGORIE GRID
 ========================= */
+/* Assicurati che la sezione successiva non abbia margini top strani */
 .home-categories {
-    padding: 100px 60px;
+    padding: 100px 0px;
     background: #050505;
+    position: relative;
+    z-index: 10; /* Per coprire bene la fine dello scroll */
 }
 
 .cat-header h2 {
@@ -650,7 +700,7 @@ html, body {
 
 
 .chi-siamo-restored {
-    padding: 100px 8%;
+    padding: 100px 0px;
     background: #000;
 }
 
@@ -725,17 +775,14 @@ html, body {
 }
 
 .footer-container {
-    /* Usiamo un max-width fisso e margin auto per centrare perfettamente */
     max-width: 1200px; 
     margin: 0 auto;
-    padding: 0 40px; /* Margine interno per non toccare i bordi su schermi medi */
-    
-    /* Forza la griglia a 4 colonne uguali */
+ padding: 0 clamp(20px, 5vw, 60px);
     display: grid;
     grid-template-columns: repeat(4, 1fr); 
     gap: 40px;
     align-items: start;
-    box-sizing: border-box;
+    text-align: center; /* Centra i testi semplici */
 }
 
 /* Colonna specifica per il Logo/Bio per dargli un po' più di respiro */
@@ -868,16 +915,8 @@ html, body {
 
 .logo:hover img {
   transform: scale(1.12);
+    filter: brightness(0) invert(1);
 }
-
-
-.hero-logo img {
-    max-width: 1300px; /* regola dimensione */
-    width: 100%;
-    height: auto;
-    margin-bottom: 10px;
-}
-
 
 
 /*PARTE SOTTO LA HERO*/ 
@@ -888,10 +927,11 @@ html, body {
 
 /* SEZIONE SCROLL LUNGA */
 .history-section {
-  min-height: 160vh; /* ✅ dinamico */
+  min-height: 120vh; 
   position: relative;
   background: #000;
   color: #fff;
+  margin-bottom: 0; /* Assicura che non ci sia margine */
 }
 
 /* BLOCCO STICKY */
@@ -899,20 +939,20 @@ html, body {
   position: sticky;
   top: 0;
   height: 100vh;
-  overflow: hidden;
-
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 0 40px;
+  padding: 0;
+  overflow: hidden;
 }
 
 /* =========================
    TOP LINE (TITOLO + COUNTDOWN)
 ========================= */
+/* Riduciamo il margine del countdown per far stare tutto nel viewport */
 .history-top {
   text-align: center;
-  margin-bottom: 100px;
+  margin-bottom: 40px; /* Ridotto da 100px */
 }
 
 .history-line {
@@ -934,10 +974,9 @@ html, body {
 }
 
 #year {
+  font-family: var(--font-titles);
   font-weight: 900;
-  color: #fff;
-  display: inline-block;
-  min-width: 120px;
+  color: var(--active);
 }
 
 /* LINEA SOTTO */
@@ -995,19 +1034,37 @@ html, body {
 ========================= */
 .history-image {
   flex: 1;
-
   opacity: 0;
   transform: translateX(200px) scale(0.95);
-  transition: all 1s ease;
+  /* Gestisce l'entrata e la morbidezza dell'ombra */
+  transition: all 1s ease, box-shadow 1.2s ease; 
+  overflow: hidden; /* Fondamentale: impedisce alla foto di uscire dai bordi quando si ingrandisce */
+  border-radius: 8px;
+  cursor: pointer;
 }
 
 .history-image img {
   width: 100%;
   border-radius: 8px;
   object-fit: cover;
+  display: block;
+  /* AGGIUNGI QUESTA RIGA: definisce la lentezza dell'hover (1.2 secondi) */
+  transition: transform 1.2s cubic-bezier(0.25, 1, 0.5, 1), filter 1.2s ease;
+  will-change: transform;
 }
 
-/* FASE 3 → entra immagine */
+/* Effetto Hover: lo zoom e la luce sulla foto */
+.history-image:hover img {
+  transform: scale(1.08); /* Zoom leggero */
+  filter: brightness(1.1); /* Leggera spinta di luce */
+}
+
+/* Effetto Hover: l'ombra sul contenitore */
+.history-image:hover {
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+}
+
+/* FASE 3 → l'animazione di entrata che avevi già */
 .history-section.phase-3 .history-image {
   opacity: 1;
   transform: translateX(0) scale(1);
@@ -1025,6 +1082,13 @@ html, body {
 /* effetto più elegante sui paragrafi */
 .history-text p {
   margin-bottom: 20px;
+}
+
+.history-text p, .footer-description {
+  font-family: var(--font-body);
+  font-weight: 300; /* Più leggero = più elegante */
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.8);
 }
 
 /* =========================
