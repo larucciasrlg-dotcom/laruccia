@@ -6,9 +6,36 @@ function loadNavbar() {
         .then(res => res.text())
         .then(data => {
             const el = document.getElementById('navbar');
-            if (el) el.innerHTML = data;
-            highlightActiveLink();
+            if (el) {
+                el.innerHTML = data;
+                initMobileMenu(); // Nuova funzione
+                highlightActiveLink();
+            }
         });
+}
+
+function initMobileMenu() {
+    const toggle = document.querySelector('.mobile-toggle');
+    const menuLinks = document.querySelector('.menu-links');
+    const hasMega = document.querySelector('.has-mega');
+
+    if (toggle) {
+        toggle.addEventListener('click', () => {
+            menuLinks.classList.toggle('active');
+            // Animazione icona hamburger (opzionale)
+            toggle.classList.toggle('is-active'); 
+        });
+    }
+
+    // Gestione click su "Prodotti" per espandere il mega menu su mobile
+    if (hasMega) {
+        hasMega.addEventListener('click', (e) => {
+            if (window.innerWidth <= 1024) {
+                e.preventDefault(); // Impedisce il cambio pagina immediato
+                hasMega.classList.toggle('open');
+            }
+        });
+    }
 }
 
 function highlightActiveLink() {

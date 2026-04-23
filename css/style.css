@@ -1110,3 +1110,75 @@ h1, h2, .history-line, .footer-logo {
     transform: none !important;
   }
 }
+
+/* ==========================================
+   MOBILE NAVIGATION
+========================================== */
+
+/* Nascondi toggle su desktop */
+.mobile-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 6px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 10000;
+}
+
+.mobile-toggle span {
+    width: 30px;
+    height: 2px;
+    background-color: #fff;
+    transition: 0.3s;
+}
+
+@media (max-width: 1024px) {
+    .mobile-toggle { display: flex; justify-self: end; }
+
+    .menu {
+        grid-template-columns: 1fr 1fr; /* Logo a sinistra, Toggle a destra */
+    }
+
+    .social-icons { display: none; } /* Nascondiamoli per pulizia */
+
+    .menu-links {
+        position: fixed;
+        top: 0;
+        right: -100%; /* Fuori schermo */
+        width: 80%;
+        height: 100vh;
+        background: #0a0a0a;
+        flex-direction: column;
+        justify-content: center;
+        gap: 30px;
+        transition: 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
+        z-index: 999;
+    }
+
+    .menu-links.active {
+        right: 0; /* Entra in scivolata */
+        box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+    }
+
+    /* Gestione Mega Menu su Mobile */
+    .mega-menu {
+        position: static;
+        transform: none;
+        width: 100%;
+        opacity: 1;
+        visibility: visible;
+        display: none; /* Lo mostriamo solo al click */
+        padding: 20px;
+        background: rgba(255,255,255,0.05);
+    }
+
+    .mega-grid-wrapper {
+        grid-template-columns: 1fr; /* Una colonna sola */
+        gap: 20px;
+    }
+
+    .has-mega.open .mega-menu {
+        display: block;
+    }
+}
