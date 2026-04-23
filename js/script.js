@@ -6,36 +6,9 @@ function loadNavbar() {
         .then(res => res.text())
         .then(data => {
             const el = document.getElementById('navbar');
-            if (el) {
-                el.innerHTML = data;
-                initMobileMenu(); // Nuova funzione
-                highlightActiveLink();
-            }
+            if (el) el.innerHTML = data;
+            highlightActiveLink();
         });
-}
-
-function initMobileMenu() {
-    const toggle = document.querySelector('.mobile-toggle');
-    const menuLinks = document.querySelector('.menu-links');
-    const hasMega = document.querySelector('.has-mega');
-
-    if (toggle) {
-        toggle.addEventListener('click', () => {
-            menuLinks.classList.toggle('active');
-            // Animazione icona hamburger (opzionale)
-            toggle.classList.toggle('is-active'); 
-        });
-    }
-
-    // Gestione click su "Prodotti" per espandere il mega menu su mobile
-    if (hasMega) {
-        hasMega.addEventListener('click', (e) => {
-            if (window.innerWidth <= 1024) {
-                e.preventDefault(); // Impedisce il cambio pagina immediato
-                hasMega.classList.toggle('open');
-            }
-        });
-    }
 }
 
 function highlightActiveLink() {
@@ -45,21 +18,6 @@ function highlightActiveLink() {
     links.forEach(link => {
         if (link.getAttribute('href') === current) {
             link.classList.add('active');
-        }
-    });
-}
-
-function initNavbarScroll() {
-    const nav = document.querySelector('.navbar');
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
-            nav.style.background = 'rgba(0, 0, 0, 0.85)';
-            nav.style.backdropFilter = 'blur(15px)';
-            nav.style.height = '70px'; // Si restringe leggermente
-        } else {
-            nav.style.background = 'transparent';
-            nav.style.backdropFilter = 'blur(0px)';
-            nav.style.height = '80px';
         }
     });
 }
@@ -95,48 +53,64 @@ function initHistorySection() {
 
     let progress = 0;
     let targetProgress = 0;
+
     let isActive = false;
     let isCompleted = false;
+    let isLocked = false;
+
     let lastYear = null;
 
     /* =========================
-       INTERSECTION OBSERVER
+       INTERSECTION OBSERVER (SUPER SMOOTH)
     ========================= */
     const observer = new IntersectionObserver(
         (entries) => {
             entries.forEach(entry => {
-                // Attivazione leggermente anticipata per migliorare il feeling
-                if (entry.isIntersecting && entry.intersectionRatio > 0.4) {
+                // attiva SOLO quando è ben dentro viewport
+                if (entry.isIntersecting && entry.intersectionRatio > 0.6) {
                     isActive = true;
-                } else if (!entry.isIntersecting) {
-                    isActive = false;
                 }
             });
         },
-        { threshold: [0.4] }
+        {
+            threshold: [0.6]
+        }
     );
 
     observer.observe(section);
 
     /* =========================
-       INPUT (WHEEL & TOUCH)
+       LOCK SCROLL
+    ========================= */
+    function lockScroll() {
+        if (isLocked) return;
+        document.body.style.overflow = "hidden";
+        isLocked = true;
+    }
+
+    function unlockScroll() {
+        document.body.style.overflow = "";
+        isLocked = false;
+    }
+
+    /* =========================
+       INPUT
     ========================= */
     function onWheel(e) {
         if (!isActive || isCompleted) return;
 
-        // Se l'utente scrolla verso l'alto all'inizio del countdown, 
-        // permette lo scroll naturale della pagina verso sopra
-        if (e.deltaY < 0 && targetProgress <= 0) return;
-
-        // Blocca lo scroll di sistema solo mentre il countdown è in corso
+        lockScroll();
         e.preventDefault();
 
-        // Incremento velocità (0.001 è più scattante di 0.0005)
-        targetProgress += e.deltaY * 0.001;
+  // 👉 IGNORA SCROLL VERSO L'ALTO
+if (e.deltaY < 0) return;
+
+targetProgress += e.deltaY * 0.0005;
         targetProgress = Math.min(Math.max(targetProgress, 0), 1);
     }
 
     let touchStartY = 0;
+
     function onTouchStart(e) {
         touchStartY = e.touches[0].clientY;
     }
@@ -144,61 +118,70 @@ function initHistorySection() {
     function onTouchMove(e) {
         if (!isActive || isCompleted) return;
 
+        lockScroll();
+
         const delta = touchStartY - e.touches[0].clientY;
-        
-        // Permette di tornare su se siamo all'inizio
-        if (delta < 0 && targetProgress <= 0) return;
+        // 👉 IGNORA SCROLL VERSO L'ALTO
+if (delta < 0) return;
+
+targetProgress += delta * 0.0009;
+
+        targetProgress = Math.min(Math.max(targetProgress, 0), 1);
+
+        touchStartY = e.touches[0].clientY;
 
         e.preventDefault();
-        
-        targetProgress += delta * 0.0015; // Velocità touch ottimizzata
-        targetProgress = Math.min(Math.max(targetProgress, 0), 1);
-        touchStartY = e.touches[0].clientY;
     }
 
     /* =========================
-       LOOP DI ANIMAZIONE
+       LOOP OTTIMIZZATO
     ========================= */
     function animate() {
+
         if (!isCompleted) {
-            // Smoothing più rapido (0.1) per ridurre il senso di ritardo
-            progress += (targetProgress - progress) * 0.1;
+            // smoothing più preciso
+            progress += (targetProgress - progress) * 0.05;
+        }
 
-            // Impedisce al progresso visuale di tornare indietro rispetto al target
-            if (targetProgress < progress) progress = targetProgress;
+        // NON PERMETTE MAI DI TORNARE INDIETRO
+if (targetProgress < progress) {
+    targetProgress = progress;
+}
 
-            /* COUNTDOWN */
-            // Usiamo un ease-out cubico per un finale più naturale
-            const ease = 1 - Math.pow(1 - progress, 3);
-            const current = Math.round(start - (start - end) * ease);
+        /* COUNTDOWN */
+        const ease = 1 - Math.pow(1 - progress, 4);
+        const current = Math.round(start - (start - end) * ease);
 
-            if (current !== lastYear) {
-                yearEl.textContent = current;
-                lastYear = current;
-            }
+        // 👉 aggiorna DOM SOLO se cambia
+        if (current !== lastYear) {
+            yearEl.textContent = current;
+            lastYear = current;
+        }
 
-            /* FASI VISIVE */
-            section.classList.toggle("phase-1", progress > 0.05);
-            section.classList.toggle("phase-2", progress > 0.25);
-            section.classList.toggle("phase-3", progress > 0.55);
+        /* FASI */
+        section.classList.toggle("phase-1", progress > 0.05);
+        section.classList.toggle("phase-2", progress > 0.25);
+        section.classList.toggle("phase-3", progress > 0.55);
 
-            /* COMPLETAMENTO ANTICIPATO */
-            // Sblocca al 98% per evitare di restare bloccati nell'ultimo millimetro di scroll
-            if (progress > 0.98) {
-                progress = 1;
-                yearEl.textContent = end;
-                isCompleted = true;
-                
-                // Rilascia eventuali blocchi (se presenti nel CSS)
-                document.body.style.overflow = "";
-            }
+        /* COMPLETAMENTO */
+        if (progress >= 0.999 && !isCompleted) {
+            progress = 1;
+            yearEl.textContent = end;
+            isCompleted = true;
+
+            unlockScroll();
+
+            window.scrollBy({
+                top: 60,
+                behavior: "smooth"
+            });
         }
 
         requestAnimationFrame(animate);
     }
 
     /* =========================
-       LISTENER
+       EVENTI PASSIVI OTTIMI
     ========================= */
     window.addEventListener("wheel", onWheel, { passive: false });
     window.addEventListener("touchstart", onTouchStart, { passive: true });
