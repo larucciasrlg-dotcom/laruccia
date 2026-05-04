@@ -11,6 +11,9 @@ function loadNavbar() {
         });
 }
 
+
+/*highlightactivelink serve a far capire all'utente in che pagina si trova*/
+
 function highlightActiveLink() {
     const links = document.querySelectorAll('.menu a');
     const current = location.pathname.split("/").pop() || 'index.html';
@@ -26,7 +29,7 @@ function highlightActiveLink() {
    HERO SLIDER
 ========================================== */
 function initHeroSlider() {
-    const hero = document.querySelector('.modern-hero-slider');
+    const hero = document.querySelector('.hero-slides')
     if (!hero) return;
 
     const slides = hero.querySelectorAll('.hero-slide');
@@ -42,240 +45,130 @@ function initHeroSlider() {
 }
 
 
+/* ==========================================
+   HISTORY SECTION
+========================================== */
+
 function initHistorySection() {
     const section = document.querySelector(".history-section");
-    const yearEl = document.getElementById("year");
-
+    const yearEl = document.getElementById("year"); // Punta solo al numero
     if (!section || !yearEl) return;
 
-    const start = 2026;
-    const end = 1939;
+    section.classList.add("phase-1");
 
-    let progress = 0;
-    let targetProgress = 0;
+    let startYear = 2026;
+    const endYear = 1939;
+    const duration = 5000; 
+    let startTime = null;
 
-    let isActive = false;
-    let isCompleted = false;
-    let isLocked = false;
+function updateCount(timestamp) {
+        if (!startTime) startTime = timestamp;
+        const elapsed = timestamp - startTime;
+        const progress = Math.min(elapsed / duration, 1);
 
-    let lastYear = null;
+        const ease = 1 - Math.pow(1 - progress, 3);
+        const currentYear = Math.round(startYear - (startYear - endYear) * ease);
+        const imageMove = (1 - ease) * 20; // Calcola un piccolo spostamento
+document.querySelector(".history-image").style.transform = `scale(${1 + (1-ease)*0.1}) translateY(${imageMove}px)`;
+        
+        // Cambia solo il numero, lasciando intatto "Insieme con voi dal"
+        yearEl.textContent = currentYear;
 
-    /* =========================
-       INTERSECTION OBSERVER (SUPER SMOOTH)
-    ========================= */
-    const observer = new IntersectionObserver(
-        (entries) => {
-            entries.forEach(entry => {
-                // attiva SOLO quando è ben dentro viewport
-                if (entry.isIntersecting && entry.intersectionRatio > 0.6) {
-                    isActive = true;
-                }
-            });
-        },
-        {
-            threshold: [0.6]
+        if (progress > 0.3) section.classList.add("phase-2");
+        if (progress > 0.7) section.classList.add("phase-3");
+
+        if (progress < 1) {
+            requestAnimationFrame(updateCount);
         }
-    );
-
-    observer.observe(section);
-
-    /* =========================
-       LOCK SCROLL
-    ========================= */
-    function lockScroll() {
-        if (isLocked) return;
-        document.body.style.overflow = "hidden";
-        isLocked = true;
     }
 
-    function unlockScroll() {
-        document.body.style.overflow = "";
-        isLocked = false;
-    }
-
-    /* =========================
-       INPUT
-    ========================= */
-    function onWheel(e) {
-        if (!isActive || isCompleted) return;
-
-        lockScroll();
-        e.preventDefault();
-
-  // 👉 IGNORA SCROLL VERSO L'ALTO
-if (e.deltaY < 0) return;
-
-targetProgress += e.deltaY * 0.0005;
-        targetProgress = Math.min(Math.max(targetProgress, 0), 1);
-    }
-
-    let touchStartY = 0;
-
-    function onTouchStart(e) {
-        touchStartY = e.touches[0].clientY;
-    }
-
-    function onTouchMove(e) {
-        if (!isActive || isCompleted) return;
-
-        lockScroll();
-
-        const delta = touchStartY - e.touches[0].clientY;
-        // 👉 IGNORA SCROLL VERSO L'ALTO
-if (delta < 0) return;
-
-targetProgress += delta * 0.0009;
-
-        targetProgress = Math.min(Math.max(targetProgress, 0), 1);
-
-        touchStartY = e.touches[0].clientY;
-
-        e.preventDefault();
-    }
-
-    /* =========================
-       LOOP OTTIMIZZATO
-    ========================= */
-    function animate() {
-
-        if (!isCompleted) {
-            // smoothing più preciso
-            progress += (targetProgress - progress) * 0.05;
-        }
-
-        // NON PERMETTE MAI DI TORNARE INDIETRO
-if (targetProgress < progress) {
-    targetProgress = progress;
+    setTimeout(() => {
+        requestAnimationFrame(updateCount);
+    }, 1000);
 }
 
-        /* COUNTDOWN */
-        const ease = 1 - Math.pow(1 - progress, 4);
-        const current = Math.round(start - (start - end) * ease);
+    window.addEventListener("wheel", (e) => {
+        if (e.deltaY > 0) handleStepScroll(e.deltaY);
+    }, { passive: true });
 
-        // 👉 aggiorna DOM SOLO se cambia
-        if (current !== lastYear) {
-            yearEl.textContent = current;
-            lastYear = current;
+    // Supporto Touch
+    let touchStartY = 0;
+    window.addEventListener("touchstart", (e) => { touchStartY = e.touches[0].clientY; }, { passive: true });
+    window.addEventListener("touchmove", (e) => {
+        const delta = touchStartY - e.touches[0].clientY;
+        if (delta > 10) { // Piccolo threshold per evitare tocchi involontari
+            handleStepScroll(delta);
+            touchStartY = e.touches[0].clientY;
         }
+    }, { passive: true });
 
-        /* FASI */
+function animate() {
+        if (isCompleted) return;
+
+        // Velocità dell'animazione: più alto è il numero, più è veloce
+        progress += 0.005; 
+
+        // Calcolo dell'anno basato sul progresso automatico
+        const ease = 1 - Math.pow(1 - progress, 3); // Effetto rallentamento finale
+        const currentYear = Math.round(start - (start - end) * ease);
+
+        yearEl.textContent = currentYear;
+
+        // Attivazione AUTOMATICA delle fasi basata sul tempo/progresso
         section.classList.toggle("phase-1", progress > 0.05);
-        section.classList.toggle("phase-2", progress > 0.25);
-        section.classList.toggle("phase-3", progress > 0.55);
+        section.classList.toggle("phase-2", progress > 0.45); // Appare il testo
+        section.classList.toggle("phase-3", progress > 0.80); // Appare l'immagine
 
-        /* COMPLETAMENTO */
-        if (progress >= 0.999 && !isCompleted) {
+        if (progress >= 1) {
             progress = 1;
             yearEl.textContent = end;
             isCompleted = true;
-
-            unlockScroll();
-
-            window.scrollBy({
-                top: 60,
-                behavior: "smooth"
-            });
+            section.classList.add("phase-1", "phase-2", "phase-3");
+        } else {
+            requestAnimationFrame(animate);
         }
-
-        requestAnimationFrame(animate);
     }
 
-    /* =========================
-       EVENTI PASSIVI OTTIMI
-    ========================= */
-    window.addEventListener("wheel", onWheel, { passive: false });
-    window.addEventListener("touchstart", onTouchStart, { passive: true });
-    window.addEventListener("touchmove", onTouchMove, { passive: false });
-
-    animate();
-}
-
-document.addEventListener("DOMContentLoaded", initHistorySection);
-
-function scrollTrack(button, direction) {
-  // Trova la traccia (track) vicina al bottone cliccato
-  const track = button.parentElement.querySelector('.brand-figurine-track');
-  // Calcola quanto scorrere (320px è la somma di card + gap)
-  const scrollAmount = 320; 
-  
-  track.scrollBy({
-    left: scrollAmount * direction,
-    behavior: 'smooth'
-  });
-}
-
-
-// Variabile per tenere traccia dell'ultima sezione interagita
-let activeTrack = null;
-
-function initProductCarousels() {
-    const wrappers = document.querySelectorAll('.figurine-wrapper');
-
-    wrappers.forEach(wrapper => {
-        const track = wrapper.querySelector('.brand-figurine-track');
-        
-        // Quando il mouse entra in una sezione, questa diventa quella "attiva" per la tastiera
-        wrapper.addEventListener('mouseenter', () => {
-            activeTrack = track;
-        });
-
-        // Opzionale: se l'utente clicca dentro la sezione
-        wrapper.addEventListener('click', () => {
-            activeTrack = track;
-        });
-    });
-}
-
-// ASCOLTATORE TASTIERA (Globale)
-document.addEventListener('keydown', (e) => {
-    // Se non abbiamo una sezione attiva, non facciamo nulla
-    if (!activeTrack) return;
-
-    const step = activeTrack.querySelector('.brand-card-mini').offsetWidth + 20;
-
-    if (e.key === 'ArrowRight') {
-        activeTrack.scrollBy({ left: step, behavior: 'smooth' });
-    } else if (e.key === 'ArrowLeft') {
-        activeTrack.scrollBy({ left: -step, behavior: 'smooth' });
-    }
-});
-
-// Chiamata all'inizializzazione (dentro il tuo DOMContentLoaded esistente)
-document.addEventListener("DOMContentLoaded", () => {
-    initProductCarousels();
-    // ... altre funzioni ...
-});
 /* ==========================================
-   FOOTER
+   CAROSELLI PRODOTTI: FRECCE E PALLINI
 ========================================== */
-function loadFooter() {
-    fetch('footer.html')
-        .then(res => res.text())
-        .then(data => {
-            const el = document.getElementById('footer-placeholder');
-            if (el) el.innerHTML = data;
-        });
+
+// 1. Gestione Visibilità Frecce
+function updateArrowVisibility(track) {
+    const wrapper = track.closest('.figurine-wrapper');
+    if (!wrapper) return;
+
+    const leftArrow = wrapper.querySelector('.scroll-arrow.left');
+    const rightArrow = wrapper.querySelector('.scroll-arrow.right');
+    
+    if (!leftArrow || !rightArrow) return;
+
+    const scrollLeft = track.scrollLeft;
+    const maxScroll = track.scrollWidth - track.clientWidth;
+
+    // Nascondi sinistra se all'inizio
+    leftArrow.classList.toggle('is-hidden', scrollLeft <= 5);
+    
+    // Nascondi destra se alla fine
+    rightArrow.classList.toggle('is-hidden', scrollLeft >= maxScroll - 5);
 }
 
-/* ==========================================
-   INIT GENERALE (UNA SOLA VOLTA!)
-========================================== */
-// 1. Funzione per le Frecce (Desktop)
-function scrollTrack(button, direction) {
-    const track = button.parentElement.querySelector('.brand-figurine-track, .carousel-track');
+// 2. Funzione di Scroll (per i click sulle frecce)
+function scrollTrack(btn, direction) {
+    const wrapper = btn.closest('.figurine-wrapper');
+    const track = wrapper.querySelector('.brand-figurine-track');
     if (!track) return;
-    
-    // Scorre di una porzione della larghezza visibile
-    const scrollAmount = track.clientWidth * 0.8; 
-    
+
+    const scrollAmount = 320; // Larghezza card + gap
     track.scrollBy({
-        left: scrollAmount * direction,
+        left: direction * scrollAmount,
         behavior: 'smooth'
     });
+    
+    // La visibilità si aggiornerà tramite l'evento 'scroll' registrato sotto
 }
 
-// 2. Inizializzazione Caroselli e Pallini
-// Variabile globale per sapere quale track scorrere con la tastiera
+// 3. Inizializzazione Totale (Pallini + Eventi)
 let activeTrackForKeyboard = null;
 
 function initProductCarousels() {
@@ -288,7 +181,7 @@ function initProductCarousels() {
 
         if (!track || items.length === 0) return;
 
-        // 1. Creazione Pallini
+        // --- Creazione Pallini ---
         if (dotsContainer) {
             dotsContainer.innerHTML = '';
             items.forEach((_, i) => {
@@ -302,31 +195,44 @@ function initProductCarousels() {
                 });
                 dotsContainer.appendChild(dot);
             });
-
-            const dots = dotsContainer.querySelectorAll('.dot');
-
-            // 2. LOGICA AGGIORNATA: Proporzione lineare per i pallini
-            track.addEventListener('scroll', () => {
-                const maxScrollLeft = track.scrollWidth - track.offsetWidth;
-                const scrollFraction = track.scrollLeft / maxScrollLeft;
-                
-                // Calcoliamo l'indice in base a quanto abbiamo scorso in percentuale
-                // Questo assicura che tutti i pallini vengano toccati proporzionalmente
-                let currentIndex = Math.round(scrollFraction * (items.length - 1));
-                
-                // Sicurezza per i limiti estremi
-                if (track.scrollLeft <= 5) currentIndex = 0;
-                if (track.scrollLeft >= maxScrollLeft - 5) currentIndex = items.length - 1;
-
-                dots.forEach((d, i) => d.classList.toggle('active', i === currentIndex));
-            });
         }
 
-        // 3. Gestione mouse per tastiera
+        // --- Evento Scroll Unificato (Frecce + Pallini) ---
+        track.addEventListener('scroll', () => {
+            // Aggiorna Frecce
+            updateArrowVisibility(track);
+
+            // Aggiorna Pallini
+            if (dotsContainer) {
+                const dots = dotsContainer.querySelectorAll('.dot');
+                const maxScrollLeft = track.scrollWidth - track.offsetWidth;
+                if (maxScrollLeft <= 0) return;
+
+                const scrollFraction = track.scrollLeft / maxScrollLeft;
+                let currentIndex = Math.round(scrollFraction * (items.length - 1));
+                
+                dots.forEach((d, i) => d.classList.toggle('active', i === currentIndex));
+            }
+        });
+
+        // Esegui un primo controllo immediato
+        updateArrowVisibility(track);
+
+        // --- Tastiera ---
         wrapper.addEventListener('mouseenter', () => { activeTrackForKeyboard = track; });
         wrapper.addEventListener('mouseleave', () => { activeTrackForKeyboard = null; });
     });
 }
+
+// 4. Keyboard Listener
+document.addEventListener('keydown', (e) => {
+    if (!activeTrackForKeyboard) return;
+    if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+        const step = 320;
+        const direction = (e.key === 'ArrowRight') ? 1 : -1;
+        activeTrackForKeyboard.scrollBy({ left: direction * step, behavior: 'smooth' });
+    }
+});
 
 // 4. Integrazione Frecce Tastiera (senza wheel)
 document.addEventListener('keydown', (e) => {
@@ -345,14 +251,11 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
-// Assicurati che initProductCarousels() sia chiamata nel DOMContentLoaded
-document.addEventListener("DOMContentLoaded", () => {
-    initProductCarousels();
-    // ... le tue altre funzioni (loadNavbar, ecc)
-});
+
 /* ==========================================
-   INIT GENERALE
+RENDE IL SITO INTERATTIVO
 ========================================== */
+
 document.addEventListener("DOMContentLoaded", () => {
     loadNavbar();
     loadFooter();
@@ -360,3 +263,54 @@ document.addEventListener("DOMContentLoaded", () => {
     initHistorySection();
     initProductCarousels(); // Avvia la logica prodotti
 });
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    const searchInput = document.getElementById('brandSearch');
+    if (!searchInput) return;
+
+
+/* ==========================================
+BARRA DI RICERCA SUI PRODOTTI
+========================================== */
+
+    searchInput.addEventListener('input', (e) => {
+        const term = e.target.value.toLowerCase();
+        const brandCards = document.querySelectorAll('.brand-card-mini');
+        const sections = document.querySelectorAll('.brand-group');
+        
+        brandCards.forEach(card => {
+            const brandName = card.querySelector('h3').innerText.toLowerCase();
+            if (brandName.includes(term)) {
+                card.style.display = 'block';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+
+        // Nascondi le sezioni intere se non hanno brand visibili
+        sections.forEach(section => {
+            const visibleCards = section.querySelectorAll('.brand-card-mini[style="display: block;"]').length;
+            const hasTerm = term.length > 0;
+            
+            if (hasTerm && visibleCards === 0) {
+                section.style.display = 'none';
+            } else {
+                section.style.display = 'block';
+            }
+        });
+    });
+});
+
+
+/* ==========================================
+   FOOTER
+========================================== */
+function loadFooter() {
+    fetch('footer.html')
+        .then(res => res.text())
+        .then(data => {
+            const el = document.getElementById('footer-placeholder');
+            if (el) el.innerHTML = data;
+        });
+}

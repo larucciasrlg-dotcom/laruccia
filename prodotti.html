@@ -9,252 +9,391 @@
 </head>
 <body>
 
-  <div id="navbar"></div>
+<div id="navbar"></div>
 
-  <nav class="product-nav">
-    <div class="product-nav-container">
-      <a href="#ceramiche" class="active">Ceramiche</a>
-      <a href="#pietre">Pietre</a>
-      <a href="#parquet">Parquet</a>
-      <a href="#sanitari">Sanitari</a>
-      <a href="#rubinetteria">Rubinetteria</a>
-      <a href="#bagno">Arredo Bagno</a>
-      <a href="#box-doccia">Box Doccia</a>
-      <a href="#radiatori">Radiatori</a>
-      <a href="#wallpaper">Wallpaper</a>
-      <a href="#wellness">Wellness</a>
-      <a href="#specchi">Specchi</a>
+<!-- Barra in alto, sotto la Navbar -->
+
+<nav class="product-nav">
+ <div class="product-nav-container">
+   <a href="#ceramiche" class="active">Ceramiche</a>
+   <a href="#pietre">Pietre</a>
+   <a href="#parquet">Parquet</a>
+   <a href="#wallpaper">Wallpaper</a>
+   <a href="#sanitari">Sanitari</a>
+   <a href="#rubinetteria">Rubinetteria</a>
+   <a href="#arredobagno">Arredo Bagno</a>
+   <a href="#box-doccia">Box Doccia</a>
+   <a href="#wellness">Wellness</a>
+   <a href="#radiatori">Radiatori</a>
+   <a href="#specchi">Specchi</a>
+   <a href="#accessoribagno">Accessori Bagno</a>
+  </div>
+</nav>
+
+<!-- Sezione di ricerca -->
+
+<div class="search-section">
+  <div class="container">
+    <div class="search-wrapper">
+      <input type="text" id="brandSearch" placeholder="Cerca un brand..." autocomplete="off">
+      <span class="search-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      </span>
     </div>
-  </nav>
+  </div>
+</div>
 
-  <main class="prodotti-layout">
+<main class="prodotti-layout">
 
-
+<!-- CERAMICHE -->
 
 <section id="ceramiche" class="brand-group">
   <div class="container">
-    <header class="group-header">
-      <h2>Ceramiche</h2>
-      <p>Collezioni d'eccellenza</p>
-    </header>
+  
+<header class="group-header">
+  <h2 class="section-title">Ceramiche</h2>
+  <p class="section-subtitle">Collezioni d'eccellenza</p>
+  <p class="group-description">Superfici dove l’innovazione incontra l’estetica per dettagli architettonici unici.</p>
+</header>
 
-    <div class="figurine-wrapper">
-      <button class="scroll-arrow left" onclick="scrollTrack(this, -1)">&#10229;</button>
-      <button class="scroll-arrow right" onclick="scrollTrack(this, 1)">&#10230;</button>
+<div class="figurine-wrapper">
+<button class="scroll-arrow left" onclick="scrollTrack(this, -1)">
+  <span class="arrow"></span>
+</button>
+<button class="scroll-arrow right" onclick="scrollTrack(this, 1)">
+  <span class="arrow right-arrow"></span>
+</button>
 
-      <div class="brand-figurine-track">
-        <div class="brand-card-mini"><img src="img/prodotti/ceramiche/ceramiche_41zero42.webp" alt="41zero42"><div class="brand-card-overlay"><h3>41zero42</h3></div></div>
-        <div class="brand-card-mini"><img src="img/prodotti/ceramiche/ceramiche_abk.jpg" alt="Abk"><div class="brand-card-overlay"><h3>Abk</h3></div></div>
-        <div class="brand-card-mini"><img src="img/prodotti/ceramiche/ceramiche_argenta.jpg" alt="Argenta"><div class="brand-card-overlay"><h3>Argenta</h3></div></div>
-        <div class="brand-card-mini"><img src="img/prodotti/ceramiche/ceramiche_arpa.jpg" alt="Arpa"><div class="brand-card-overlay"><h3>Arpa</h3></div></div>
-        <div class="brand-card-mini"><img src="img/prodotti/ceramiche/ceramiche_ceramichedagostino.webp" alt="Ceramiche D'agostino"><div class="brand-card-overlay"><h3>Ceramiche D'Agostino</h3></div></div>
-        <div class="brand-card-mini"><img src="img/prodotti/ceramiche/ceramiche_cerdisa.jpg" alt="Cerdisa"><div class="brand-card-overlay"><h3>Cerdisa</h3></div></div>
-        <div class="brand-card-mini"><img src="img/prodotti/ceramiche/ceramiche_cerdomus.jpg" alt="Cerdomus"><div class="brand-card-overlay"><h3>Cerdomus</h3></div></div>
-        <div class="brand-card-mini"><img src="img/prodotti/ceramiche/ceramiche_dadoceramica.jpg" alt="Dado"><div class="brand-card-overlay"><h3>Dado Ceramica</h3></div></div>
-        <div class="brand-card-mini"><img src="img/prodotti/ceramiche/ceramiche_decoratoribassanesi.jpg" alt="Decoratori Bassanesi"><div class="brand-card-overlay"><h3>Decoratori Bassanesi</h3></div></div>
-        <div class="brand-card-mini"><img src="img/prodotti/ceramiche/ceramiche_evoluzioni.jpg" alt="Evoluzioni"><div class="brand-card-overlay"><h3>Evoluzioni</h3></div></div>
-        <div class="brand-card-mini"><img src="img/prodotti/ceramiche/ceramiche_flaviker.jpg" alt="Flaviker"><div class="brand-card-overlay"><h3>Flaviker</h3></div></div>
-        <div class="brand-card-mini"><img src="img/prodotti/ceramiche/ceramiche_flooritalia.jpeg" alt="Floor Italia"><div class="brand-card-overlay"><h3>Floor Italia</h3></div></div>
-        <div class="brand-card-mini"><img src="img/prodotti/ceramiche/ceramiche_florim.jpg" alt="Florim"><div class="brand-card-overlay"><h3>Florim</h3></div></div>
-        <div class="brand-card-mini"><img src="img/prodotti/ceramiche/ceramiche_francescodemaio.webp" alt="Francesco De Maio"><div class="brand-card-overlay"><h3>Francesco De Maio</h3></div></div>
-        <div class="brand-card-mini"><img src="img/prodotti/ceramiche/ceramiche_ilcavallino.jpg" alt="Il Cavallino"><div class="brand-card-overlay"><h3>Il Cavallino</h3></div></div>
-        <div class="brand-card-mini"><img src="img/prodotti/ceramiche/ceramiche_imso.jpg" alt="Imso"><div class="brand-card-overlay"><h3>Imso</h3></div></div>
-        <div class="brand-card-mini"><img src="img/prodotti/ceramiche/ceramiche_kronos.jpg" alt="Kronos"><div class="brand-card-overlay"><h3>Kronos</h3></div></div>
-        <div class="brand-card-mini"><img src="img/prodotti/ceramiche/ceramiche_ktl.jpeg" alt="ktl"><div class="brand-card-overlay"><h3>Ktl</h3></div></div>
-        <div class="brand-card-mini"><img src="img/prodotti/ceramiche/ceramiche_laminam.jpg" alt="Laminam"><div class="brand-card-overlay"><h3>Laminam</h3></div></div>
-        <div class="brand-card-mini"><img src="img/prodotti/ceramiche/ceramiche_mariner.jpg" alt="Mariner"><div class="brand-card-overlay"><h3>Mariner</h3></div></div>
-        <div class="brand-card-mini"><img src="img/prodotti/ceramiche/ceramiche_mipa.jpg" alt="Mipa"><div class="brand-card-overlay"><h3>Mipa</h3></div></div>
-        <div class="brand-card-mini"><img src="img/prodotti/ceramiche/ceramiche_piemme.jpg" alt="Piemme"><div class="brand-card-overlay"><h3>Piemme</h3></div></div>
-        <div class="brand-card-mini"><img src="img/prodotti/ceramiche/ceramiche_provenza.jpeg" alt="Provenza"><div class="brand-card-overlay"><h3>Provenza</h3></div></div>
-        <div class="brand-card-mini"><img src="img/prodotti/ceramiche/ceramiche_ricchetti.jpg" alt="Ricchetti"><div class="brand-card-overlay"><h3>Ricchetti</h3></div></div>
-        <div class="brand-card-mini"><img src="img/prodotti/ceramiche/ceramiche_saime.jpg" alt="Saime"><div class="brand-card-overlay"><h3>Saime</h3></div></div>
-        <div class="brand-card-mini"><img src="img/prodotti/ceramiche/ceramiche_settecento.jpg" alt="Settecento"><div class="brand-card-overlay"><h3>Settecento</h3></div></div>
-        <div class="brand-card-mini"><img src="img/prodotti/ceramiche/ceramiche_studiooneequipe.jpg" alt="Studio One Equipe"><div class="brand-card-overlay"><h3>Studio One Equipe</h3></div></div>
-      </div>
-      <div class="carousel-dots"></div>
-    </div>
+  <div class="brand-figurine-track">
+    <div class="brand-card-mini"><img src="img/prodotti/ceramiche/ceramiche_41zero42.webp" alt="41zero42"><div class="brand-card-overlay"><h3>41zero42</h3></div></div>
+    <div class="brand-card-mini"><img src="img/prodotti/ceramiche/ceramiche_abk.webp" alt="Abk"><div class="brand-card-overlay"><h3>Abk</h3></div></div>
+    <div class="brand-card-mini"><img src="img/prodotti/ceramiche/ceramiche_argenta.webp" alt="Argenta"><div class="brand-card-overlay"><h3>Argenta</h3></div></div>
+    <div class="brand-card-mini"><img src="img/prodotti/ceramiche/ceramiche_arpa.webp" alt="Arpa"><div class="brand-card-overlay"><h3>Arpa</h3></div></div>
+    <div class="brand-card-mini"><img src="img/prodotti/ceramiche/ceramiche_ceramichedagostino.webp" alt="Ceramiche D'agostino"><div class="brand-card-overlay"><h3>Ceramiche D'Agostino</h3></div></div>
+    <div class="brand-card-mini"><img src="img/prodotti/ceramiche/ceramiche_cerdisa.webp" alt="Cerdisa"><div class="brand-card-overlay"><h3>Cerdisa</h3></div></div>
+    <div class="brand-card-mini"><img src="img/prodotti/ceramiche/ceramiche_cerdomus.webp" alt="Cerdomus"><div class="brand-card-overlay"><h3>Cerdomus</h3></div></div>
+    <div class="brand-card-mini"><img src="img/prodotti/ceramiche/ceramiche_dadoceramica.webp" alt="Dado"><div class="brand-card-overlay"><h3>Dado Ceramica</h3></div></div>
+    <div class="brand-card-mini"><img src="img/prodotti/ceramiche/ceramiche_decoratoribassanesi.webp" alt="Decoratori Bassanesi"><div class="brand-card-overlay"><h3>Decoratori Bassanesi</h3></div></div>
+    <div class="brand-card-mini"><img src="img/prodotti/ceramiche/ceramiche_evoluzioni.webp" alt="Evoluzioni"><div class="brand-card-overlay"><h3>Evoluzioni</h3></div></div>
+    <div class="brand-card-mini"><img src="img/prodotti/ceramiche/ceramiche_flaviker.webp" alt="Flaviker"><div class="brand-card-overlay"><h3>Flaviker</h3></div></div>
+    <div class="brand-card-mini"><img src="img/prodotti/ceramiche/ceramiche_flooritalia.webp" alt="Floor Italia"><div class="brand-card-overlay"><h3>Floor Italia</h3></div></div>
+    <div class="brand-card-mini"><img src="img/prodotti/ceramiche/ceramiche_florim.webp" alt="Florim"><div class="brand-card-overlay"><h3>Florim</h3></div></div>
+    <div class="brand-card-mini"><img src="img/prodotti/ceramiche/ceramiche_francescodemaio.webp" alt="Francesco De Maio"><div class="brand-card-overlay"><h3>Francesco De Maio</h3></div></div>
+    <div class="brand-card-mini"><img src="img/prodotti/ceramiche/ceramiche_ilcavallino.webp" alt="Il Cavallino"><div class="brand-card-overlay"><h3>Il Cavallino</h3></div></div>
+    <div class="brand-card-mini"><img src="img/prodotti/ceramiche/ceramiche_imso.webp" alt="Imso"><div class="brand-card-overlay"><h3>Imso</h3></div></div>
+    <div class="brand-card-mini"><img src="img/prodotti/ceramiche/ceramiche_kronos.webp" alt="Kronos"><div class="brand-card-overlay"><h3>Kronos</h3></div></div>
+    <div class="brand-card-mini"><img src="img/prodotti/ceramiche/ceramiche_ktl.webp" alt="ktl"><div class="brand-card-overlay"><h3>Ktl</h3></div></div>
+    <div class="brand-card-mini"><img src="img/prodotti/ceramiche/ceramiche_laminam.webp" alt="Laminam"><div class="brand-card-overlay"><h3>Laminam</h3></div></div>
+    <div class="brand-card-mini"><img src="img/prodotti/ceramiche/ceramiche_mariner.webp" alt="Mariner"><div class="brand-card-overlay"><h3>Mariner</h3></div></div>
+    <div class="brand-card-mini"><img src="img/prodotti/ceramiche/ceramiche_piemme.webp" alt="Piemme"><div class="brand-card-overlay"><h3>Piemme</h3></div></div>
+    <div class="brand-card-mini"><img src="img/prodotti/ceramiche/ceramiche_provenza.webp" alt="Provenza"><div class="brand-card-overlay"><h3>Provenza</h3></div></div>
+    <div class="brand-card-mini"><img src="img/prodotti/ceramiche/ceramiche_ricchetti.webp" alt="Ricchetti"><div class="brand-card-overlay"><h3>Ricchetti</h3></div></div>
+    <div class="brand-card-mini"><img src="img/prodotti/ceramiche/ceramiche_saime.webp" alt="Saime"><div class="brand-card-overlay"><h3>Saime</h3></div></div>
+    <div class="brand-card-mini"><img src="img/prodotti/ceramiche/ceramiche_settecento.webp" alt="Settecento"><div class="brand-card-overlay"><h3>Settecento</h3></div></div>
+    <div class="brand-card-mini"><img src="img/prodotti/ceramiche/ceramiche_studiooneequipe.webp" alt="Studio One Equipe"><div class="brand-card-overlay"><h3>Studio One Equipe</h3></div></div>
   </div>
+  <div class="carousel-dots"></div>
+</div>
+</div>
 </section>
+
+<!-- PIETRE -->
 
 <section id="pietre" class="brand-group">
   <div class="container">
-    <header class="group-header">
-      <h2>Pietre</h2>
-    </header>
-    <div class="figurine-wrapper">
-      <button class="scroll-arrow left" onclick="scrollTrack(this, -1)">&#10229;</button>
-      <button class="scroll-arrow right" onclick="scrollTrack(this, 1)">&#10230;</button>
-      <div class="brand-figurine-track">
-        <div class="brand-card-mini"><img src="img/pietre/artesia.jpg" alt="Artesia"><div class="brand-card-overlay"><h3>Artesia</h3></div></div>
-        <div class="brand-card-mini"><img src="img/pietre/boxer.jpg" alt="Boxer"><div class="brand-card-overlay"><h3>Boxer</h3></div></div>
-        <div class="brand-card-mini"><img src="img/pietre/nero-sicilia.jpg" alt="Nero Sicilia"><div class="brand-card-overlay"><h3>Nero Sicilia</h3></div></div>
-        <div class="brand-card-mini"><img src="img/pietre/salvatori.jpg" alt="Salvatori Marmi"><div class="brand-card-overlay"><h3>Salvatori Marmi</h3></div></div>
-         <div class="brand-card-mini"><img src="img/pietre/salvatori.jpg" alt="Salvatori Marmi"><div class="brand-card-overlay"><h3>Pecchioli Franco</h3></div></div>
-          <div class="brand-card-mini"><img src="img/pietre/salvatori.jpg" alt="Salvatori Marmi"><div class="brand-card-overlay"><h3>Oltremateria</h3></div></div>
-      </div>
-          <div class="carousel-dots"></div>
-    </div>
+
+<header class="group-header">
+  <h2 class="section-title">Pietre</h2>
+  <p class="section-subtitle">Estetica Ancestrale</p>
+  <p class="group-description">Texture autentiche e venature naturali nate per conferire un carattere eterno allo spazio.</p>
+</header>
+
+
+<div class="figurine-wrapper">
+<button class="scroll-arrow left" onclick="scrollTrack(this, -1)">
+  <span class="arrow"></span>
+</button>
+<button class="scroll-arrow right" onclick="scrollTrack(this, 1)">
+  <span class="arrow right-arrow"></span>
+</button>
+
+    <div class="brand-figurine-track">
+    <div class="brand-card-mini"><img src="img/prodotti/pietre/pietre_artesia.webp" alt="Artesia"><div class="brand-card-overlay"><h3>Artesia</h3></div></div>
+    <div class="brand-card-mini"><img src="img/prodotti/pietre/pietre_boxer.webp" alt="Boxer"><div class="brand-card-overlay"><h3>Boxer</h3></div></div>
+    <div class="brand-card-mini"><img src="img/prodotti/pietre/pietre_mipa.webp" alt="Mipa"><div class="brand-card-overlay"><h3>Mipa</h3></div></div>
+    <div class="brand-card-mini"><img src="img/prodotti/pietre/pietre_nerosicilia.webp" alt="Nero Sicilia"><div class="brand-card-overlay"><h3>Nero Sicilia</h3></div></div>
+    <div class="brand-card-mini"><img src="img/prodotti/pietre/pietre_pecchiolifranco.webp" alt="Pecchioli Franco"><div class="brand-card-overlay"><h3>Pecchioli Franco</h3></div></div>
+    <div class="brand-card-mini"><img src="img/prodotti/pietre/pietre_salvatorimarmi.webp" alt="Salvatori Marmi"><div class="brand-card-overlay"><h3>Salvatori Marmi</h3></div></div>
+    <div class="brand-card-mini"><img src="img/prodotti/pietre/pietre_oltremateria.webp" alt="Oltremateria"><div class="brand-card-overlay"><h3>Oltremateria</h3></div></div>
   </div>
+  <div class="carousel-dots"></div>
+</div>
+</div>
 </section>
 
-<section id="bagno" class="brand-group">
+<!-- PARQUET -->
+
+<section id="parquet" class="brand-group">
   <div class="container">
-    <header class="group-header">
-      <h2>Arredo Bagno</h2>
-    </header>
-    <div class="figurine-wrapper">
-      <button class="scroll-arrow left" onclick="scrollTrack(this, -1)">&#10229;</button>
-      <button class="scroll-arrow right" onclick="scrollTrack(this, 1)">&#10230;</button>
-      <div class="brand-figurine-track">
-        <div class="brand-card-mini"><img src="img/bagno/antoniolupi.jpg" alt="Antonio Lupi"><div class="brand-card-overlay"><h3>Antonio Lupi</h3></div></div>
-        <div class="brand-card-mini"><img src="img/bagno/cerasa.jpg" alt="Cerasa"><div class="brand-card-overlay"><h3>Cerasa</h3></div></div>
-        <div class="brand-card-mini"><img src="img/bagno/inda.jpg" alt="Inda"><div class="brand-card-overlay"><h3>Inda</h3></div></div>
-        <div class="brand-card-mini"><img src="img/bagno/rexa.jpg" alt="Rexa Design"><div class="brand-card-overlay"><h3>Rexa Design</h3></div></div>
-        <div class="brand-card-mini"><img src="img/bagno/stocco.jpg" alt="Stocco"><div class="brand-card-overlay"><h3>Stocco</h3></div></div>
-      </div>
-          <div class="carousel-dots"></div>
-    </div>
+
+ <header class="group-header">
+  <h2 class="section-title">Parquet</h2>
+  <p class="section-subtitle">Calore Naturale</p>
+  <p class="group-description">Essenze pregiate lavorate con maestria per trasformare ogni ambiente in un luogo accogliente.</p>
+</header>
+
+  <div class="brand-figurine-track">
+    <div class="brand-card-mini"><img src="img/prodotti/parquet/parquet_originalparquet.webp" alt="Original Parquet"><div class="brand-card-overlay"><h3>Original Parquet</h3></div></div>
+    <div class="brand-card-mini"><img src="img/prodotti/parquet/parquet_cpparquet.webp" alt="CP Parquet"><div class="brand-card-overlay"><h3>CP Parquet</h3></div></div>
+  </div>
+<div class="carousel-dots"></div>
+</div>
+</section>
+
+<!-- WALLPAPER -->
+
+<section id="wallpaper" class="brand-group">
+<div class="container">
+
+<header class="group-header">
+  <h2 class="section-title">Wallpaper</h2>
+  <p class="section-subtitle">Visioni d'Arredo</p>
+  <p class="group-description">Trame decorative e design contemporaneo per trasformare le pareti in opere d'arte.</p>
+</header>
+
+  <div class="brand-figurine-track">
+    <div class="brand-card-mini"><img src="img/prodotti/cartadaparati/cartadaparati_inkiostrobianco.webp" alt="Inkiostro Bianco"><div class="brand-card-overlay"><h3>Inkiostro Bianco</h3></div></div>
+    <div class="brand-card-mini"><img src="img/prodotti/cartadaparati/cartadaparati_rimura.webp" alt="Rimura"><div class="brand-card-overlay"><h3>Rimura</h3></div></div>
+  </div>
+  <div class="carousel-dots"></div>
   </div>
 </section>
 
-    <section id="box-doccia" class="brand-group">
-      <div class="container">
-        <header class="group-header">
-          <h2>Box Doccia</h2>
-          <p>Spazi Rigeneranti</p>
-        </header>
-         <div class="figurine-wrapper">
-      <button class="scroll-arrow left" onclick="scrollTrack(this, -1)">&#10229;</button>
-      <button class="scroll-arrow right" onclick="scrollTrack(this, 1)">&#10230;</button>
-        <div class="brand-figurine-track">
-          <div class="brand-card-mini"><img src="img/box/inda.jpg" alt="Inda"><div class="brand-card-overlay"><h3>Inda</h3></div></div>
-          <div class="brand-card-mini"><img src="img/box/sphera.jpg" alt="Sphera Docce"><div class="brand-card-overlay"><h3>Sphera Docce</h3></div></div>
-          <div class="brand-card-mini"><img src="img/box/spring.jpg" alt="Spring"><div class="brand-card-overlay"><h3>Spring</h3></div></div>
-          <div class="brand-card-mini"><img src="img/box/thermodesign.jpg" alt="Thermodesign"><div class="brand-card-overlay"><h3>Thermodesign</h3></div></div>
-          <div class="brand-card-mini"><img src="img/box/gme.jpg" alt="GME"><div class="brand-card-overlay"><h3>GME</h3></div></div>
-          <div class="brand-card-mini"><img src="img/box/duplach.jpg" alt="Duplach"><div class="brand-card-overlay"><h3>Duplach</h3></div></div>
-        </div>
-            <div class="carousel-dots"></div>
-            </div>
-      </div>
-    </section>
+<!-- SANITARI -->  
 
-    <section id="rubinetteria" class="brand-group">
-      <div class="container">
-        <header class="group-header">
-          <h2>Rubinetteria</h2>
-          <p>L'Essenza dell'Acqua</p>
-        </header>
-        <div class="brand-figurine-track">
-          <div class="brand-card-mini"><img src="img/rubinetteria/bongio.jpg" alt="Bongio"><div class="brand-card-overlay"><h3>Bongio</h3></div></div>
-          <div class="brand-card-mini"><img src="img/rubinetteria/cea.jpg" alt="Cea"><div class="brand-card-overlay"><h3>Cea</h3></div></div>
-          <div class="brand-card-mini"><img src="img/rubinetteria/paini.jpg" alt="Paini"><div class="brand-card-overlay"><h3>Paini</h3></div></div>
-          <div class="brand-card-mini"><img src="img/rubinetteria/ritmonio.jpg" alt="Ritmonio"><div class="brand-card-overlay"><h3>Ritmonio</h3></div></div>
-          <div class="brand-card-mini"><img src="img/rubinetteria/tubico.jpg" alt="Tubico"><div class="brand-card-overlay"><h3>Tubico</h3></div></div>
-          <div class="brand-card-mini"><img src="img/rubinetteria/dmp.jpg" alt="DMP"><div class="brand-card-overlay"><h3>DMP</h3></div></div>
-          <div class="brand-card-mini"><img src="img/rubinetteria/ausili.jpg" alt="Asd Ausili"><div class="brand-card-overlay"><h3>Asd Ausili</h3></div></div>
-          <div class="brand-card-mini"><img src="img/rubinetteria/gme.jpg" alt="GME"><div class="brand-card-overlay"><h3>GME</h3></div></div>
-          <div class="brand-card-mini"><img src="img/rubinetteria/zanetti.jpg" alt="Zanetti Chini"><div class="brand-card-overlay"><h3>Zanetti Chini</h3></div></div>
-        </div>
-            <div class="carousel-dots"></div>
-      </div>
-    </section>
+<section id="sanitari" class="brand-group">
+<div class="container">
 
-    <section id="radiatori" class="brand-group">
-      <div class="container">
-        <header class="group-header">
-          <h2>Radiatori</h2>
-          <p>Calore e Design</p>
-        </header>
-        <div class="brand-figurine-track">
-          <div class="brand-card-mini"><img src="img/radiatori/brem.jpg" alt="Brem"><div class="brand-card-overlay"><h3>Brem</h3></div></div>
-          <div class="brand-card-mini"><img src="img/radiatori/lazzarini.jpg" alt="Lazzarini"><div class="brand-card-overlay"><h3>Lazzarini</h3></div></div>
-          <div class="brand-card-mini"><img src="img/radiatori/brandoni.jpg" alt="Brandoni"><div class="brand-card-overlay"><h3>Brandoni</h3></div></div>
-        </div>
-            <div class="carousel-dots"></div>
-      </div>
-    </section>
+<header class="group-header">
+  <h2 class="section-title">Sanitari</h2>
+  <p class="section-subtitle">Purezza Formale</p>
+  <p class="group-description">L’equilibrio perfetto tra ergonomia e igiene attraverso linee essenziali in ceramica.</p>
+</header>
 
-    <section id="bagno" class="brand-group">
-      <div class="container">
-        <header class="group-header">
-          <h2>Arredo Bagno</h2>
-          <p>Estetica e Comfort</p>
-        </header>
-        <div class="brand-figurine-track">
-          <div class="brand-card-mini"><img src="img/arredobagno/antoniolupi.jpg" alt="Antonio Lupi"><div class="brand-card-overlay"><h3>Antonio Lupi</h3></div></div>
-          <div class="brand-card-mini"><img src="img/arredobagno/cerasa.jpg" alt="Cerasa"><div class="brand-card-overlay"><h3>Cerasa</h3></div></div>
-          <div class="brand-card-mini"><img src="img/arredobagno/inda.jpg" alt="Inda"><div class="brand-card-overlay"><h3>Inda</h3></div></div>
-          <div class="brand-card-mini"><img src="img/arredobagno/rexa.jpg" alt="Rexa Design"><div class="brand-card-overlay"><h3>Rexa Design</h3></div></div>
-          <div class="brand-card-mini"><img src="img/arredobagno/royo.jpg" alt="Royo Group"><div class="brand-card-overlay"><h3>Royo Group</h3></div></div>
-          <div class="brand-card-mini"><img src="img/arredobagno/stocco.jpg" alt="Stocco"><div class="brand-card-overlay"><h3>Stocco</h3></div></div>
-          <div class="brand-card-mini"><img src="img/arredobagno/nic.jpg" alt="Nic Design"><div class="brand-card-overlay"><h3>Nic Design</h3></div></div>
-          <div class="brand-card-mini"><img src="img/arredobagno/taylormade.jpg" alt="Taylor Made"><div class="brand-card-overlay"><h3>Taylor Made</h3></div></div>
-          <div class="brand-card-mini"><img src="img/arredobagno/xilon.jpg" alt="Xilon"><div class="brand-card-overlay"><h3>Xilon</h3></div></div>
-        </div>
-            <div class="carousel-dots"></div>
-      </div>
-    </section>
+<div class="figurine-wrapper">
+<button class="scroll-arrow left" onclick="scrollTrack(this, -1)">
+  <span class="arrow"></span>
+</button>
+<button class="scroll-arrow right" onclick="scrollTrack(this, 1)">
+  <span class="arrow right-arrow"></span>
+</button>
 
-    <section id="accessori" class="brand-group">
-      <div class="container">
-        <header class="group-header">
-          <h2>Accessori Bagno</h2>
-        </header>
-        <div class="brand-figurine-track">
-          <div class="brand-card-mini"><img src="img/accessori/capannoli.jpg" alt="Capannoli"><div class="brand-card-overlay"><h3>Capannoli</h3></div></div>
-          <div class="brand-card-mini"><img src="img/accessori/colombo.jpg" alt="Colombo"><div class="brand-card-overlay"><h3>Colombo</h3></div></div>
-          <div class="brand-card-mini"><img src="img/accessori/geelli.jpg" alt="Geelli"><div class="brand-card-overlay"><h3>Geelli</h3></div></div>
-        </div>
-            <div class="carousel-dots"></div>
-      </div>
-    </section>
+<div class="brand-figurine-track">         
+<div class="brand-card-mini"><img src="img/prodotti/sanitari/flaminia.jpg" alt="flaminia"><div class="brand-card-overlay"><h3>Flaminia</h3></div></div>
+<div class="brand-card-mini"><img src="img/prodotti/sanitaru/gsg.jpg" alt="gsg"><div class="brand-card-overlay"><h3>GSG</h3></div></div>
+<div class="brand-card-mini"><img src="img/prodotti/sanitaru/gsg.jpg" alt="gsg"><div class="brand-card-overlay"><h3>Laufen</h3></div></div>
+<div class="brand-card-mini"><img src="img/prodotti/sanitaru/gsg.jpg" alt="gsg"><div class="brand-card-overlay"><h3>Nic</h3></div></div>
+<div class="brand-card-mini"><img src="img/prodotti/sanitaru/gsg.jgp" alt="gsg"><div class="brand-card-overlay"><h3>Olympia</h3></div></div>
+<div class="brand-card-mini"><img src="img/prodotti/sanitaru/gsg.jgp" alt="gsg"><div class="brand-card-overlay"><h3>The Art Ceram</h3></div></div>
+<div class="brand-card-mini"><img src="img/prodotti/sanitaru/gsg.jpg" alt="gsg"><div class="brand-card-overlay"><h3>Thermomat</h3></div></div>
+</div>
+<div class="carousel-dots"></div>
+</div>
+</div>
+</section>
 
-    <section id="wallpaper" class="brand-group">
-      <div class="container">
-        <header class="group-header">
-          <h2>Carta da Parati</h2>
-        </header>
-        <div class="brand-figurine-track">
-          <div class="brand-card-mini"><img src="img/prodotti/cartadaparati/cartadaparati_inkiostrobianco.jpg" alt="Inkiostro Bianco"><div class="brand-card-overlay"><h3>Inkiostro Bianco</h3></div></div>
-          <div class="brand-card-mini"><img src="img/prodotti/cartadaparati/cartadaparati_rimura.jpg" alt="Rimura"><div class="brand-card-overlay"><h3>Rimura</h3></div></div>
-        </div>
-            <div class="carousel-dots"></div>
-      </div>
-    </section>
+<!-- RUBINETTERIA -->
 
-    <section id="wellness" class="brand-group">
-      <div class="container">
-        <header class="group-header">
-          <h2>Wellness & Outdoor</h2>
-        </header>
-        <div class="brand-figurine-track">
-          <div class="brand-card-mini"><img src="img/wellness/treesse.jpg" alt="Treesse"><div class="brand-card-overlay"><h3>Idromassaggio Treesse</h3></div></div>
-          <div class="brand-card-mini"><img src="img/wellness/effegibi.jpg" alt="Effegibi"><div class="brand-card-overlay"><h3>Saune Effegibi</h3></div></div>
-          <div class="brand-card-mini"><img src="img/outdoor/atmosphera.jpg" alt="Atmosphera"><div class="brand-card-overlay"><h3>Atmosphera</h3></div></div>
-          <div class="brand-card-mini"><img src="img/outdoor/ilparco.jpg" alt="Il Parco"><div class="brand-card-overlay"><h3>Il Parco</h3></div></div>
-          <div class="brand-card-mini"><img src="img/wellness/palazzetti.jpg" alt="Palazzetti"><div class="brand-card-overlay"><h3>Caminetti Palazzetti</h3></div></div>
-        </div>
-            <div class="carousel-dots"></div>
-      </div>
-    </section>
+<section id="rubinetteria" class="brand-group">
+<div class="container">
 
-    <section id="specchi" class="brand-group">
-      <div class="container">
-        <header class="group-header">
-          <h2>Specchi</h2>
-        </header>
-        <div class="brand-figurine-track">
-          <div class="brand-card-mini"><img src="img/prodotti/specchi/specchi_genexia.jpg" alt="Genexia"><div class="brand-card-overlay"><h3>Genexia</h3></div></div>
-          <div class="brand-card-mini"><img src="img/prodotti/specchi/specchi_specchi_sartoriali.png" alt="Specchi Sartoriali"><div class="brand-card-overlay"><h3>Specchi Sartoriali</h3></div></div>
-          <div class="brand-card-mini"><img src="img/prodotti/specchi/specchi_stocco.jpg" alt="Specchi Stocco"><div class="brand-card-overlay"><h3>Stocco</h3></div></div>
-        </div>
-            <div class="carousel-dots"></div>
-      </div>
-    </section>
+<header class="group-header">
+  <h2 class="section-title">Rubinetteria</h2>
+  <p class="section-subtitle">L'Essenza dell'Acqua</p>
+  <p class="group-description">Sistemi di erogazione e miscelatori nati per un'esperienza di puro benessere quotidiano.</p>
+</header>
 
-  <div id="footer-placeholder"></div>
+<div class="figurine-wrapper">
+<button class="scroll-arrow left" onclick="scrollTrack(this, -1)">
+  <span class="arrow"></span>
+</button>
+<button class="scroll-arrow right" onclick="scrollTrack(this, 1)">
+  <span class="arrow right-arrow"></span>
+</button>
 
-  <script src="js/script.js"></script>
+<div class="brand-figurine-track">
+<div class="brand-card-mini"><img src="img/rubinetteria/bongio.jpg" alt="Bongio"><div class="brand-card-overlay"><h3>Bongio</h3></div></div>
+<div class="brand-card-mini"><img src="img/rubinetteria/cea.jpg" alt="Cea"><div class="brand-card-overlay"><h3>Cea</h3></div></div>
+<div class="brand-card-mini"><img src="img/rubinetteria/paini.jpg" alt="Paini"><div class="brand-card-overlay"><h3>Paini</h3></div></div>
+<div class="brand-card-mini"><img src="img/rubinetteria/ritmonio.jpg" alt="Ritmonio"><div class="brand-card-overlay"><h3>Ritmonio</h3></div></div>
+<div class="brand-card-mini"><img src="img/rubinetteria/tubico.jpg" alt="Tubico"><div class="brand-card-overlay"><h3>Tubico</h3></div></div>
+<div class="brand-card-mini"><img src="img/rubinetteria/dmp.jpg" alt="DMP"><div class="brand-card-overlay"><h3>DMP</h3></div></div>
+<div class="brand-card-mini"><img src="img/rubinetteria/ausili.jpg" alt="Asd Ausili"><div class="brand-card-overlay"><h3>Asd Ausili</h3></div></div>
+<div class="brand-card-mini"><img src="img/rubinetteria/gme.jpg" alt="GME"><div class="brand-card-overlay"><h3>GME</h3></div></div>
+<div class="brand-card-mini"><img src="img/rubinetteria/zanetti.jpg" alt="Zanetti Chini"><div class="brand-card-overlay"><h3>Zanetti Chini</h3></div></div>
+</div>
+<div class="carousel-dots"></div>
+</div>
+</div>
+</section>
+
+<!-- ARREDO BAGNO -->
+
+<section id="arredobagno" class="brand-group">
+<div class="container">
+
+<header class="group-header">
+  <h2 class="section-title">Arredo Bagno</h2>
+  <p class="section-subtitle">Architetture Sartoriali</p>
+  <p class="group-description">Soluzioni su misura che combinano estetica e razionalità per organizzare lo spazio.</p>
+</header>
+
+<div class="figurine-wrapper">
+<button class="scroll-arrow left" onclick="scrollTrack(this, -1)">
+  <span class="arrow"></span>
+</button>
+<button class="scroll-arrow right" onclick="scrollTrack(this, 1)">
+  <span class="arrow right-arrow"></span>
+</button>
+<div class="brand-figurine-track">
+<div class="brand-card-mini"><img src="img/bagno/antoniolupi.jpg" alt="Antonio Lupi"><div class="brand-card-overlay"><h3>Antonio Lupi</h3></div></div>
+<div class="brand-card-mini"><img src="img/bagno/cerasa.jpg" alt="Cerasa"><div class="brand-card-overlay"><h3>Cerasa</h3></div></div>
+<div class="brand-card-mini"><img src="img/bagno/inda.jpg" alt="Inda"><div class="brand-card-overlay"><h3>Inda</h3></div></div>
+<div class="brand-card-mini"><img src="img/bagno/rexa.jpg" alt="Rexa Design"><div class="brand-card-overlay"><h3>Rexa Design</h3></div></div>
+<div class="brand-card-mini"><img src="img/bagno/stocco.jpg" alt="Stocco"><div class="brand-card-overlay"><h3>Stocco</h3></div></div>
+</div>
+<div class="carousel-dots"></div>
+</div>
+</div>
+</section>
+
+<!-- BOX DOCCIA -->
+
+
+<section id="box-doccia" class="brand-group">
+<div class="container">
+
+<header class="group-header">
+  <h2 class="section-title">Box Doccia</h2>
+  <p class="section-subtitle">Spazi Rigeneranti</p>
+  <p class="group-description">Trasparenze cristalline e profili minimali per un'area doccia dal comfort superiore.</p>
+</header>
+
+<div class="figurine-wrapper">
+<button class="scroll-arrow left" onclick="scrollTrack(this, -1)">
+  <span class="arrow"></span>
+</button>
+<button class="scroll-arrow right" onclick="scrollTrack(this, 1)">
+  <span class="arrow right-arrow"></span>
+</button>
+
+<div class="brand-figurine-track">
+<div class="brand-card-mini"><img src="img/box/inda.jpg" alt="Inda"><div class="brand-card-overlay"><h3>Inda</h3></div></div>
+<div class="brand-card-mini"><img src="img/box/sphera.jpg" alt="Sphera Docce"><div class="brand-card-overlay"><h3>Sphera Docce</h3></div></div>
+<div class="brand-card-mini"><img src="img/box/spring.jpg" alt="Spring"><div class="brand-card-overlay"><h3>Spring</h3></div></div>
+<div class="brand-card-mini"><img src="img/box/thermodesign.jpg" alt="Thermodesign"><div class="brand-card-overlay"><h3>Thermodesign</h3></div></div>
+<div class="brand-card-mini"><img src="img/box/gme.jpg" alt="GME"><div class="brand-card-overlay"><h3>GME</h3></div></div>
+<div class="brand-card-mini"><img src="img/box/duplach.jpg" alt="Duplach"><div class="brand-card-overlay"><h3>Duplach</h3></div></div>
+</div>
+<div class="carousel-dots"></div>
+</div>
+</div>
+</section>
+
+<!-- WELLNESS & OUTDOOR -->
+
+<section id="wellness" class="brand-group">
+<div class="container">
+
+<header class="group-header">
+  <h2 class="section-title">Wellness</h2>
+  <p class="section-subtitle">Oasi di Benessere</p>
+  <p class="group-description">Dalle saune hi-tech agli arredi outdoor per una totale armonia tra mente e corpo.</p>
+</header>
+
+<div class="figurine-wrapper">
+<button class="scroll-arrow left" onclick="scrollTrack(this, -1)">
+  <span class="arrow"></span>
+</button>
+<button class="scroll-arrow right" onclick="scrollTrack(this, 1)">
+  <span class="arrow right-arrow"></span>
+</button>
+
+<div class="brand-figurine-track">
+<div class="brand-card-mini"><img src="img/wellness/treesse.jpg" alt="Treesse"><div class="brand-card-overlay"><h3>Idromassaggio Treesse</h3></div></div>
+<div class="brand-card-mini"><img src="img/wellness/effegibi.jpg" alt="Effegibi"><div class="brand-card-overlay"><h3>Saune Effegibi</h3></div></div>
+<div class="brand-card-mini"><img src="img/outdoor/atmosphera.jpg" alt="Atmosphera"><div class="brand-card-overlay"><h3>Atmosphera</h3></div></div>
+<div class="brand-card-mini"><img src="img/outdoor/ilparco.jpg" alt="Il Parco"><div class="brand-card-overlay"><h3>Il Parco</h3></div></div>
+<div class="brand-card-mini"><img src="img/wellness/palazzetti.jpg" alt="Palazzetti"><div class="brand-card-overlay"><h3>Caminetti Palazzetti</h3></div></div>
+</div>
+<div class="carousel-dots"></div>
+</div>
+</div>
+</section>
+
+<!-- RADIATORI -->
+
+<section id="radiatori" class="brand-group">
+<div class="container">
+
+<header class="group-header">
+  <h2 class="section-title">Radiatori</h2>
+  <p class="section-subtitle">Calore e Design</p>
+  <p class="group-description">Efficienza energetica e ricerca estetica per corpi scaldanti dalla presenza distintiva.</p>
+</header>
+
+<div class="brand-figurine-track">
+<div class="brand-card-mini"><img src="img/radiatori/brem.jpg" alt="Brem"><div class="brand-card-overlay"><h3>Brem</h3></div></div>
+<div class="brand-card-mini"><img src="img/radiatori/lazzarini.jpg" alt="Lazzarini"><div class="brand-card-overlay"><h3>Lazzarini</h3></div></div>
+<div class="brand-card-mini"><img src="img/radiatori/brandoni.jpg" alt="Brandoni"><div class="brand-card-overlay"><h3>Brandoni</h3></div></div>
+</div>
+<div class="carousel-dots"></div>
+</div>
+</section>
+
+<!-- SPECCHI -->
+
+
+<section id="specchi" class="brand-group">
+<div class="container">
+
+<header class="group-header">
+  <h2 class="section-title">Specchi</h2>
+  <p class="section-subtitle">Riflessi di Luce</p>
+  <p class="group-description">Superfici tecnologiche studiate per amplificare lo spazio con dettagli di pura luce.</p>
+</header>
+
+<div class="brand-figurine-track">
+<div class="brand-card-mini"><img src="img/prodotti/specchi/specchi_genexia.jpg" alt="Genexia"><div class="brand-card-overlay"><h3>Genexia</h3></div></div>
+<div class="brand-card-mini"><img src="img/prodotti/specchi/specchi_specchi_sartoriali.png" alt="Specchi Sartoriali"><div class="brand-card-overlay"><h3>Specchi Sartoriali</h3></div></div>
+<div class="brand-card-mini"><img src="img/prodotti/specchi/specchi_stocco.jpg" alt="Specchi Stocco"><div class="brand-card-overlay"><h3>Stocco</h3></div></div>
+</div>
+<div class="carousel-dots"></div>
+</div>
+</section>
+
+<!-- ACCESSORI BAGNO -->
+
+<section id="accessoribagno" class="brand-group">
+<div class="container">
+
+<header class="group-header">
+  <h2 class="section-title">Accessori</h2>
+  <p class="section-subtitle">Dettagli di Carattere</p>
+  <p class="group-description">Il tocco finale funzionale per aggiungere un accento stilistico coordinato al bagno.</p>
+</header>
+
+<div class="brand-figurine-track">
+<div class="brand-card-mini"><img src="img/accessori/capannoli.jpg" alt="Capannoli"><div class="brand-card-overlay"><h3>Capannoli</h3></div></div>
+<div class="brand-card-mini"><img src="img/accessori/colombo.jpg" alt="Colombo"><div class="brand-card-overlay"><h3>Colombo</h3></div></div>
+<div class="brand-card-mini"><img src="img/accessori/geelli.jpg" alt="Geelli"><div class="brand-card-overlay"><h3>Geelli</h3></div></div>
+</div>
+<div class="carousel-dots"></div>
+</div>
+</section>
+
+<div id="footer-placeholder"></div>
+
+<script src="js/script.js"></script>
 </body>
 </html>
