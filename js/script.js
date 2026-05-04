@@ -314,3 +314,83 @@ function loadFooter() {
             if (el) el.innerHTML = data;
         });
 }
+
+
+// Database dei brand (puoi spostarlo in un file .json esterno in futuro)
+const brandData = {
+    "41zero42": {
+        nome: "41zero42",
+        descrizione: "Descrizione dettagliata...",
+        imgPrincipale: "img/prodotti/ceramiche/ceramiche_41zero42.webp",
+        sito: "https://www.41zero42.com",
+        gallery: ["img/41-1.jpg", "img/41-2.jpg"]
+    },
+    "Abk": { // AGGIUNGI QUESTO
+        nome: "Abk",
+        descrizione: "Leader nella produzione di grandi lastre ceramiche...",
+        imgPrincipale: "img/prodotti/ceramiche/ceramiche_abk.webp",
+        sito: "https://www.abk.it",
+        gallery: ["img/abk-1.jpg", "img/abk-2.jpg"]
+    }
+    // E così via per tutti gli altri...
+};
+
+function caricaBrand() {
+    const params = new URLSearchParams(window.location.search);
+    const brandKey = params.get('name');
+    const data = brandData[brandKey];
+
+    if (data) {
+        // Aggiorna Meta dati e testi principali
+        document.title = `${data.nome} - NomeTuoShowroom`; 
+        document.getElementById('brand-title').innerText = data.nome;
+        document.getElementById('brand-description').innerText = data.descrizione;
+        
+        // Gestione Immagine Principale
+        const mainImg = document.getElementById('brand-main-img');
+        mainImg.src = data.imgPrincipale;
+        mainImg.alt = `Ambientazione ${data.nome}`;
+
+        // Gestione Link
+        document.getElementById('brand-link').href = data.sito;
+
+        // Genera Galleria con struttura ottimizzata per il CSS
+        const galleryContainer = document.getElementById('brand-gallery');
+        galleryContainer.innerHTML = ''; // Pulisce il contenitore prima di caricarne di nuovi
+
+        data.gallery.forEach(imgUrl => {
+            galleryContainer.innerHTML += `
+                <div class="col-12 col-md-4 mb-4">
+                    <div class="gallery-item">
+                        <img src="${imgUrl}" 
+                             alt="Collezione ${data.nome}" 
+                             class="img-fluid" 
+                             loading="lazy">
+                    </div>
+                </div>`;
+        });
+    } else {
+        // Opzionale: reindirizza alla pagina prodotti se il brand non esiste
+        // window.location.href = 'prodotti.html';
+    }
+}
+
+// Esegui la funzione quando la pagina è pronta
+document.addEventListener('DOMContentLoaded', caricaBrand);
+
+const contenitore = document.getElementById('lista-brand-ceramiche');
+
+// Cicla attraverso le chiavi del tuo oggetto brandData
+Object.keys(brandData).forEach(key => {
+    const brand = brandData[key];
+    contenitore.innerHTML += `
+        <div class="brand-card-mini">
+            <a href="brand.html?name=${key}">
+                <img src="${brand.imgMiniatura}" alt="${brand.nome}">
+                <div class="brand-card-overlay">
+                    <h3>${brand.nome}</h3>
+                </div>
+            </a>
+        </div>
+    `;
+});

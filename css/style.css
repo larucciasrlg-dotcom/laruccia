@@ -1272,11 +1272,17 @@ h1, h2, .history-line, .footer-logo {
     flex-direction: row !important;
     flex-wrap: nowrap !important;
     overflow-x: auto !important;
-    scroll-snap-type: x mandatory;
+    scroll-snap-type: x proximity;
     gap: 20px;
     padding: 20px 0 40px 0;
     scrollbar-width: none; /* Nasconde scrollbar Firefox */
     -webkit-overflow-scrolling: touch;
+      scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+
+  /* 🔥 questo elimina glitch rendering */
+  transform: translateZ(0);
+  padding-bottom: 4px;
 }
 
 .brand-figurine-track::-webkit-scrollbar {
@@ -1293,14 +1299,29 @@ h1, h2, .history-line, .footer-logo {
     scroll-snap-align: start;
     background: #0a0a0a;
     transition: transform 0.4s cubic-bezier(0.2, 1, 0.2, 1);
+    will-change: transform;
+    flex-shrink: 0; /* evita micro-compressioni */
+    transform: translateY(0);
+}
+
+.brand-card-mini::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,0.01);
+  pointer-events: none;
 }
 
 .brand-card-mini img {
+    display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
     opacity: 0.7;
     transition: all 0.6s ease;
+    backface-visibility: hidden; /* 🔥 elimina flicker */
+     transform: translateZ(0); /* forza GPU */
 }
 
 /* Testo sopra l'immagine */
@@ -1324,8 +1345,7 @@ h1, h2, .history-line, .footer-logo {
 
 /* Hover: l'immagine si schiarisce e si ingrandisce */
 .brand-card-mini:hover {
-    transform: translateY(-10px);
-}
+transform: translate3d(0, -10px, 0);}
 
 .brand-card-mini:hover img {
     opacity: 1;
@@ -1379,6 +1399,12 @@ h1, h2, .history-line, .footer-logo {
   .scroll-arrow { display: none; }
 }
 
+/* Classe per nascondere le frecce quando non c'è più spazio per scorrere */
+.scroll-arrow.is-hidden {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+}
 /* ==========================================
    FRECCE CAROSELLO - FIX STRUTTURALE FINALE
 ========================================== */
@@ -1466,13 +1492,6 @@ h1, h2, .history-line, .footer-logo {
     animation: aniArrow02 1.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
 
-/* Classe per nascondere le frecce quando non c'è più spazio per scorrere */
-.scroll-arrow.is-hidden {
-    opacity: 0 !important;
-    visibility: hidden !important;
-    pointer-events: none !important;
-}
-
 
 /* Container della sezione ricerca */
 .search-section {
@@ -1520,4 +1539,136 @@ h1, h2, .history-line, .footer-logo {
 
 .search-wrapper:hover #brandSearch {
   border-color: rgba(255, 255, 255, 0.3);
+}
+
+
+
+/* Stili specifici per il Template Brand */
+
+#brand-title {
+    font-family: 'Fraunces', serif; /* Coerenza con i titoli del sito[cite: 9] */
+    color: #333;
+    letter-spacing: -1px;
+}
+
+#brand-description {
+    font-family: 'Montserrat', sans-serif;
+    line-height: 1.8;
+    color: #555;
+    text-align: justify;
+}
+
+/* Immagine Hero del Brand */
+#brand-main-img {
+    width: 100%;
+    height: 500px;
+    object-fit: cover; /* Evita distorsioni dell'immagine */
+    transition: transform 0.5s ease;
+}
+
+/* Galleria Collezioni */
+.gallery-item {
+    overflow: hidden;
+    border-radius: 4px;
+    height: 300px;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: all 0.4s ease-in-out;
+    filter: grayscale(20%); /* Effetto sofisticato */
+}
+
+.gallery-item img:hover {
+    transform: scale(1.05);
+    filter: grayscale(0%);
+}
+
+/* Pulsante Sito Ufficiale */
+#brand-link {
+    border: 2px solid #333;
+    padding: 12px 30px;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    transition: all 0.3s;
+}
+
+#brand-link:hover {
+    background-color: #333;
+    color: #fff !important;
+}
+
+/* Layout Pagina Brand */
+.brand-detail-page {
+    padding-top: 150px; /* Spazio per la navbar fixed */
+    background: #000;
+}
+
+.brand-hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    margin-bottom: 100px;
+}
+
+#brand-title {
+    font-size: clamp(3rem, 8vw, 5rem);
+    color: var(--active); /* Il tuo verde #207b6e */
+    margin-bottom: 30px;
+}
+
+.brand-description-wrapper {
+    border-left: 2px solid var(--active);
+    padding-left: 30px;
+    margin-bottom: 40px;
+}
+
+#brand-description {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: rgba(255,255,255,0.7);
+}
+
+.brand-image-featured img {
+    width: 100%;
+    height: 600px;
+    object-fit: cover;
+    border-radius: 20px;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+}
+
+/* Griglia Galleria */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
+    padding-bottom: 100px;
+}
+
+.gallery-item {
+    position: relative;
+    height: 450px;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s cubic-bezier(0.2, 1, 0.2, 1);
+}
+
+.gallery-item:hover img {
+    transform: scale(1.1);
+}
+
+@media (max-width: 992px) {
+    .brand-hero-grid { grid-template-columns: 1fr; gap: 40px; }
+    .brand-image-featured img { height: 400px; }
 }
