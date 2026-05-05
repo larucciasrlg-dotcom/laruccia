@@ -2,13 +2,21 @@
    NAVBAR
 ========================================== */
 function loadNavbar() {
-    return fetch('navbar.html')
-        .then(res => res.text())
+    // Carica navbar.html dalla stessa cartella della pagina corrente
+    fetch('navbar.html') 
+        .then(response => {
+            if (!response.ok) throw new Error("Errore nel caricamento della navbar");
+            return response.text();
+        })
         .then(data => {
-            const el = document.getElementById('navbar');
-            if (el) el.innerHTML = data;
+            document.getElementById('navbar').innerHTML = data;
+            
+            // Re-inizializza le funzioni dopo aver inserito l'HTML nel DOM
             highlightActiveLink();
-        });
+            initMobileMenu(); // Questo attiva il menu a scomparsa[cite: 9]
+            setupMegaMenu();  // Questo attiva il menu "Apple style"[cite: 9]
+        })
+        .catch(error => console.error('Errore:', error));
 }
 
 
@@ -25,24 +33,6 @@ function highlightActiveLink() {
     });
 }
 
-/* ==========================================
-   HERO SLIDER
-========================================== */
-function initHeroSlider() {
-    const hero = document.querySelector('.hero-slides')
-    if (!hero) return;
-
-    const slides = hero.querySelectorAll('.hero-slide');
-    if (slides.length <= 1) return;
-
-    let current = 0;
-
-    setInterval(() => {
-        slides[current].classList.remove('active');
-        current = (current + 1) % slides.length;
-        slides[current].classList.add('active');
-    }, 7000);
-}
 
 
 /* ==========================================
@@ -378,19 +368,41 @@ function caricaBrand() {
 // Esegui la funzione quando la pagina è pronta
 document.addEventListener('DOMContentLoaded', caricaBrand);
 
-const contenitore = document.getElementById('lista-brand-ceramiche');
 
-// Cicla attraverso le chiavi del tuo oggetto brandData
-Object.keys(brandData).forEach(key => {
-    const brand = brandData[key];
-    contenitore.innerHTML += `
-        <div class="brand-card-mini">
-            <a href="brand.html?name=${key}">
-                <img src="${brand.imgMiniatura}" alt="${brand.nome}">
-                <div class="brand-card-overlay">
-                    <h3>${brand.nome}</h3>
-                </div>
-            </a>
-        </div>
-    `;
-});
+function initMobileMenu() {
+    const toggle = document.querySelector('.menu-toggle');
+    const overlay = document.querySelector('.mobile-overlay');
+    const body = document.body;
+
+    if (!toggle || !overlay) return;
+
+    toggle.addEventListener('click', () => {
+        toggle.classList.toggle('active');
+        overlay.classList.toggle('active');
+        // Impedisce lo scroll della pagina quando il menu è aperto
+        body.style.overflow = overlay.classList.contains('active') ? 'hidden' : '';
+    });
+
+    // Chiudi il menu se si clicca su un link
+    const mobileLinks = overlay.querySelectorAll('a');
+    mobileLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            toggle.classList.remove('active');
+            overlay.classList.remove('active');
+            body.style.overflow = '';
+        });
+    });
+}
+
+// Chiamala dopo che la navbar è stata caricata
+// Modifica la tua funzione loadNavbar esistente:
+function loadNavbar() {
+    return fetch('navbar.html')
+        .then(res => res.text())
+        .then(data => {
+            const el = document.getElementById('navbar');
+            if (el) el.innerHTML = data;
+            highlightActiveLink();
+            initMobileMenu(); // <--- AGGIUNGI QUESTA
+        });
+}

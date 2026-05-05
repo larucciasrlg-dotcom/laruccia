@@ -2,13 +2,19 @@
 <html lang="it">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Aggiunto per mobile -->
   <title>Laruccia</title>
 
+  <!-- Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,ital,wght@9..144,0,300..900;1,300..900&family=Manrope:wght@200..800&display=swap" rel="stylesheet">
 
+  <!-- CSS (Percorso corretto senza / iniziale) -->
   <link rel="stylesheet" href="css/style.css">
+
+  <!-- JS (INDISPENSABILE per caricare la navbar) -->
+  <script src="script.js" defer></script>
 </head>
 
 <body class="home">
@@ -19,22 +25,13 @@
   <!-- HERO (FULL WIDTH - CORRETTA COSÌ) -->
   <section class="hero">
     
-    <div class="hero-slides">
-      <div class="hero-slide active">
-        <img src="img/hero.jpg" alt="Superfici di design Laruccia">
-        <div class="hero-overlay"></div>
-      </div>
-
-      <div class="hero-slide">
-        <img src="img/gallery1.jpg" alt="Arredo Bagno eccellenza Laruccia">
-        <div class="hero-overlay"></div>
-      </div>
-
-      <div class="hero-slide">
-        <img src="img/gallery2.jpg" alt="Soluzioni Outdoor Laruccia">
-        <div class="hero-overlay"></div>
-      </div>
-    </div>
+<div class="hero-video-container">
+  <video autoplay muted loop playsinline poster="img/hero.jpg" class="hero-video">
+    <source src="img/video/videohero.mp4" type="video/mp4">
+    Il tuo browser non supporta i video.
+  </video>
+  <div class="hero-overlay"></div>
+</div>
 
     <div class="hero-content-wrapper">
       <div class="hero-content">
