@@ -985,128 +985,114 @@ h1, h2, .history-line, .footer-logo {
 }
 
 /* ==========================================
-   6. CONTATTI INTEGRATI (COERENZA CHI-SIAMO)
+   6. CONTATTI - VARIANTE TURCHESE 
 ========================================== */
-
-/* Il contenitore principale deve avere lo stesso sfondo della storia */
-.c-modern-layout {
-    background: #0a0a0a; 
-    padding: 100px 0; /* Padding verticale standard per dare respiro */
-    overflow-x: hidden;
-}
-
-/* Allineamento della riga */
-.c-modern-layout .row {
-    margin: 0;
-    align-items: center;
-}
-
-/* COLONNA SINISTRA: Testo (Sincronizzata con History) */
 .c-modern-info {
-    /* Usiamo lo stesso padding-left della history-section per coerenza visiva */
-    padding-left: clamp(20px, 5vw, 60px) !important; 
-    padding-right: 40px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    align-items: center;      /* Centra orizzontalmente nel flex container */
+    justify-content: center;   /* Centra verticalmente */
+    padding: 40px !important;  /* Reset del padding laterale precedente */
+    text-align: center;
 }
 
 .info-content-wrapper {
-    max-width: 550px; /* Stessa larghezza dei paragrafi della storia */
+    max-width: 600px;         /* Leggermente più largo per il testo centrato */
+    margin: 0 auto;           /* Centra il blocco rispetto alla colonna */
 }
-
-/* Stili Testuali Uniformati */
-.c-label {
-    color: var(--active);
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    font-size: 13px;
-    font-weight: 700;
-    margin-bottom: 15px;
-    display: block;
-}
-
-.c-title {
-    font-family: var(--font-titles); /* Fraunces */
-    font-size: clamp(2.5rem, 5vw, 3.8rem); /* Come i titoli delle sezioni prodotti[cite: 9] */
-    color: #fff;
-    line-height: 1.1;
-    margin-bottom: 25px;
-}
-
-.c-description {
-    font-family: var(--font-body); /* Manrope[cite: 9] */
-    font-size: 1.1rem;
-    line-height: 1.8;
-    color: rgba(255, 255, 255, 0.7); /* Grigio chiaro come la storia */
-    margin-bottom: 35px;
-}
-
-/* COLONNA DESTRA: Mappa */
-.c-modern-map-container {
-    display: flex;
-    justify-content: flex-end; 
-    padding-right: clamp(20px, 5vw, 60px) !important;
-    padding-left: 20px !important;
-}
-
-.c-modern-map-wrapper {
-    position: relative;
-    width: 100%;
-    max-width: 650px; 
-    height: 500px; /* Altezza leggermente ridotta per eleganza */
-    border-radius: 30px; 
-    overflow: hidden;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 30px 60px rgba(0,0,0,0.5);
-}
-
-/* Stile Titolo Contatti (Eredita dalla Storia) */
-.contact-header-style {
-    text-align: center;
-    margin-bottom: 60px; /* Spazio tra il titolo e il blocco mappa/info */
-}
-
-.contact-header-style .history-line {
-    justify-content: center;
-    font-size: clamp(35px, 6vw, 70px); /* Leggermente più grande per impatto Hero */
-}
-
-/* Fix Pulsanti Contatti */
 .c-actions {
     display: flex;
     gap: 15px;
-    margin-top: 20px;
+    justify-content: center;
+    margin-bottom: 50px; /* Spazio prima della mappa */
 }
 
+.c-modern-layout {
+    background-color: var(--active); /* Il tuo turchese #207b6e */
+    padding: 120px 0;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Titolo in stile Storia ma su fondo Turchese */
+.contact-header-style {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.contact-header-style .history-prefix {
+    color: rgba(255, 255, 255, 0.7); /* Bianco opaco per il prefisso */
+}
+
+.contact-header-style .history-counter {
+    color: #ffffff; /* Bianco puro per il titolo principale */
+    text-shadow: none; /* Rimuoviamo l'ombra verde per pulizia */
+}
+
+/* Info e Descrizione */
+.c-label {
+    color: #000; /* Etichetta nera per staccare sul turchese */
+    background: rgba(255,255,255,0.2);
+    display: inline-block;
+    padding: 5px 15px;
+    border-radius: 50px;
+    font-size: 11px;
+    margin-bottom: 20px;
+}
+
+.c-description {
+    color: #ffffff; /* Testo bianco su turchese */
+    font-size: 1.2rem;
+    line-height: 1.8;
+    opacity: 0.9;
+}
+
+/* Pulsanti adattati al fondo colorato */
 .c-btn {
-    padding: 15px 30px;
+    padding: 18px 35px;
     border-radius: 5px;
-    text-decoration: none;
     font-weight: 700;
-    font-size: 13px;
     text-transform: uppercase;
-    letter-spacing: 1px;
     transition: all 0.3s ease;
-    border: 2px solid var(--active);
+    display: inline-block;
+    border: 2px solid #ffffff;
+    text-decoration: none;
 }
 
 .c-btn.wa {
-    background: var(--active);
-    color: #fff;
+    background: #ffffff;
+    color: var(--active); /* Testo turchese su bottone bianco */
 }
 
 .c-btn.mail {
     background: transparent;
-    color: #fff;
-    border-color: rgba(255,255,255,0.2);
+    color: #ffffff;
 }
 
 .c-btn:hover {
-    transform: translateY(-3px);
-    background: #fff;
-    color: #000;
-    border-color: #fff;
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    background: #000;
+    color: #fff;
+    border-color: #000;
+}
+
+/* Mappa: Rimuoviamo i filtri dark per farla risaltare sul turchese */
+.c-modern-map-wrapper {
+    width: 100%;
+    max-width: 900px; /* Larghezza del rettangolo */
+    height: 400px;    /* Altezza ridotta per forma rettangolare */
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+}
+
+.c-modern-map-wrapper iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    filter: grayscale(1) contrast(1.1);
 }
 
 /* Allineamento Mappa per continuità visiva */
@@ -1115,6 +1101,13 @@ h1, h2, .history-line, .footer-logo {
     height: 100%;
     border: 0;
     filter: grayscale(1) invert(0.9) contrast(1.2); /* Effetto Dark Map coerente */
+}
+
+.c-modern-map-container-centered {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
 }
 
 /* RESPONSIVE FIX */
@@ -1131,11 +1124,18 @@ h1, h2, .history-line, .footer-logo {
     
     .c-modern-info {
         text-align: center;
-        padding-right: 20px !important;
+        padding: 60px 20px !important;
     }
     
     .c-actions { justify-content: center; }
+
+    .c-modern-map-wrapper {
+        height: 300px;
+        max-width: 100%;
+    }
 }
+
+
 
 /* BARRA FILTRI */
 .product-filter-bar {
