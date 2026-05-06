@@ -32,92 +32,117 @@ function highlightActiveLink() {
         }
     });
 }
-
-
+                                                                        /* ==========================================
+                                                                        PROVA DI MODIFICHE SPERIAMO TUTTO OK 
+                                                                        ========================================== */
 
 /* ==========================================
-   HISTORY SECTION
+   INIZIALIZZAZIONE GLOBALE
 ========================================== */
+document.addEventListener("DOMContentLoaded", () => {
+    console.log("Script inizializzato correttamente.");
 
+    // script.js - Aggiungi questo nel DOMContentLoaded
+const heroVideo = document.querySelector('.hero-video');
+if (heroVideo) {
+    heroVideo.play().catch(error => {
+        console.log("L'autoplay è stato bloccato dal browser, provo il riavvio al primo click.");
+        // Se il browser lo blocca, appena l'utente clicca ovunque, il video parte
+        document.body.addEventListener('click', () => {
+            heroVideo.play();
+        }, { once: true });
+    });
+}
+    
+    // Carichiamo i componenti (Navbar e Footer)
+    loadNavbar();
+    loadFooter();
+
+    // Avviamo la storia (Priorità Chi Siamo)
+    initHistorySection();
+
+    // Avviamo le altre funzioni solo se esistono
+    if (typeof initHeroSlider === "function") initHeroSlider();
+    if (typeof initProductCarousels === "function") initProductCarousels();
+    
+    // Avviamo il database brand (se siamo in brand-detail.html)
+    if (document.getElementById('brand-title')) caricaBrand();
+});
+
+/* ==========================================
+   NAVBAR & FOOTER (VERSIONI COMPLETE)
+========================================== */
+function loadNavbar() {
+    fetch('navbar.html') 
+        .then(response => {
+            if (!response.ok) throw new Error("Errore navbar");
+            return response.text();
+        })
+        .then(data => {
+            const navEl = document.getElementById('navbar');
+            if (navEl) {
+                navEl.innerHTML = data;
+                highlightActiveLink();
+                initMobileMenu(); // Attiva menu mobile[cite: 9]
+                if (typeof setupMegaMenu === "function") setupMegaMenu(); // Attiva Mega Menu[cite: 9]
+            }
+        })
+        .catch(error => console.error('Errore:', error));
+}
+
+function loadFooter() {
+    fetch('footer.html')
+        .then(res => res.text())
+        .then(data => {
+            const el = document.getElementById('footer-placeholder');
+            if (el) el.innerHTML = data;
+        });
+}
+
+function highlightActiveLink() {
+    const links = document.querySelectorAll('.menu a');
+    const current = location.pathname.split("/").pop() || 'index.html';
+    links.forEach(link => {
+        if (link.getAttribute('href') === current) link.classList.add('active');
+    });
+}
+
+/* ==========================================
+   HISTORY SECTION (ANIMAZIONE ANNO)
+========================================== */
 function initHistorySection() {
     const section = document.querySelector(".history-section");
-    const yearEl = document.getElementById("year"); // Punta solo al numero
+    const yearEl = document.getElementById("year");
+    const historyImg = document.querySelector(".history-image");
+
     if (!section || !yearEl) return;
 
-    section.classList.add("phase-1");
-
-    let startYear = 2026;
+    const startYear = 2026;
     const endYear = 1939;
-    const duration = 5000; 
+    const duration = 4000;
     let startTime = null;
 
-function updateCount(timestamp) {
+    function updateCount(timestamp) {
         if (!startTime) startTime = timestamp;
         const elapsed = timestamp - startTime;
         const progress = Math.min(elapsed / duration, 1);
-
         const ease = 1 - Math.pow(1 - progress, 3);
-        const currentYear = Math.round(startYear - (startYear - endYear) * ease);
-        const imageMove = (1 - ease) * 20; // Calcola un piccolo spostamento
-document.querySelector(".history-image").style.transform = `scale(${1 + (1-ease)*0.1}) translateY(${imageMove}px)`;
         
-        // Cambia solo il numero, lasciando intatto "Insieme con voi dal"
-        yearEl.textContent = currentYear;
+        yearEl.textContent = Math.round(startYear - (startYear - endYear) * ease);
 
-        if (progress > 0.3) section.classList.add("phase-2");
-        if (progress > 0.7) section.classList.add("phase-3");
-
-        if (progress < 1) {
-            requestAnimationFrame(updateCount);
+        if (historyImg) {
+            historyImg.style.transform = `scale(${1 + (1 - ease) * 0.05})`;
         }
-    }
 
-    setTimeout(() => {
-        requestAnimationFrame(updateCount);
-    }, 1000);
+        section.classList.add("phase-1");
+        if (progress > 0.45) section.classList.add("phase-2");
+        if (progress > 0.8) section.classList.add("phase-3");
+
+        if (progress < 1) requestAnimationFrame(updateCount);
+    }
+    setTimeout(() => requestAnimationFrame(updateCount), 500);
 }
 
-    window.addEventListener("wheel", (e) => {
-        if (e.deltaY > 0) handleStepScroll(e.deltaY);
-    }, { passive: true });
-
-    // Supporto Touch
-    let touchStartY = 0;
-    window.addEventListener("touchstart", (e) => { touchStartY = e.touches[0].clientY; }, { passive: true });
-    window.addEventListener("touchmove", (e) => {
-        const delta = touchStartY - e.touches[0].clientY;
-        if (delta > 10) { // Piccolo threshold per evitare tocchi involontari
-            handleStepScroll(delta);
-            touchStartY = e.touches[0].clientY;
-        }
-    }, { passive: true });
-
-function animate() {
-        if (isCompleted) return;
-
-        // Velocità dell'animazione: più alto è il numero, più è veloce
-        progress += 0.005; 
-
-        // Calcolo dell'anno basato sul progresso automatico
-        const ease = 1 - Math.pow(1 - progress, 3); // Effetto rallentamento finale
-        const currentYear = Math.round(start - (start - end) * ease);
-
-        yearEl.textContent = currentYear;
-
-        // Attivazione AUTOMATICA delle fasi basata sul tempo/progresso
-        section.classList.toggle("phase-1", progress > 0.05);
-        section.classList.toggle("phase-2", progress > 0.45); // Appare il testo
-        section.classList.toggle("phase-3", progress > 0.80); // Appare l'immagine
-
-        if (progress >= 1) {
-            progress = 1;
-            yearEl.textContent = end;
-            isCompleted = true;
-            section.classList.add("phase-1", "phase-2", "phase-3");
-        } else {
-            requestAnimationFrame(animate);
-        }
-    }
 
 /* ==========================================
    CAROSELLI PRODOTTI: FRECCE E PALLINI
@@ -243,24 +268,6 @@ document.addEventListener('keydown', (e) => {
 
 
 /* ==========================================
-RENDE IL SITO INTERATTIVO
-========================================== */
-
-document.addEventListener("DOMContentLoaded", () => {
-    loadNavbar();
-    loadFooter();
-    initHeroSlider();
-    initHistorySection();
-    initProductCarousels(); // Avvia la logica prodotti
-});
-
-
-document.addEventListener('DOMContentLoaded', () => {
-    const searchInput = document.getElementById('brandSearch');
-    if (!searchInput) return;
-
-
-/* ==========================================
 BARRA DI RICERCA SUI PRODOTTI
 ========================================== */
 
@@ -290,7 +297,6 @@ BARRA DI RICERCA SUI PRODOTTI
             }
         });
     });
-});
 
 
 /* ==========================================
@@ -406,3 +412,10 @@ function loadNavbar() {
             initMobileMenu(); // <--- AGGIUNGI QUESTA
         });
 }
+
+// 3. FIX: Se initHeroSlider non è ancora pronta, commentala o crea una funzione vuota
+    if (typeof initHeroSlider === "function") {
+        initHeroSlider();
+    } else {
+        console.warn("initHeroSlider non è definita, ma non bloccherò più il resto.");
+    }
