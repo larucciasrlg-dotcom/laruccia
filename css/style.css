@@ -42,6 +42,15 @@ h1, h2, .history-line, .footer-logo {
   text-transform: none; 
 }
 
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.03;
+    background-image: url('img/noise.png');
+    z-index: 999999;
+}
 /* ==========================================
    2. NAVBAR & MENU
 ========================================== */
@@ -136,7 +145,7 @@ h1, h2, .history-line, .footer-logo {
 
 .social-icon:hover img {
   transform: translateY(-3px);
-  filter: brightness(0) invert(1) drop-shadow(0 0 5px var(--active));
+  filter: drop-shadow(0 0 5px var(--active));
   opacity: 1;
 }
 
@@ -241,17 +250,17 @@ h1, h2, .history-line, .footer-logo {
 
 /* Link "Scopri tutti" personalizzato */
 .discover-all-gold {
-    margin-top: 20px !important;
+    margin-top: 20px;
     color: var(--accent-gold) !important;
-    font-size: 13px !important;
-    font-weight: 600 !important;
-    letter-spacing: 0.05em !important;
-    opacity: 1 !important;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    opacity: 1;
 }
 
 .discover-all-gold:hover {
-    opacity: 0.8 !important;
-    color: var(--accent-gold) !important;
+    opacity: 0.8;
+    color: var(--accent-gold);
 }
 
 .discover-all-gold span {
@@ -583,7 +592,7 @@ h1, h2, .history-line, .footer-logo {
 .section-subtitle {
     font-family: var(--font-body);
     font-size: clamp(1rem, 2vw, 1.4rem);
-    color: var(--active); 
+    color: var(--accent-gold);; 
     font-weight: 500;
     margin-bottom: 15px;
     opacity: 0.8;
@@ -804,27 +813,23 @@ h1, h2, .history-line, .footer-logo {
 
 .logo:hover img {
   transform: scale(1.12);
-    filter: brightness(0) invert(1);
 }
 
 /* ==========================================
     HISTORY SECTION (AUTO-ANIMATED)
 ========================================== */
 
-.history-section, .c-modern-layout {
+.history-section {
     position: relative;
     background: #0a0a0a;
-    /* Riduciamo l'altezza: non più 100vh fissa, ma si adatta al contenuto */
     min-height: 80vh; 
-    /* Aggiungiamo spazio in alto per non toccare la navbar (regola in base alla tua navbar) */
     padding-top: 120px; 
-    padding-bottom: 80px;
+    padding-bottom: 0px;
     overflow: hidden;
+    text-align: center;
 }
 
 .history-sticky {
-    /* Rimuoviamo la posizione sticky se crea problemi di sovrapposizione */
-    position: relative;
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
@@ -838,16 +843,16 @@ h1, h2, .history-line, .footer-logo {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 .history-line {
-    /* Ridimensioniamo leggermente il font per il mobile/desktop */
+    position: relative;
     font-size: clamp(24px, 5vw, 60px); 
-    display: flex;
     flex-wrap: wrap; /* Permette al testo di andare a capo su schermi piccoli */
+    display: flex;
     justify-content: center;
-    gap: 15px;
+    gap: 0.1em;
     opacity: 1; /* Lo rendiamo subito visibile */
     transform: none; /* Rimuoviamo il salto iniziale */
 }
@@ -885,6 +890,14 @@ h1, h2, .history-line, .footer-logo {
     transition: all 0.1s ease;
     /* Un leggero riflesso verde per far "vibrare" il numero mentre scorre */
     text-shadow: 0 0 15px rgba(32, 123, 110, 0.3);
+    
+}
+
+#year {
+    display: inline-block; /* Assicura che si comporti come un blocco solido */
+    font-variant-numeric: tabular-nums; /* Forza i numeri ad avere larghezza identica */
+    min-width: 4.5ch; /* Riserva spazio fisso per circa 4-5 caratteri */
+    text-align: center;
 }
 
 /* --- CONTENUTO (TESTO + FOTO) --- */
@@ -892,10 +905,11 @@ h1, h2, .history-line, .footer-logo {
     /* Usiamo una griglia per gestire meglio testo e immagine */
     display: grid;
     grid-template-columns: 1.2fr 0.8fr;
-    gap: 60px;
+    gap: 120px;
     align-items: center;
     padding: 0 20px;
 }
+
 
 /* TESTO (PHASE 2) */
 .history-text-wrapper {
@@ -908,17 +922,24 @@ h1, h2, .history-line, .footer-logo {
 .history-description {
     font-family: var(--font-body);
     font-weight: 300;
-    font-size: 1.1rem;
-    line-height: 1.9; /* Leggermente aumentato */
+    font-size: 1.35rem;
+    line-height: 1.7; /* Leggermente aumentato */
     color: rgba(255, 255, 255, 0.7); /* Grigio chiaro invece di bianco puro */
     margin-bottom: 30px;
     max-width: 90%; /* Evita che le righe siano troppo larghe e difficili da leggere */
 }
 
+
 /* Evidenzia i brand leader */
 .history-description strong {
     color: var(--accent-gold);
     font-weight: 500;
+}
+
+.showroom-title {
+    color: #fff;
+    text-shadow: none;
+    font-weight: 700;
 }
 
 /* Attivazione Fase 2: Appare il testo */
@@ -934,6 +955,21 @@ h1, h2, .history-line, .footer-logo {
     transition: opacity 1.5s cubic-bezier(0.16, 1, 0.3, 1), 
                 transform 1.5s cubic-bezier(0.16, 1, 0.3, 1);
     will-change: opacity, transform;
+    border-radius: 28px;
+    overflow: hidden;
+    position: relative;
+}
+
+.history-visual::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(
+        to top,
+        rgba(0,0,0,0.35),
+        rgba(0,0,0,0)
+      );
 }
 
 .history-image {
@@ -942,6 +978,7 @@ h1, h2, .history-line, .footer-logo {
     object-fit: cover;
     display: block;
 }
+
 
 /* Attivazione Fase 3: L'immagine si stabilizza */
 /* Fase 3: L'immagine appare e torna alla scala normale (1) */
@@ -955,159 +992,173 @@ h1, h2, .history-line, .footer-logo {
     .history-content {
         flex-direction: column;
         text-align: center;
-        gap: 40px;
+        gap: 20px;
+        grid-template-columns: 1fr; /* Testo sopra, immagine sotto */
+        display: flex;
+    }
+
+    .history-section {
+        min-height: auto; /* Rimuove i 250vh che causano lo scroll vuoto */
+        height: auto;
+        padding: 40px 0; /* Spazio controllato sopra e sotto */
     }
     
     .history-visual {
         width: 100%;
-        height: 40vh;
+        max-width: 500px;
+        height: auto;
+        max-height: 300px; /* Opzionale: limita l'altezza dell'immagine */
         order: -1; /* Immagine sopra il testo su mobile */
+        margin: 0 auto 10px auto;
+        margin-bottom: 0; /* Rimuove margini extra sotto l'immagine */
+
     }
     
-    .history-sticky {
+   .history-sticky {
         height: auto;
-        padding: 100px 20px;
+        position: relative; /* Evita conflitti con lo sticky */
+        top: 0;
+        padding: 40px !important; /* Sovrascrive i 100px che avevi */
+        display: block; /* Rimuove il centramento verticale del flex */
+    }
+
+    .history-top {
+        height: auto;
+        margin-bottom: 40px; /* Spazio tra "2026" e l'immagine */
+    }
+
+
+    .history-description {
+        padding: 0 20px; /* Evita che il testo tocchi i bordi */
+        font-size: 1.1rem; /* Opzionale: riduci leggermente per mobile */
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
     }
 }
 
-/* --- RESPONSIVE --- */
-/* Responsive per Tablet e Mobile */
-@media (max-width: 992px) {
-    .history-content {
-        grid-template-columns: 1fr; /* Testo sopra, immagine sotto */
-        text-align: center;
-    }
-    
-    .history-visual {
-        max-width: 500px;
-        margin: 0 auto;
-    }
-}
 
 /* ==========================================
-   6. CONTATTI - VARIANTE TURCHESE 
+   6. CONTATTI
 ========================================== */
-.c-modern-info {
-    display: flex;
-    flex-direction: column;
-    align-items: center;      /* Centra orizzontalmente nel flex container */
-    justify-content: center;   /* Centra verticalmente */
-    padding: 40px !important;  /* Reset del padding laterale precedente */
-    text-align: center;
-}
 
-.info-content-wrapper {
-    max-width: 600px;         /* Leggermente più largo per il testo centrato */
-    margin: 0 auto;           /* Centra il blocco rispetto alla colonna */
-}
-.c-actions {
+.social-buttons {
     display: flex;
-    gap: 15px;
     justify-content: center;
-    margin-bottom: 50px; /* Spazio prima della mappa */
-}
-
-.c-modern-layout {
-    background-color: var(--active); /* Il tuo turchese #207b6e */
-    padding: 120px 0;
-    position: relative;
-    overflow: hidden;
-}
-
-/* Titolo in stile Storia ma su fondo Turchese */
-.contact-header-style {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.contact-header-style .history-prefix {
-    color: rgba(255, 255, 255, 0.7); /* Bianco opaco per il prefisso */
-}
-
-.contact-header-style .history-counter {
-    color: #ffffff; /* Bianco puro per il titolo principale */
-    text-shadow: none; /* Rimuoviamo l'ombra verde per pulizia */
-}
-
-/* Info e Descrizione */
-.c-label {
-    color: #000; /* Etichetta nera per staccare sul turchese */
-    background: rgba(255,255,255,0.2);
-    display: inline-block;
-    padding: 5px 15px;
-    border-radius: 50px;
-    font-size: 11px;
-    margin-bottom: 20px;
-}
-
-.c-description {
-    color: #ffffff; /* Testo bianco su turchese */
-    font-size: 1.2rem;
-    line-height: 1.8;
-    opacity: 0.9;
+    gap: 40px;
+    margin-top: 40px;
+    flex-wrap: wrap;
 }
 
 /* Pulsanti adattati al fondo colorato */
 .c-btn {
-    padding: 18px 35px;
-    border-radius: 5px;
-    font-weight: 700;
-    text-transform: uppercase;
-    transition: all 0.3s ease;
-    display: inline-block;
-    border: 2px solid #ffffff;
+    position: relative;
+    color: rgba(255,255,255,0.85);
     text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 0.82rem;
+    font-weight: 600;
+    padding-bottom: 10px;
+    transition: color 0.4s ease;
 }
 
-.c-btn.wa {
-    background: #ffffff;
-    color: var(--active); /* Testo turchese su bottone bianco */
+.c-btn::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 1px;
+    background: var(--accent-gold);
+    transition: width 0.45s cubic-bezier(0.16,1,0.3,1);
 }
 
-.c-btn.mail {
-    background: transparent;
-    color: #ffffff;
-}
 
 .c-btn:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-    background: #000;
-    color: #fff;
-    border-color: #000;
+    color: var(--accent-gold);
+}
+
+.c-btn:hover::after {
+    width: 100%;
 }
 
 /* Mappa: Rimuoviamo i filtri dark per farla risaltare sul turchese */
 .c-modern-map-wrapper {
-    width: 100%;
-    max-width: 900px; /* Larghezza del rettangolo */
-    height: 400px;    /* Altezza ridotta per forma rettangolare */
-    border-radius: 20px;
+    width: 78%;
+    max-width: 900px;
+    aspect-ratio: 16 / 9; /* Mantiene la mappa proporzionata */
+    min-height: 620px;
+
+    height: 70vh;
+
+    border-radius: 32px;
     overflow: hidden;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+
+    position: relative;
+
+    border: 1px solid rgba(255,255,255,0.08);
+
+    background: rgba(255,255,255,0.03);
+
+    backdrop-filter: blur(20px);
+
+    box-shadow:
+      0 40px 80px rgba(0,0,0,0.45);
+
+    transition: transform 1.2s ease;
+    pointer-events: auto; /* Assicurati che sia auto */
 }
 
-.c-modern-map-wrapper iframe {
-    width: 100%;
-    height: 100%;
-    border: 0;
-    filter: grayscale(1) contrast(1.1);
+
+.c-modern-map-wrapper::after {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    background:
+      linear-gradient(
+        to top,
+        rgba(0,0,0,0.45),
+        rgba(0,0,0,0.05)
+      );
+
+    pointer-events: none;
 }
 
 /* Allineamento Mappa per continuità visiva */
 .c-modern-map-wrapper iframe {
     width: 100%;
     height: 100%;
-    border: 0;
+    border: none;
     filter: grayscale(1) invert(0.9) contrast(1.2); /* Effetto Dark Map coerente */
 }
 
 .c-modern-map-container-centered {
-    width: 100%;
     display: flex;
     justify-content: center;
-    margin-top: 20px;
+    align-items: center;
+    width: 100%;
+    margin: 50px auto; /* Spazio sopra e sotto la mappa */
+}
+
+.c-modern-map-container-centered::before {
+    content: "";
+
+    position: absolute;
+
+    width: 500px;
+    height: 500px;
+
+    background:
+      rgba(32,123,110,0.18);
+
+    filter: blur(120px);
+
+    border-radius: 50%;
+
+    z-index: 0;
 }
 
 /* RESPONSIVE FIX */
@@ -1122,10 +1173,6 @@ h1, h2, .history-line, .footer-logo {
         margin-bottom: 40px;
     }
     
-    .c-modern-info {
-        text-align: center;
-        padding: 60px 20px !important;
-    }
     
     .c-actions { justify-content: center; }
 
@@ -1135,45 +1182,6 @@ h1, h2, .history-line, .footer-logo {
     }
 }
 
-
-
-/* BARRA FILTRI */
-.product-filter-bar {
-  position: sticky;
-  top: var(--navbar-height);
-  background: rgba(0, 0, 0, 0.8);
-  backdrop-filter: blur(10px);
-  z-index: 99;
-  border-bottom: 1px solid rgba(255,255,255,0.1);
-  padding: 15px 0;
-}
-
-.filter-container {
-  display: flex;
-  overflow-x: auto;
-  gap: 30px;
-  padding: 0 40px;
-  scrollbar-width: none; /* Nasconde scrollbar */
-}
-
-.filter-container a {
-  color: #888;
-  text-decoration: none;
-  font-size: 0.9rem;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  white-space: nowrap;
-  transition: color 0.3s;
-}
-
-.filter-container a:hover { color: var(--active); }
-
-#year {
-    display: inline-block; /* Assicura che si comporti come un blocco solido */
-    font-variant-numeric: tabular-nums; /* Forza i numeri ad avere larghezza identica */
-    min-width: 4.5ch; /* Riserva spazio fisso per circa 4-5 caratteri */
-    text-align: center;
-}
 
 /* CAROSELLO APPLE STYLE - STIAMO CAPENDO COSA CANCELLARE*/
 
@@ -1299,6 +1307,7 @@ h1, h2, .history-line, .footer-logo {
     will-change: transform;
     flex-shrink: 0; /* evita micro-compressioni */
     transform: translateY(0);
+     border: 1px solid rgba(255,255,255,0.06);
 }
 
 .brand-card-mini::after {
@@ -1325,7 +1334,13 @@ h1, h2, .history-line, .footer-logo {
 .brand-card-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 60%);
+    background:
+      linear-gradient(
+        to top,
+        rgba(0,0,0,0.92) 10%,
+        rgba(0,0,0,0.1) 60%,
+        transparent
+      );
     display: flex;
     align-items: flex-end;
     padding: 25px;

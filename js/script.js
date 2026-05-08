@@ -135,13 +135,16 @@ function initHistorySection() {
         }
 
         section.classList.add("phase-1");
-        if (progress > 0.45) section.classList.add("phase-2");
-        if (progress > 0.8) section.classList.add("phase-3");
+        if (progress > 0.8) section.classList.add("phase-2");
+        if (progress > 0.45) section.classList.add("phase-3");
 
         if (progress < 1) requestAnimationFrame(updateCount);
     }
+    
     setTimeout(() => requestAnimationFrame(updateCount), 500);
 }
+
+
 
 
 /* ==========================================
@@ -419,3 +422,48 @@ function loadNavbar() {
     } else {
         console.warn("initHeroSlider non è definita, ma non bloccherò più il resto.");
     }
+
+    function animateExistingLine() {
+    const path = document.getElementById('snake-path');
+    const startPoint = document.getElementById('year');
+    const endPoint = document.querySelector('.contact-header-style .history-counter');
+    const svg = document.getElementById('snake-svg');
+
+    if (!startPoint || !endPoint) return;
+
+    // Calcoliamo l'altezza totale della pagina per l'SVG
+    const totalHeight = document.documentElement.scrollHeight;
+    svg.style.height = totalHeight + "px";
+
+    const startRect = startPoint.getBoundingClientRect();
+    const endRect = endPoint.getBoundingClientRect();
+    const scrollY = window.scrollY;
+
+    // Punto di inizio: sotto il "1939"
+    const x1 = startRect.left + (startRect.width / 2);
+    const y1 = startRect.bottom + scrollY;
+
+    // Punto finale: sopra "Showroom"
+    const x2 = endRect.left + (endRect.width / 2);
+    const y2 = endRect.top + scrollY - 15;
+
+    // Percorso: scende, va a sinistra, e torna al centro in basso
+    const controlY = y1 + (y2 - y1) * 0.5;
+    const d = `M ${x1} ${y1} 
+               C ${x1} ${y1 + 100}, ${x1 - 150} ${controlY}, ${x1 - 150} ${controlY + 100}
+               C ${x1 - 150} ${y2 - 100}, ${x2} ${y2 - 100}, ${x2} ${y2}`;
+
+    path.setAttribute('d', d);
+
+    // Effetto "allungamento"
+    const length = path.getTotalLength();
+    path.style.strokeDasharray = length;
+    path.style.strokeDashoffset = length;
+
+    // Avvia l'animazione dopo un breve delay
+    setTimeout(() => {
+        path.style.strokeDashoffset = '0';
+    }, 500);
+}
+
+window.addEventListener('load', animateExistingLine);
