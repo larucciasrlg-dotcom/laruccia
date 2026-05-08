@@ -1266,6 +1266,44 @@ body::before {
 
 .product-nav a:hover, .product-nav a.active { color: #fff; }
 
+@media (max-width: 768px) {
+    .products-grid {
+        /* Crea colonne da almeno 140px che si adattano allo schermo */
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); 
+        gap: 15px; /* Spazio ridotto tra i prodotti */
+        padding: 0 15px;
+    }
+
+    .product-item img {
+        height: 200px; /* Riduce l'altezza delle immagini su mobile */
+    }
+
+    .products-header {
+        height: 40vh; /* Ridotto dal 60vh originale */
+        padding: 20px;
+    }
+
+    .products-header h1 {
+        font-size: 2.2rem; /* Titolo più leggibile */
+    }
+
+    .filter-container {
+        display: flex;
+        overflow-x: auto; /* Permette lo swipe laterale dei filtri */
+        white-space: nowrap;
+        padding: 10px 15px;
+        -webkit-overflow-scrolling: touch;
+        gap: 10px;
+        justify-content: flex-start; /* Allinea a sinistra per lo scroll */
+    }
+
+    .filter-btn {
+        padding: 8px 20px;
+        font-size: 0.9rem;
+        flex: 0 0 auto; /* Impedisce ai bottoni di restringersi */
+    }
+}
+
 
 /* ==========================================
    BRAND CAROUSEL (OTTIMIZZAZIONE HTML)
@@ -1819,7 +1857,7 @@ transform: translate3d(0, -10px, 0);}
     }
 }
 
-@media (max-width: 700px) {
+@media (max-width: 768px) {
     .footer-container {
         grid-template-columns: 1fr; /* Una colonna su mobile */
         text-align: center;
@@ -1827,4 +1865,18 @@ transform: translate3d(0, -10px, 0);}
     .footer-social {
         justify-content: center; /* Centra icone su mobile */
     }
-}
+
+    footer {
+        padding: 40px 20px;
+        text-align: center;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .footer-section {
+        width: 100%;
+    }
+} 
