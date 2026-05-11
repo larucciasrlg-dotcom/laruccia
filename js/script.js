@@ -57,6 +57,7 @@ if (heroVideo) {
     // Carichiamo i componenti (Navbar e Footer)
     loadNavbar();
     loadFooter();
+    initSearch();
 
     // Avviamo la storia (Priorità Chi Siamo)
     initHistorySection();
@@ -274,13 +275,27 @@ document.addEventListener('keydown', (e) => {
 BARRA DI RICERCA SUI PRODOTTI
 ========================================== */
 
+/* ==========================================
+   BARRA DI RICERCA SUI PRODOTTI
+========================================== */
+function initSearch() {
+    // Recuperiamo l'input usando l'ID corretto presente nel tuo HTML
+    const searchInput = document.getElementById('brandSearch'); 
+    
+    // Se l'elemento non esiste (magari siamo su un'altra pagina), usciamo silenziosamente
+    if (!searchInput) return;
+
     searchInput.addEventListener('input', (e) => {
         const term = e.target.value.toLowerCase();
         const brandCards = document.querySelectorAll('.brand-card-mini');
         const sections = document.querySelectorAll('.brand-group');
         
         brandCards.forEach(card => {
-            const brandName = card.querySelector('h3').innerText.toLowerCase();
+            const h3 = card.querySelector('h3');
+            if (!h3) return;
+
+            const brandName = h3.innerText.toLowerCase();
+            // Mostra o nascondi la card in base al termine cercato
             if (brandName.includes(term)) {
                 card.style.display = 'block';
             } else {
@@ -288,18 +303,20 @@ BARRA DI RICERCA SUI PRODOTTI
             }
         });
 
-        // Nascondi le sezioni intere se non hanno brand visibili
+        // Gestione visibilità delle sezioni (Ceramiche, Pietre, ecc.)
         sections.forEach(section => {
+            // Contiamo quante card sono rimaste visibili in questa specifica sezione
             const visibleCards = section.querySelectorAll('.brand-card-mini[style="display: block;"]').length;
-            const hasTerm = term.length > 0;
             
-            if (hasTerm && visibleCards === 0) {
+            // Se stiamo cercando qualcosa E non ci sono risultati, nascondi l'intera sezione
+            if (term.length > 0 && visibleCards === 0) {
                 section.style.display = 'none';
             } else {
                 section.style.display = 'block';
             }
         });
     });
+}
 
 
 /* ==========================================

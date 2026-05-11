@@ -1302,6 +1302,26 @@ body::before {
         font-size: 0.9rem;
         flex: 0 0 auto; /* Impedisce ai bottoni di restringersi */
     }
+
+    .product-nav-container {
+        display: flex;
+        overflow-x: auto;
+        white-space: nowrap;
+        padding-bottom: 10px;
+        -webkit-overflow-scrolling: touch;
+        gap: 20px;
+        justify-content: flex-start; /* Allinea a sinistra per lo scroll */
+    }
+
+    /* Nascondi la barra di scorrimento brutta su alcuni browser */
+    .product-nav-container::-webkit-scrollbar {
+        display: none;
+    }
+
+    .product-nav a {
+        font-size: 13px;
+        flex: 0 0 auto; /* Impedisce ai link di restringersi */
+    }
 }
 
 
@@ -1444,17 +1464,30 @@ transform: translate3d(0, -10px, 0);}
 
 
 
-/* Nasconde frecce su mobile per pulizia */
 @media (max-width: 768px) {
-  .scroll-arrow { display: none; }
+    /* Nascondiamo le frecce che occupano spazio */
+    .scroll-arrow {
+        display: none !important;
+    }
+
+    .brand-figurine-track {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* Due brand per riga */
+        gap: 15px;
+        overflow-x: hidden; /* Disattiva lo scroll orizzontale se preferisci la griglia */
+        padding: 0 10px;
+    }
+
+    .brand-card-mini {
+        width: 100%; /* La card prende tutta la colonna della griglia */
+        min-width: unset;
+    }
+    
+    .group-header h2.section-title {
+        font-size: 2.2rem; /* Ridimensiona i titoli giganti */
+    }
 }
 
-/* Classe per nascondere le frecce quando non c'è più spazio per scorrere */
-.scroll-arrow.is-hidden {
-    opacity: 0 !important;
-    visibility: hidden !important;
-    pointer-events: none !important;
-}
 /* ==========================================
    FRECCE CAROSELLO - FIX STRUTTURALE FINALE
 ========================================== */
@@ -1591,6 +1624,25 @@ transform: translate3d(0, -10px, 0);}
   border-color: rgba(255, 255, 255, 0.3);
 }
 
+@media (max-width: 768px) {
+    .search-section {
+        position: sticky;
+        top: 70px; /* Sotto la navbar mobile */
+        z-index: 100;
+        background: rgba(0, 0, 0, 0.8);
+        backdrop-filter: blur(10px);
+        padding: 15px 0;
+    }
+
+    .search-wrapper {
+        width: 100%;
+        height: 50px; /* Più alta per facilitare il touch */
+    }
+
+    #brandSearch {
+        font-size: 16px; /* Evita lo zoom automatico su iOS */
+    }
+}
 
 
 /* Stili specifici per il Template Brand */
