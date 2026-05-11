@@ -484,44 +484,65 @@ body::before {
 }
 
 /* --- Bottoni (Stile Corretto e Reattivo) --- */
+/* --- NUOVO STILE BOTTONI PREMIUM --- */
+
+/* Base comune per entrambi i tasti */
 .btn-primary, .btn-secondary {
-    padding: 18px 35px;
-    border-radius: 5px;
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 14px;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    /* Cambiato: ora la transizione è secca e veloce solo su trasformazione e colore */
-    transition: transform 0.1s ease, background-color 0.02s ease, color 0.02s ease;
-    display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px 40px;
+  font-family: var(--font-body);
+  font-size: 11px;             /* Testo piccolo = più elegante */
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 3px;         /* Spaziatura ampia per il lusso */
+  text-decoration: none;
+  position: relative;
+  transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  cursor: pointer;
+  z-index: 1;
+  overflow: hidden;
 }
 
+/* Tasto "Esplora le collezioni" (Pieno che diventa vuoto) */
 .btn-primary {
-    background-color: var(--active);
-    color: #fff;
-    border: 2px solid var(--active);
+  background-color: #fff;
+  color: #000;
 }
 
+.btn-primary:hover {
+  background-color: transparent;
+  color: #fff;
+  border-color: #fff;
+}
+
+/* Tasto "Prenota una visita" (Vuoto che si riempie) */
 .btn-secondary {
-    background-color: transparent;
-    border: 2px solid #fff;
-    color: #fff;
+  background-color: transparent;
+  color: #fff;
 }
 
-/* Hover istantaneo */
+.btn-secondary:hover {
+  background-color: #fff;
+  color: #000;
+}
+
+/* Effetto di elevazione leggera al passaggio del mouse */
 .btn-primary:hover, .btn-secondary:hover {
-    transform: translateY(-3px);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
-.btn-primary:hover { 
-    background-color: #fff; 
-    border-color: #fff;
-    color: #000; 
-}
-
-.btn-secondary:hover { 
-    background-color: rgba(255,255,255,0.1); 
+/* Variante per Mobile: rendiamoli un po' più grandi per il tocco */
+@media (max-width: 768px) {
+  .btn-primary, .btn-secondary {
+    padding: 15px 30px;
+    width: 100%;       /* Spesso su mobile i bottoni a tutta larghezza funzionano meglio */
+    max-width: 300px;
+    margin: 10px auto;
+  }
 }
 
 /* Animazione di ingresso */
