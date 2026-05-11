@@ -340,14 +340,23 @@ body::before {
 }
 
 .mobile-links a {
-  font-family: var(--font-titles);
-  font-size: clamp(40px, 12vw, 65px);
+  /* Cambiato da --font-titles a --font-body per coerenza con desktop */
+  font-family: var(--font-body); 
+  
+  /* Adatta la dimensione: desktop usa 12px, 
+     su mobile puoi tenerli un po' più grandi (es. 18px-24px) per la leggibilità */
+  font-size: 20px; 
+  
   color: #fff;
   text-decoration: none;
-  font-weight: 500;
-  line-height: 1.1;
-  letter-spacing: -2px;
-  text-align: right;     /* Allineamento testo */
+  
+  /* Aggiunto stile maiuscolo e spaziatura come su desktop */
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 600;
+  
+  line-height: 1.5;
+  text-align: right;
 }
 
 .mobile-links a:hover {
