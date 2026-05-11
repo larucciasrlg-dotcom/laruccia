@@ -60,20 +60,6 @@ body::before {
     z-index: 1000;
 }
 
-@media (max-width: 992px) {
-    #navbar {
-        /* Questo aggiunge spazio in alto SOLO se il telefono ha il notch/barra di stato */
-        padding-top: env(safe-area-inset-top);
-        
-        /* Assicurati che lo sfondo sia nero e copra tutto il blocco superiore */
-        background-color: rgba(0, 0, 0, 0.8) !important;
-        backdrop-filter: blur(15px);
-        -webkit-backdrop-filter: blur(15px);
-        
-        height: auto; /* Permette alla navbar di espandersi per includere il padding extra */
-        min-height: 80px; 
-    }
- }
 
 /* ==========================================
    2. NAVBAR & MENU
