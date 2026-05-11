@@ -347,6 +347,198 @@ const brandData = {
         imgPrincipale: "img/prodotti/ceramiche/ceramiche_abk.webp",
         sito: "https://www.abk.it",
         gallery: ["img/abk-1.jpg", "img/abk-2.jpg"]
+    },
+
+    "Argenta": {
+        nome: "Argenta",
+        descrizione: "Specializzata in pavimenti e rivestimenti ceramici dal design contemporaneo.",
+        imgPrincipale: "img/prodotti/ceramiche/ceramiche_argenta.webp",
+        sito: "https://www.argentaceramica.com",
+        gallery: ["img/argenta-1.jpg", "img/argenta-2.jpg"]
+    },
+
+    "Arpa": {
+        nome: "Arpa",
+        descrizione: "Ceramiche Made in Italy per pavimenti, rivestimenti e grandi superfici.",
+        imgPrincipale: "img/prodotti/ceramiche/ceramiche_arpa.webp",
+        sito: "https://www.arpaceramiche.it",
+        gallery: ["img/arpa-1.jpg", "img/arpa-2.jpg"]
+    },
+
+    "CeramicheDagostino": {
+        nome: "Ceramiche D'Agostino",
+        descrizione: "Tradizione e innovazione nella produzione di superfici ceramiche italiane.",
+        imgPrincipale: "img/prodotti/ceramiche/ceramiche_ceramichedagostino.webp",
+        sito: "https://www.agostinoceramiche.com/",
+        gallery: ["img/cerdag-1.jpg", "img/cerdag-2.jpg"]
+    },
+
+    "Cerdisa": {
+        nome: "Cerdisa",
+        descrizione: "Soluzioni ceramiche per ambienti moderni e contemporanei.",
+        imgPrincipale: "img/prodotti/ceramiche/ceramiche_cerdisa.webp",
+        sito: "https://www.ricchetti-group.com/it",
+        gallery: ["img/cerdisa-1.jpg", "img/cerdisa-2.jpg"]
+    },
+
+    "Cerdomus": {
+        nome: "Cerdomus",
+        descrizione: "Collezioni in gres porcellanato dal design elegante e ricercato.",
+        imgPrincipale: "img/prodotti/ceramiche/ceramiche_cerdomus.webp",
+        sito: "https://www.cerdomus.com",
+        gallery: ["img/cerdomus-1.jpg", "img/cerdomus-2.jpg"]
+    },
+
+    "Dado": {
+        nome: "Dado Ceramica",
+        descrizione: "Produzione italiana di gres porcellanato e rivestimenti ceramici.",
+        imgPrincipale: "img/prodotti/ceramiche/ceramiche_dadoceramica.webp",
+        sito: "https://www.dadoceramica.it",
+        gallery: ["img/dado-1.jpg", "img/dado-2.jpg"]
+    },
+
+    "DecoratoriBassanesi": {
+        nome: "Decoratori Bassanesi",
+        descrizione: "Ceramiche artistiche e decorative dal forte carattere artigianale.",
+        imgPrincipale: "img/prodotti/ceramiche/ceramiche_decoratoribassanesi.webp",
+        sito: "https://www.decoratoribassanesi.it",
+        gallery: ["img/decoratori-1.jpg", "img/decoratori-2.jpg"]
+    },
+
+    "Evoluzioni": {
+        nome: "Evoluzioni",
+        descrizione: "Superfici ceramiche innovative per interior design contemporaneo.",
+        imgPrincipale: "img/prodotti/ceramiche/ceramiche_evoluzioni.webp",
+        sito: "https://www.evoluzioni-ceramiche.it",
+        gallery: ["img/evoluzioni-1.jpg", "img/evoluzioni-2.jpg"]
+    },
+
+    "Flaviker": {
+        nome: "Flaviker",
+        descrizione: "Lastre e superfici ceramiche di design per architettura moderna.",
+        imgPrincipale: "img/prodotti/ceramiche/ceramiche_flaviker.webp",
+        sito: "https://www.flavikerpisa.it",
+        gallery: ["img/flaviker-1.jpg", "img/flaviker-2.jpg"]
+    },
+
+    "FloorItalia": {
+        nome: "Floor Italia",
+        descrizione: "Pavimenti e rivestimenti in gres porcellanato Made in Italy.",
+        imgPrincipale: "img/prodotti/ceramiche/ceramiche_flooritalia.webp",
+        sito: "https://www.flooritalia.it",
+        gallery: ["img/flooritalia-1.jpg", "img/flooritalia-2.jpg"]
+    },
+
+    "Florim": {
+        nome: "Florim",
+        descrizione: "Leader internazionale nelle superfici ceramiche di alta gamma.",
+        imgPrincipale: "img/prodotti/ceramiche/ceramiche_florim.webp",
+        sito: "https://www.florim.com",
+        gallery: ["img/florim-1.jpg", "img/florim-2.jpg"]
+    },
+
+    "FrancescoDeMaio": {
+        nome: "Francesco De Maio",
+        descrizione: "Maioliche artistiche artigianali della tradizione vietrese.",
+        imgPrincipale: "img/prodotti/ceramiche/ceramiche_francescodemaio.webp",
+        sito: "https://www.francescodemaio.it",
+        gallery: ["img/demaio-1.jpg", "img/demaio-2.jpg"]
+    },
+
+    "IlCavallino": {
+        nome: "Il Cavallino",
+        descrizione: "Ceramiche decorative italiane dal gusto classico e contemporaneo.",
+        imgPrincipale: "img/prodotti/ceramiche/ceramiche_ilcavallino.webp",
+        sito: "https://www.ilcavallino.it",
+        gallery: ["img/cavallino-1.jpg", "img/cavallino-2.jpg"]
+    },
+
+    "Imso": {
+        nome: "Imso",
+        descrizione: "Superfici ceramiche per ambienti residenziali e commerciali.",
+        imgPrincipale: "img/prodotti/ceramiche/ceramiche_imso.webp",
+        sito: "https://www.imso.it",
+        gallery: ["img/imso-1.jpg", "img/imso-2.jpg"]
+    },
+
+    "Kronos": {
+        nome: "Kronos",
+        descrizione: "Gres porcellanato innovativo per indoor e outdoor.",
+        imgPrincipale: "img/prodotti/ceramiche/ceramiche_kronos.webp",
+        sito: "https://kronosceramiche.com",
+        gallery: ["img/kronos-1.jpg", "img/kronos-2.jpg"]
+    },
+
+    "Ktl": {
+        nome: "Ktl",
+        descrizione: "Soluzioni ceramiche moderne per architettura e design.",
+        imgPrincipale: "img/prodotti/ceramiche/ceramiche_ktl.webp",
+        sito: "https://www.ktlceramiche.it",
+        gallery: ["img/ktl-1.jpg", "img/ktl-2.jpg"]
+    },
+
+    "Laminam": {
+        nome: "Laminam",
+        descrizione: "Grandi lastre ceramiche innovative per architettura e arredo.",
+        imgPrincipale: "img/prodotti/ceramiche/ceramiche_laminam.webp",
+        sito: "https://www.laminam.com",
+        gallery: ["img/laminam-1.jpg", "img/laminam-2.jpg"]
+    },
+
+    "Mariner": {
+        nome: "Mariner",
+        descrizione: "Ceramiche italiane per pavimenti e rivestimenti di qualità.",
+        imgPrincipale: "img/prodotti/ceramiche/ceramiche_mariner.webp",
+        sito: "https://www.mariner.it",
+        gallery: ["img/mariner-1.jpg", "img/mariner-2.jpg"]
+    },
+
+    "Piemme": {
+        nome: "Ceramiche Piemme",
+        descrizione: "Design italiano e innovazione tecnologica nelle superfici ceramiche.",
+        imgPrincipale: "img/prodotti/ceramiche/ceramiche_piemme.webp",
+        sito: "https://www.ceramichepiemme.it",
+        gallery: ["img/piemme-1.jpg", "img/piemme-2.jpg"]
+    },
+
+    "Provenza": {
+        nome: "Provenza",
+        descrizione: "Superfici in gres porcellanato dallo stile raffinato e naturale.",
+        imgPrincipale: "img/prodotti/ceramiche/ceramiche_provenza.webp",
+        sito: "https://www.provenzafloors.com",
+        gallery: ["img/provenza-1.jpg", "img/provenza-2.jpg"]
+    },
+
+    "Ricchetti": {
+        nome: "Ricchetti",
+        descrizione: "Tradizione ceramica italiana con collezioni eleganti e contemporanee.",
+        imgPrincipale: "img/prodotti/ceramiche/ceramiche_ricchetti.webp",
+        sito: "https://www.ricchetti-group.com",
+        gallery: ["img/ricchetti-1.jpg", "img/ricchetti-2.jpg"]
+    },
+
+    "Saime": {
+        nome: "Saime",
+        descrizione: "Pavimenti e rivestimenti ceramici per ambienti moderni.",
+        imgPrincipale: "img/prodotti/ceramiche/ceramiche_saime.webp",
+        sito: "https://www.saimeceramiche.it",
+        gallery: ["img/saime-1.jpg", "img/saime-2.jpg"]
+    },
+
+    "Settecento": {
+        nome: "Settecento",
+        descrizione: "Manifattura ceramica italiana dal forte carattere decorativo.",
+        imgPrincipale: "img/prodotti/ceramiche/ceramiche_settecento.webp",
+        sito: "https://www.settecento.com",
+        gallery: ["img/settecento-1.jpg", "img/settecento-2.jpg"]
+    },
+
+    "StudioOneEquipe": {
+        nome: "Studio One Equipe",
+        descrizione: "Ceramiche decorative e superfici creative Made in Italy.",
+        imgPrincipale: "img/prodotti/ceramiche/ceramiche_studiooneequipe.webp",
+        sito: "https://www.equipeceramicas.com",
+        gallery: ["img/studioone-1.jpg", "img/studioone-2.jpg"]
     }
     // E così via per tutti gli altri...
 };
@@ -405,8 +597,13 @@ function initMobileMenu() {
     toggle.addEventListener('click', () => {
         toggle.classList.toggle('active');
         overlay.classList.toggle('active');
-        // Impedisce lo scroll della pagina quando il menu è aperto
-        body.style.overflow = overlay.classList.contains('active') ? 'hidden' : '';
+
+        // BLOCCA LO SCROLL DEL BODY
+        if (overlay.classList.contains('active')) {
+            body.style.overflow = 'hidden'; // Impedisce lo scroll del sito sotto
+        } else {
+            body.style.overflow = ''; // Ripristina lo scroll
+        }
     });
 
     // Chiudi il menu se si clicca su un link
