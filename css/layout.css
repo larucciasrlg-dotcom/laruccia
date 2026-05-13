@@ -1,0 +1,462 @@
+/* ==========================================
+   LAYOUT.CSS
+   Core Structure System
+========================================== */
+
+
+/* ==========================================
+   1. APP WRAPPER
+========================================== */
+
+.site-wrapper {
+  position: relative;
+  width: 100%;
+  overflow: clip;
+}
+
+
+/* ==========================================
+   2. SECTION STRUCTURE
+========================================== */
+
+.section {
+  position: relative;
+  width: 100%;
+}
+
+.section-inner {
+  position: relative;
+  z-index: 2;
+}
+
+
+/* ==========================================
+   3. SECTION SPACING SYSTEM
+========================================== */
+
+.section-xs {
+  padding-block: 60px;
+}
+
+.section-sm {
+  padding-block: 90px;
+}
+
+.section-md {
+  padding-block: 120px;
+}
+
+.section-lg {
+  padding-block: 160px;
+}
+
+.section-xl {
+  padding-block: 220px;
+}
+
+
+/* ==========================================
+   4. BACKGROUND LAYERS
+========================================== */
+
+.bg-main {
+  background: var(--bg-main);
+}
+
+.bg-secondary {
+  background: var(--bg-secondary);
+}
+
+.bg-elevated {
+  background: var(--bg-elevated);
+}
+
+
+/* ==========================================
+   5. CINEMATIC GRADIENTS
+========================================== */
+
+.gradient-top {
+  position: relative;
+}
+
+.gradient-top::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(255,255,255,0.02),
+      transparent 35%
+    );
+
+  pointer-events: none;
+}
+
+
+.gradient-bottom {
+  position: relative;
+}
+
+.gradient-bottom::after {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  background:
+    linear-gradient(
+      to top,
+      rgba(0,0,0,0.32),
+      transparent 40%
+    );
+
+  pointer-events: none;
+}
+
+
+/* ==========================================
+   6. GRID SYSTEM
+========================================== */
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 60px;
+}
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 30px;
+}
+
+.grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 30px;
+}
+
+
+/* ==========================================
+   7. FLEX UTILITIES
+========================================== */
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+
+/* ==========================================
+   8. STACK SYSTEM
+========================================== */
+
+.stack-xs > * + * {
+  margin-top: 12px;
+}
+
+.stack-sm > * + * {
+  margin-top: 20px;
+}
+
+.stack-md > * + * {
+  margin-top: 32px;
+}
+
+.stack-lg > * + * {
+  margin-top: 48px;
+}
+
+
+/* ==========================================
+   9. SECTION HEADERS
+========================================== */
+
+.section-header {
+  position: relative;
+
+  max-width: 900px;
+
+  margin-bottom: 70px;
+}
+
+.section-label {
+  display: inline-block;
+
+  margin-bottom: 18px;
+
+  color: var(--accent-gold);
+
+  font-size: 12px;
+  font-weight: 600;
+
+  letter-spacing: var(--letter-spacing-lg);
+
+  text-transform: uppercase;
+}
+
+.section-title {
+  font-size:
+    clamp(3rem, 7vw, 5.5rem);
+
+  line-height: 0.95;
+
+  margin-bottom: 22px;
+}
+
+.section-description {
+  max-width: 620px;
+
+  font-size: 1.05rem;
+
+  color: var(--text-secondary);
+
+  line-height: 1.8;
+}
+
+
+/* ==========================================
+   10. PREMIUM DIVIDER
+========================================== */
+
+.divider {
+  width: 100%;
+  height: 1px;
+
+  background:
+    linear-gradient(
+      to right,
+      transparent,
+      rgba(255,255,255,0.08),
+      transparent
+    );
+}
+
+
+/* ==========================================
+   11. SURFACE SYSTEM
+========================================== */
+
+.surface {
+  position: relative;
+
+  background: var(--surface-1);
+
+  border: var(--glass-border);
+
+  border-radius: var(--radius-lg);
+
+  overflow: hidden;
+}
+
+.surface::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255,255,255,0.05),
+      transparent 30%
+    );
+
+  pointer-events: none;
+}
+
+
+/* ==========================================
+   12. GLASS PANEL
+========================================== */
+
+.glass-panel {
+  position: relative;
+
+  background: var(--glass-bg);
+
+  border: var(--glass-border);
+
+  border-radius: var(--radius-lg);
+
+  overflow: hidden;
+
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+
+  box-shadow: var(--glass-shadow);
+}
+
+.glass-panel::before {
+  content: "";
+
+  position: absolute;
+  inset: 1px;
+
+  border-radius: inherit;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255,255,255,0.12),
+      rgba(255,255,255,0.03) 22%,
+      transparent 50%
+    );
+
+  pointer-events: none;
+}
+
+
+/* ==========================================
+   13. CINEMATIC OVERLAY
+========================================== */
+
+.overlay-dark {
+  position: absolute;
+  inset: 0;
+
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(0,0,0,0.72) 0%,
+      rgba(0,0,0,0.28) 35%,
+      rgba(0,0,0,0.18) 50%,
+      rgba(0,0,0,0.72) 100%
+    );
+
+  z-index: 1;
+}
+
+
+/* ==========================================
+   14. SPOTLIGHT EFFECT
+========================================== */
+
+.spotlight {
+  position: absolute;
+
+  width: 600px;
+  height: 600px;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(198,164,106,0.14),
+      transparent 70%
+    );
+
+  filter: blur(100px);
+
+  pointer-events: none;
+}
+
+
+/* ==========================================
+   15. IMAGE SYSTEM
+========================================== */
+
+.media-cover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.media-rounded {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+
+/* ==========================================
+   16. TRANSITIONS
+========================================== */
+
+.fade-in {
+  opacity: 0;
+  transform: translateY(40px);
+
+  transition:
+    opacity 1s var(--ease-premium),
+    transform 1s var(--ease-premium);
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+/* ==========================================
+   17. RESPONSIVE
+========================================== */
+
+@media (max-width: 1200px) {
+
+  .grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+}
+
+
+@media (max-width: 992px) {
+
+  .grid-2,
+  .grid-3,
+  .grid-4 {
+    grid-template-columns: 1fr;
+  }
+
+  .section-header {
+    margin-bottom: 50px;
+  }
+
+  .section-title {
+    font-size:
+      clamp(2.6rem, 10vw, 4rem);
+  }
+
+}
+
+
+@media (max-width: 768px) {
+
+  .section-xs {
+    padding-block: 50px;
+  }
+
+  .section-sm {
+    padding-block: 70px;
+  }
+
+  .section-md {
+    padding-block: 90px;
+  }
+
+  .section-lg {
+    padding-block: 120px;
+  }
+
+  .section-xl {
+    padding-block: 150px;
+  }
+
+}

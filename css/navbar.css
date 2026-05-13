@@ -1,0 +1,616 @@
+/* ==========================================
+   NAVBAR.CSS
+   Apple Luxury Navigation System
+========================================== */
+
+
+/* ==========================================
+   1. NAVBAR WRAPPER
+========================================== */
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: var(--navbar-height);
+
+  z-index: 9999;
+
+  transition:
+    background var(--transition-medium),
+    backdrop-filter var(--transition-medium),
+    border-color var(--transition-medium),
+    transform var(--transition-medium);
+}
+
+
+/* ==========================================
+   2. NAVBAR BACKGROUND
+========================================== */
+
+.navbar::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(0,0,0,0.65),
+      rgba(0,0,0,0.18)
+    );
+
+  opacity: 1;
+
+  transition: opacity var(--transition-medium);
+
+  pointer-events: none;
+}
+
+
+/* ==========================================
+   3. SCROLLED STATE
+========================================== */
+
+.navbar.scrolled {
+
+  background:
+    rgba(8,8,9,0.55);
+
+  backdrop-filter:
+    blur(24px) saturate(180%);
+
+  -webkit-backdrop-filter:
+    blur(24px) saturate(180%);
+
+  border-bottom:
+    1px solid rgba(255,255,255,0.06);
+
+  box-shadow:
+    0 10px 40px rgba(0,0,0,0.28);
+}
+
+.navbar.scrolled::before {
+  opacity: 0;
+}
+
+
+/* ==========================================
+   4. NAVBAR CONTAINER
+========================================== */
+
+.navbar-container {
+  position: relative;
+
+  width: 100%;
+  height: 100%;
+
+  max-width: var(--container-xl);
+
+  margin-inline: auto;
+
+  padding-inline:
+    clamp(20px, 5vw, 60px);
+
+  display: grid;
+  grid-template-columns: 180px 1fr 180px;
+
+  align-items: center;
+}
+
+
+/* ==========================================
+   5. LOGO
+========================================== */
+
+.logo {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+
+  justify-self: start;
+}
+
+.logo img {
+  height: 54px;
+  width: auto;
+
+  filter: brightness(0) invert(1);
+
+  transition:
+    transform var(--transition-medium),
+    opacity var(--transition-medium);
+
+  opacity: 0.94;
+}
+
+.logo:hover img {
+  transform: scale(1.04);
+
+  opacity: 1;
+}
+
+
+/* ==========================================
+   6. NAV LINKS
+========================================== */
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 44px;
+}
+
+.nav-links a,
+.dropdown-toggle {
+  position: relative;
+
+  display: inline-flex;
+  align-items: center;
+
+  color: var(--text-secondary);
+
+  font-size: 11px;
+  font-weight: 500;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.24em;
+
+  transition:
+    color var(--transition-fast),
+    opacity var(--transition-fast);
+
+  cursor: pointer;
+}
+
+
+/* Hover */
+
+.nav-links a:hover,
+.dropdown-toggle:hover {
+  color: var(--text-primary);
+}
+
+
+/* Underline */
+
+.nav-links a::after,
+.dropdown-toggle::after {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  bottom: -10px;
+
+  width: 100%;
+  height: 1px;
+
+  background:
+    linear-gradient(
+      to right,
+      transparent,
+      var(--accent-gold),
+      transparent
+    );
+
+  transform: scaleX(0);
+
+  transform-origin: center;
+
+  transition:
+    transform var(--transition-medium);
+}
+
+.nav-links a:hover::after,
+.dropdown-toggle:hover::after {
+  transform: scaleX(1);
+}
+
+
+/* ==========================================
+   7. SOCIALS
+========================================== */
+
+.nav-socials {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  gap: 18px;
+}
+
+.nav-socials a {
+  opacity: 0.7;
+
+  transition:
+    transform var(--transition-fast),
+    opacity var(--transition-fast);
+}
+
+.nav-socials a:hover {
+  opacity: 1;
+
+  transform: translateY(-2px);
+}
+
+.nav-socials img {
+  width: 22px;
+  height: 22px;
+
+  filter: brightness(0) invert(1);
+}
+
+
+/* ==========================================
+   8. MEGA MENU
+========================================== */
+
+.mega-dropdown {
+  position: relative;
+}
+
+.mega-menu {
+  position: absolute;
+
+  top: calc(100% + 22px);
+  left: 50%;
+
+  transform:
+    translateX(-50%)
+    translateY(10px);
+
+  width: min(1200px, 94vw);
+
+  padding: 34px;
+
+  border-radius: 30px;
+
+  background: var(--glass-bg);
+
+  border: var(--glass-border);
+
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+
+  box-shadow: var(--glass-shadow);
+
+  opacity: 0;
+  visibility: hidden;
+
+  transition:
+    opacity var(--transition-medium),
+    transform var(--transition-medium),
+    visibility var(--transition-medium);
+
+  overflow: hidden;
+}
+
+
+/* Top Reflection */
+
+.mega-menu::before {
+  content: "";
+
+  position: absolute;
+  inset: 1px;
+
+  border-radius: inherit;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255,255,255,0.12),
+      rgba(255,255,255,0.03) 24%,
+      transparent 50%
+    );
+
+  pointer-events: none;
+}
+
+
+/* Open */
+
+.mega-dropdown:hover .mega-menu {
+  opacity: 1;
+  visibility: visible;
+
+  transform:
+    translateX(-50%)
+    translateY(0);
+}
+
+
+/* ==========================================
+   9. MEGA GRID
+========================================== */
+
+.mega-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 50px;
+}
+
+.mega-column h4 {
+  margin-bottom: 22px;
+
+  color: var(--text-muted);
+
+  font-size: 11px;
+  font-weight: 600;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.22em;
+}
+
+.mega-column a {
+  display: block;
+
+  margin-bottom: 14px;
+
+  color: var(--text-secondary);
+
+  font-size: 14px;
+  font-weight: 500;
+
+  transition:
+    transform var(--transition-fast),
+    color var(--transition-fast),
+    opacity var(--transition-fast);
+}
+
+.mega-column a:hover {
+  transform: translateX(6px);
+
+  color: var(--text-primary);
+}
+
+
+/* Discover link */
+
+.discover-link {
+  display: inline-flex;
+  align-items: center;
+
+  gap: 10px;
+
+  margin-top: 16px;
+
+  color: var(--accent-gold);
+
+  font-size: 13px;
+  font-weight: 600;
+
+  letter-spacing: 0.08em;
+}
+
+.discover-link span {
+  transition:
+    transform var(--transition-medium);
+}
+
+.discover-link:hover span {
+  transform: translateX(6px);
+}
+
+
+/* ==========================================
+   10. MOBILE TOGGLE
+========================================== */
+
+.menu-toggle {
+  display: none;
+
+  width: 42px;
+  height: 42px;
+
+  position: relative;
+
+  justify-self: end;
+}
+
+.menu-toggle span {
+  position: absolute;
+
+  left: 50%;
+
+  width: 24px;
+  height: 1.5px;
+
+  background: white;
+
+  border-radius: 999px;
+
+  transform:
+    translateX(-50%);
+
+  transition:
+    transform var(--transition-medium),
+    opacity var(--transition-medium);
+}
+
+.menu-toggle span:nth-child(1) {
+  top: 15px;
+}
+
+.menu-toggle span:nth-child(2) {
+  top: 23px;
+}
+
+
+/* Active */
+
+.menu-toggle.active span:nth-child(1) {
+  transform:
+    translateX(-50%)
+    translateY(4px)
+    rotate(45deg);
+}
+
+.menu-toggle.active span:nth-child(2) {
+  transform:
+    translateX(-50%)
+    translateY(-4px)
+    rotate(-45deg);
+}
+
+
+/* ==========================================
+   11. MOBILE MENU
+========================================== */
+
+.mobile-menu {
+  position: fixed;
+  inset: 0;
+
+  background:
+    rgba(5,5,5,0.82);
+
+  backdrop-filter:
+    blur(30px);
+
+  -webkit-backdrop-filter:
+    blur(30px);
+
+  z-index: 9998;
+
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+  align-items: flex-end;
+
+  padding:
+    100px
+    clamp(30px, 8vw, 60px);
+
+  transform:
+    translateX(100%);
+
+  transition:
+    transform var(--transition-slow);
+}
+
+
+/* Open */
+
+.mobile-menu.active {
+  transform:
+    translateX(0);
+}
+
+
+/* Mobile links */
+
+.mobile-links {
+  display: flex;
+  flex-direction: column;
+
+  align-items: flex-end;
+
+  gap: 22px;
+}
+
+.mobile-links a {
+  font-size:
+    clamp(24px, 6vw, 38px);
+
+  font-weight: 600;
+
+  color: var(--text-primary);
+
+  letter-spacing: -0.02em;
+
+  transition:
+    opacity var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+.mobile-links a:hover {
+  opacity: 0.7;
+
+  transform:
+    translateX(-4px);
+}
+
+
+/* ==========================================
+   12. MOBILE SOCIALS
+========================================== */
+
+.mobile-socials {
+  display: flex;
+
+  gap: 20px;
+
+  margin-top: 60px;
+}
+
+.mobile-socials img {
+  width: 28px;
+  height: 28px;
+
+  filter: brightness(0) invert(1);
+
+  opacity: 0.7;
+
+  transition:
+    opacity var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+.mobile-socials a:hover img {
+  opacity: 1;
+
+  transform:
+    translateY(-2px);
+}
+
+
+/* ==========================================
+   13. RESPONSIVE
+========================================== */
+
+@media (max-width: 1100px) {
+
+  .navbar-container {
+    grid-template-columns: 1fr auto;
+  }
+
+  .nav-links,
+  .nav-socials {
+    display: none;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+
+}
+
+
+@media (max-width: 992px) {
+
+  .mega-menu {
+    display: none;
+  }
+
+}
+
+
+@media (max-width: 768px) {
+
+  .logo img {
+    height: 48px;
+  }
+
+}

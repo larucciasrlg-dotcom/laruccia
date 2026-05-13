@@ -1,0 +1,374 @@
+/* ==========================================
+   1. ROOT VARIABLES
+========================================== */
+
+:root {
+
+  /* ---------- LAYOUT ---------- */
+
+  --navbar-height: 82px;
+
+  --container-xl: 1440px;
+  --container-lg: 1280px;
+  --container-md: 1100px;
+
+  --section-spacing: clamp(100px, 10vw, 160px);
+
+  --radius-sm: 10px;
+  --radius-md: 18px;
+  --radius-lg: 28px;
+  --radius-xl: 40px;
+
+
+  /* ---------- COLORS ---------- */
+
+  --bg-main: #050505;
+  --bg-secondary: #0b0b0c;
+  --bg-elevated: #121214;
+
+  --surface-1: rgba(255,255,255,0.03);
+  --surface-2: rgba(255,255,255,0.06);
+
+  --text-primary: rgba(255,255,255,0.96);
+  --text-secondary: rgba(255,255,255,0.72);
+  --text-muted: rgba(255,255,255,0.42);
+
+  --border-primary: rgba(255,255,255,0.10);
+  --border-secondary: rgba(255,255,255,0.06);
+
+  /* Champagne Gold */
+  --accent-gold: #c6a46a;
+  --accent-gold-light: #e7d2b0;
+  --accent-gold-dark: #8f7348;
+
+  /* Optional Teal Accent */
+  --accent-soft: #6f8f89;
+
+
+  /* ---------- TYPOGRAPHY ---------- */
+
+  --font-titles: 'Fraunces', serif;
+  --font-body: 'Manrope', sans-serif;
+
+  --letter-spacing-xs: 0.02em;
+  --letter-spacing-sm: 0.08em;
+  --letter-spacing-md: 0.16em;
+  --letter-spacing-lg: 0.24em;
+
+  --line-height-tight: 1;
+  --line-height-title: 1.08;
+  --line-height-body: 1.7;
+
+
+  /* ---------- GLASS SYSTEM ---------- */
+
+  --glass-bg:
+    linear-gradient(
+      135deg,
+      rgba(255,255,255,0.10) 0%,
+      rgba(255,255,255,0.04) 35%,
+      rgba(198,164,106,0.05) 100%
+    );
+
+  --glass-bg-strong:
+    linear-gradient(
+      135deg,
+      rgba(255,255,255,0.14) 0%,
+      rgba(255,255,255,0.05) 35%,
+      rgba(198,164,106,0.08) 100%
+    );
+
+  --glass-border:
+    1px solid rgba(255,255,255,0.10);
+
+  --glass-border-strong:
+    1px solid rgba(255,255,255,0.16);
+
+  --glass-blur: blur(24px) saturate(180%);
+
+  --glass-shadow:
+    0 10px 40px rgba(0,0,0,0.35),
+    inset 0 1px 0 rgba(255,255,255,0.08);
+
+  --glass-shadow-hover:
+    0 20px 60px rgba(0,0,0,0.45),
+    inset 0 1px 0 rgba(255,255,255,0.12);
+
+
+  /* ---------- SHADOWS ---------- */
+
+  --shadow-sm:
+    0 4px 12px rgba(0,0,0,0.18);
+
+  --shadow-md:
+    0 10px 30px rgba(0,0,0,0.28);
+
+  --shadow-lg:
+    0 20px 60px rgba(0,0,0,0.40);
+
+  --shadow-xl:
+    0 40px 100px rgba(0,0,0,0.55);
+
+
+  /* ---------- TRANSITIONS ---------- */
+
+  --ease-standard:
+    cubic-bezier(0.4, 0, 0.2, 1);
+
+  --ease-premium:
+    cubic-bezier(0.19, 1, 0.22, 1);
+
+  --transition-fast:
+    0.25s var(--ease-standard);
+
+  --transition-medium:
+    0.45s var(--ease-premium);
+
+  --transition-slow:
+    0.8s var(--ease-premium);
+}
+
+
+
+/* ==========================================
+   2. RESET
+========================================== */
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  width: 100%;
+  min-height: 100vh;
+
+  overflow-x: clip;
+
+  background:
+    radial-gradient(
+      circle at top,
+      #161616 0%,
+      #050505 45%
+    );
+
+  color: var(--text-primary);
+
+  font-family: var(--font-body);
+  line-height: var(--line-height-body);
+
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+
+/* ==========================================
+   3. GLOBAL NOISE
+========================================== */
+
+body::before {
+  content: "";
+
+  position: fixed;
+  inset: 0;
+
+  pointer-events: none;
+
+  opacity: 0.025;
+
+  background-image: url('img/noise.png');
+
+  z-index: 9999;
+}
+
+
+
+/* ==========================================
+   4. CONTAINERS
+========================================== */
+
+.container {
+  width: 100%;
+  max-width: var(--container-xl);
+
+  margin-inline: auto;
+
+  padding-inline:
+    clamp(20px, 5vw, 60px);
+}
+
+
+/* ==========================================
+   5. TYPOGRAPHY
+========================================== */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-titles);
+
+  font-weight: 700;
+
+  line-height: var(--line-height-title);
+
+  letter-spacing: -0.03em;
+
+  color: var(--text-primary);
+}
+
+p {
+  color: var(--text-secondary);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+
+/* ==========================================
+   6. SECTION SYSTEM
+========================================== */
+
+section {
+  position: relative;
+  width: 100%;
+}
+
+.section-spacing {
+  padding-block: var(--section-spacing);
+}
+
+
+/* ==========================================
+   7. IMAGES & MEDIA
+========================================== */
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+img {
+  user-select: none;
+}
+
+
+/* ==========================================
+   8. BUTTON RESET
+========================================== */
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+
+/* ==========================================
+   9. GLASS UTILITY
+========================================== */
+
+.glass {
+  background: var(--glass-bg);
+
+  border: var(--glass-border);
+
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+
+  box-shadow: var(--glass-shadow);
+}
+
+
+/* ==========================================
+   10. PREMIUM HOVER
+========================================== */
+
+.hover-lift {
+  transition:
+    transform var(--transition-medium),
+    box-shadow var(--transition-medium);
+}
+
+.hover-lift:hover {
+  transform: translateY(-6px);
+
+  box-shadow: var(--glass-shadow-hover);
+}
+
+
+/* ==========================================
+   11. TEXT UTILITIES
+========================================== */
+
+.text-muted {
+  color: var(--text-muted);
+}
+
+.text-gold {
+  color: var(--accent-gold);
+}
+
+.uppercase-label {
+  text-transform: uppercase;
+
+  letter-spacing: var(--letter-spacing-md);
+
+  font-size: 12px;
+
+  font-weight: 600;
+}
+
+
+/* ==========================================
+   12. RESPONSIVE FOUNDATION
+========================================== */
+
+@media (max-width: 992px) {
+
+  :root {
+
+    --section-spacing:
+      clamp(80px, 12vw, 120px);
+
+    --navbar-height: 74px;
+  }
+
+}
+
+
+@media (max-width: 768px) {
+
+  body {
+    overflow-x: hidden;
+  }
+
+}
+
+
+section[id] {
+  scroll-margin-top: 140px;
+}

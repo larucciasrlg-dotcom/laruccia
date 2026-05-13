@@ -1,0 +1,1303 @@
+/* ==========================================
+   FINAL.CSS
+   Mobile • History • Contact • Compatibility • Cleanup
+========================================== */
+
+
+/* ==========================================
+   1. COMPATIBILITY WITH OLD HTML
+========================================== */
+
+#navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: var(--navbar-height);
+  z-index: 9999;
+}
+
+.menu {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  max-width: var(--container-xl);
+  margin-inline: auto;
+  padding-inline: clamp(20px, 5vw, 60px);
+  display: grid;
+  grid-template-columns: 180px 1fr 180px;
+  align-items: center;
+}
+
+.menu-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 44px;
+}
+
+.social-icons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 18px;
+}
+
+.social-icon img {
+  width: 22px;
+  height: 22px;
+  filter: brightness(0) invert(1);
+  opacity: 0.72;
+  transition: transform var(--transition-fast), opacity var(--transition-fast);
+}
+
+.social-icon:hover img {
+  opacity: 1;
+  transform: translateY(-2px);
+}
+
+.navbar-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.72), transparent);
+}
+
+
+/* Old mega menu names */
+
+.mega-grid-wrapper {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 50px;
+}
+
+.discover-all-gold {
+  color: var(--accent-gold-light) !important;
+  margin-top: 18px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.dropdown-toggle span::after {
+  content: "";
+  display: inline-block;
+  margin-left: 10px;
+  width: 5px;
+  height: 5px;
+  border-right: 1px solid currentColor;
+  border-bottom: 1px solid currentColor;
+  transform: rotate(45deg) translateY(-2px);
+  opacity: 0.6;
+  transition: transform var(--transition-fast);
+}
+
+.mega-dropdown:hover .dropdown-toggle span::after {
+  transform: rotate(-135deg) translateY(2px);
+}
+
+
+/* ==========================================
+   2. OLD HERO COMPATIBILITY
+========================================== */
+
+.hero-video-container,
+.hero-slides {
+  position: absolute;
+  inset: 0;
+  z-index: -3;
+}
+
+.hero-video,
+.hero-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 1.2s var(--ease-premium);
+}
+
+.hero-slide.active {
+  opacity: 1;
+}
+
+.hero-content-wrapper {
+  position: relative;
+  width: 100%;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-logo img {
+  width: min(900px, 82vw);
+  height: auto;
+  margin-inline: auto;
+}
+
+.hero-btns {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  margin-top: 26px;
+  flex-wrap: wrap;
+}
+
+
+/* ==========================================
+   3. HISTORY SECTION
+========================================== */
+
+.history-section {
+  position: relative;
+  padding-block: clamp(100px, 12vw, 180px);
+  background: linear-gradient(to bottom, #050505, #0b0b0c);
+  overflow: hidden;
+  text-align: center;
+}
+
+.history-sticky {
+  width: 100%;
+  max-width: var(--container-lg);
+  margin-inline: auto;
+  padding-inline: clamp(24px, 5vw, 60px);
+}
+
+.history-top {
+  margin-bottom: 70px;
+}
+
+.history-line {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.18em;
+  font-family: var(--font-titles);
+  font-size: clamp(2.8rem, 8vw, 7rem);
+  line-height: 0.95;
+  letter-spacing: -0.06em;
+}
+
+.history-line::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -28px;
+  width: 140px;
+  height: 1px;
+  transform: translateX(-50%);
+  background: linear-gradient(to right, transparent, var(--accent-gold), transparent);
+}
+
+.history-prefix {
+  color: var(--text-primary);
+  font-weight: 300;
+}
+
+.history-counter,
+#year {
+  color: var(--accent-gold-light);
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 0 30px rgba(198,164,106,0.14);
+}
+
+.showroom-title {
+  color: var(--text-primary);
+  font-weight: 700;
+}
+
+.history-content {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: clamp(50px, 8vw, 120px);
+  align-items: center;
+  text-align: left;
+}
+
+.history-description {
+  max-width: 680px;
+  color: var(--text-secondary);
+  font-size: clamp(1.05rem, 1.5vw, 1.35rem);
+  line-height: 1.9;
+  font-weight: 300;
+}
+
+.history-description strong {
+  color: var(--accent-gold-light);
+  font-weight: 500;
+}
+
+.history-visual {
+  position: relative;
+  min-height: 560px;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-xl);
+}
+
+.history-visual::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.45), transparent 50%);
+}
+
+.history-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+/* ==========================================
+   4. CONTACT SECTION
+========================================== */
+
+.contact-section,
+.c-modern-layout {
+  position: relative;
+  padding-block: clamp(100px, 12vw, 180px);
+  background: var(--bg-main);
+}
+
+.social-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 28px;
+  flex-wrap: wrap;
+  margin-top: 44px;
+}
+
+.c-btn {
+  position: relative;
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  padding-bottom: 12px;
+  transition: color var(--transition-fast);
+}
+
+.c-btn::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1px;
+  background: var(--accent-gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--transition-medium);
+}
+
+.c-btn:hover {
+  color: var(--accent-gold-light);
+}
+
+.c-btn:hover::after {
+  transform: scaleX(1);
+}
+
+.c-modern-map-container-centered {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  margin: 70px auto;
+}
+
+.c-modern-map-container-centered::before {
+  content: "";
+  position: absolute;
+  width: 520px;
+  height: 520px;
+  border-radius: 50%;
+  background: rgba(198,164,106,0.10);
+  filter: blur(120px);
+  pointer-events: none;
+}
+
+.c-modern-map-wrapper {
+  position: relative;
+  width: min(900px, 86vw);
+  height: min(620px, 70vh);
+  min-height: 420px;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.03);
+  box-shadow: var(--shadow-xl);
+  z-index: 2;
+}
+
+.c-modern-map-wrapper iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  filter: grayscale(1) invert(0.9) contrast(1.1);
+}
+
+.c-modern-map-wrapper::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.22), transparent 50%);
+  pointer-events: none;
+}
+
+
+/* ==========================================
+   5. PRODUCTS / BRAND GROUPS OLD CLASSES
+========================================== */
+
+.prodotti-container {
+  padding-block: clamp(100px, 12vw, 180px);
+}
+
+.brand-group {
+  position: relative;
+  padding-block: clamp(80px, 10vw, 130px);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.group-header {
+  max-width: 850px;
+  margin-bottom: 46px;
+}
+
+.group-header h2.section-title {
+  font-size: clamp(3rem, 7vw, 5.5rem);
+  line-height: 0.95;
+  margin-bottom: 18px;
+}
+
+.section-subtitle {
+  color: var(--accent-gold);
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  margin-bottom: 16px;
+  font-weight: 500;
+}
+
+.group-description {
+  max-width: 620px;
+  color: var(--text-secondary) !important;
+  font-size: 15px !important;
+  line-height: 1.8 !important;
+  font-weight: 300 !important;
+}
+
+.product-nav {
+  position: sticky;
+  top: var(--navbar-height);
+  z-index: 800;
+  padding: 14px 0;
+  background: rgba(5,5,5,0.66);
+  backdrop-filter: blur(22px) saturate(180%);
+  -webkit-backdrop-filter: blur(22px) saturate(180%);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.product-nav-container {
+  display: flex;
+  justify-content: center;
+  gap: 28px;
+  overflow-x: auto;
+  white-space: nowrap;
+  scrollbar-width: none;
+  padding-inline: 20px;
+}
+
+.product-nav-container::-webkit-scrollbar {
+  display: none;
+}
+
+.product-nav a {
+  color: var(--text-muted);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  transition: color var(--transition-fast);
+}
+
+.product-nav a:hover,
+.product-nav a.active {
+  color: var(--accent-gold-light);
+}
+
+
+/* ==========================================
+   6. BRAND CAROUSEL OLD CLASSES
+========================================== */
+
+.figurine-wrapper {
+  position: relative;
+}
+
+.brand-figurine-track {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  gap: 24px;
+  overflow-x: auto !important;
+  scroll-snap-type: x proximity;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  padding: 16px 0 34px;
+}
+
+.brand-figurine-track::-webkit-scrollbar {
+  display: none;
+}
+
+.brand-card-mini {
+  position: relative;
+  flex: 0 0 330px !important;
+  height: 460px !important;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  scroll-snap-align: start;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.07);
+  transition: transform var(--transition-medium), border-color var(--transition-medium), box-shadow var(--transition-medium);
+}
+
+.brand-card-mini:hover {
+  transform: translateY(-10px);
+  border-color: rgba(255,255,255,0.14);
+  box-shadow: 0 28px 60px rgba(0,0,0,0.38);
+}
+
+.brand-card-mini img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.78;
+  transition: transform 1.2s var(--ease-premium), opacity 1.2s var(--ease-premium);
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+.brand-card-mini:hover img {
+  transform: scale(1.07);
+  opacity: 1;
+}
+
+.brand-card-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  padding: 28px;
+  background: linear-gradient(to top, rgba(0,0,0,0.88) 8%, rgba(0,0,0,0.20) 55%, transparent);
+}
+
+.brand-card-overlay h3 {
+  font-family: var(--font-titles);
+  color: var(--text-primary);
+  font-size: 1.45rem;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+
+/* ==========================================
+   7. CAROUSEL ARROWS / DOTS OLD CLASSES
+========================================== */
+
+.scroll-arrow,
+.nav-btn {
+  position: absolute;
+  top: 50%;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  transform: translateY(-50%);
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.10);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  color: var(--text-primary);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 10;
+  opacity: 0;
+  transition: opacity var(--transition-medium), transform var(--transition-medium), background var(--transition-medium);
+}
+
+.figurine-wrapper:hover .scroll-arrow {
+  opacity: 1;
+}
+
+.scroll-arrow:hover,
+.nav-btn:hover {
+  background: rgba(255,255,255,0.12);
+  transform: translateY(-50%) scale(1.05);
+}
+
+.scroll-arrow.left,
+.prev {
+  left: -28px;
+}
+
+.scroll-arrow.right,
+.next {
+  right: -28px;
+}
+
+.carousel-dots,
+.slider-dots {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 28px;
+}
+
+.dot,
+.slider-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.20);
+  cursor: pointer;
+  transition: transform var(--transition-fast), background var(--transition-fast);
+}
+
+.dot.active,
+.dot:hover,
+.slider-dot.active,
+.slider-dot:hover {
+  background: var(--accent-gold);
+  transform: scale(1.45);
+}
+
+
+/* ==========================================
+   8. HOME INTRO / CATEGORIES OLD CLASSES
+========================================== */
+
+.home-intro,
+.home-categories {
+  position: relative;
+  padding-block: clamp(100px, 12vw, 170px);
+}
+
+.home-categories {
+  background: var(--bg-secondary);
+}
+
+.intro-container {
+  max-width: var(--container-lg);
+  margin-inline: auto;
+  padding-inline: clamp(24px, 5vw, 60px);
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: clamp(50px, 8vw, 100px);
+  align-items: center;
+}
+
+.label-superior {
+  display: block;
+  margin-bottom: 20px;
+  color: var(--accent-gold);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+
+.intro-content h2 {
+  font-size: clamp(3rem, 6vw, 5.5rem);
+  line-height: 0.95;
+  margin-bottom: 36px;
+}
+
+.intro-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 36px;
+}
+
+.intro-text p {
+  color: var(--text-secondary);
+  line-height: 1.9;
+  margin-bottom: 24px;
+}
+
+.link-scopri {
+  color: var(--text-primary);
+  border-bottom: 1px solid rgba(198,164,106,0.55);
+  padding-bottom: 6px;
+}
+
+.feature-item {
+  margin-bottom: 24px;
+}
+
+.feature-item strong {
+  display: block;
+  color: var(--accent-gold-light);
+  margin-bottom: 6px;
+}
+
+.feature-item span {
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+.cat-header h2 {
+  text-align: center;
+  font-size: clamp(2rem, 4vw, 3rem);
+  margin-bottom: 56px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.cat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.cat-card {
+  position: relative;
+  height: 540px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.cat-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1.2s var(--ease-premium);
+}
+
+.cat-card:hover img {
+  transform: scale(1.07);
+}
+
+.cat-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 34px;
+  background: linear-gradient(to top, rgba(0,0,0,0.82), transparent 60%);
+}
+
+.cat-overlay h3 {
+  font-size: 2rem;
+  margin-bottom: 8px;
+}
+
+.cat-overlay p {
+  color: var(--accent-gold);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+
+/* ==========================================
+   9. MOBILE MENU OLD CLASSES
+========================================== */
+
+.mobile-overlay {
+  position: fixed;
+  inset: 0;
+  height: 100svh;
+  z-index: 9998;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  padding: 100px clamp(30px, 8vw, 60px);
+  background: rgba(5,5,5,0.86);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  transform: translateX(100%);
+  transition: transform var(--transition-slow);
+}
+
+.mobile-overlay.active {
+  transform: translateX(0);
+}
+
+.mobile-links {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 22px;
+}
+
+.mobile-links a {
+  color: var(--text-primary);
+  font-size: clamp(24px, 7vw, 42px);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  text-transform: none;
+}
+
+.mobile-socials {
+  display: flex;
+  gap: 22px;
+  margin-top: 58px;
+}
+
+.mobile-socials a img {
+  width: 28px;
+  height: 28px;
+  filter: brightness(0) invert(1);
+  opacity: 0.75;
+}
+
+
+/* ==========================================
+   10. ACCESSIBILITY / FOCUS
+========================================== */
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid rgba(198,164,106,0.45);
+  outline-offset: 4px;
+}
+
+::selection {
+  background: rgba(198,164,106,0.28);
+  color: white;
+}
+
+
+/* ==========================================
+   11. SCROLLBAR
+========================================== */
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #050505;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.16);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(198,164,106,0.38);
+}
+
+
+/* ==========================================
+   12. MOBILE RESPONSIVE MASTER
+========================================== */
+
+@media (max-width: 1100px) {
+
+  .menu {
+    grid-template-columns: 1fr auto;
+  }
+
+  .menu-links,
+  .social-icons {
+    display: none;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+
+  .mega-menu {
+    display: none;
+  }
+
+  .intro-container,
+  .history-content {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .history-description {
+    margin-inline: auto;
+  }
+
+  .cat-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+@media (max-width: 768px) {
+
+  body {
+    overflow-x: hidden;
+  }
+
+  .container {
+    padding-inline: 22px;
+  }
+
+  .logo img {
+    height: 46px;
+  }
+
+  .hero {
+    min-height: 92svh;
+  }
+
+  .hero-content {
+    padding-top: calc(var(--navbar-height) + 20px);
+  }
+
+  .hero-logo img {
+    width: 88vw;
+  }
+
+  .hero-btns,
+  .hero-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    width: min(100%, 340px);
+    min-width: unset;
+  }
+
+  .scroll-indicator {
+    display: none;
+  }
+
+  .brand-group {
+    padding-block: 70px;
+    scroll-margin-top: calc(var(--navbar-height) + 80px);
+  }
+
+  .brand-card-mini {
+    flex: 0 0 76vw !important;
+    height: 430px !important;
+  }
+
+  .scroll-arrow,
+  .nav-btn,
+  .slider-dots,
+  .carousel-dots {
+    display: none !important;
+  }
+
+  .product-nav {
+    display: none !important;
+  }
+
+  .search-section {
+    top: var(--navbar-height);
+  }
+
+  .history-line {
+    font-size: clamp(2.8rem, 15vw, 5rem);
+  }
+
+  .history-top {
+    margin-bottom: 50px;
+  }
+
+  .history-visual {
+    min-height: 360px;
+    order: -1;
+  }
+
+  .history-description {
+    font-size: 1.05rem;
+    text-align: center;
+  }
+
+  .intro-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cat-card {
+    height: 460px;
+  }
+
+  .c-modern-map-wrapper {
+    width: 92vw;
+    height: 360px;
+    min-height: 360px;
+    border-radius: var(--radius-lg);
+  }
+
+  .footer-container,
+  .footer-top {
+    grid-template-columns: 1fr;
+    text-align: left;
+  }
+}
+
+
+/* ==========================================
+   13. SMALL MOBILE
+========================================== */
+
+@media (max-width: 480px) {
+
+  :root {
+    --navbar-height: 72px;
+  }
+
+  .section-title,
+  .showcase-title,
+  .gallery-title,
+  .editorial-title {
+    letter-spacing: -0.05em;
+  }
+
+  .brand-card-mini {
+    flex-basis: 82vw !important;
+  }
+
+  .mobile-links a {
+    font-size: 32px;
+  }
+
+  .cat-overlay,
+  .category-content,
+  .showcase-info {
+    padding: 24px;
+  }
+}
+
+
+/* ==========================================
+   14. PRINT / REDUCED MOTION
+========================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+
+/* MOBILE HEADER */
+
+.mobile-header-top {
+  position: absolute;
+
+  top: 24px;
+  left: clamp(24px, 5vw, 60px);
+}
+
+.mobile-logo img {
+  height: 58px;
+  width: auto;
+
+  filter: brightness(0) invert(1);
+}
+
+/* ==========================================
+   NAVBAR OLD CLASS COMPATIBILITY FIX
+========================================== */
+
+.menu-links a,
+.menu-links .dropdown-toggle {
+  position: relative;
+
+  display: inline-flex;
+  align-items: center;
+
+  color: var(--text-secondary);
+
+  font-size: 11px;
+  font-weight: 500;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.24em;
+
+  transition:
+    color var(--transition-fast),
+    opacity var(--transition-fast);
+}
+
+.menu-links a:hover,
+.menu-links .dropdown-toggle:hover {
+  color: var(--text-primary);
+}
+
+.menu-links > a::after,
+.menu-links .dropdown-toggle::after {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  bottom: -10px;
+
+  width: 100%;
+  height: 1px;
+
+  background:
+    linear-gradient(
+      to right,
+      transparent,
+      var(--accent-gold),
+      transparent
+    );
+
+  transform: scaleX(0);
+  transform-origin: center;
+
+  transition:
+    transform var(--transition-medium);
+}
+
+.menu-links > a:hover::after,
+.menu-links .dropdown-toggle:hover::after {
+  transform: scaleX(1);
+}
+
+.menu-links a.active {
+  color: var(--text-primary);
+}
+/* HOME PAGE REFINEMENTS */
+
+.home-intro-header,
+.home-categories-header {
+  text-align: center;
+  margin-inline: auto;
+}
+
+.home-intro-header .section-description,
+.home-categories-header .section-description {
+  margin-inline: auto;
+}
+
+.home-intro-action {
+  display: flex;
+  justify-content: center;
+}
+
+.cat-card {
+  display: block;
+}
+
+/* PRODUCTS PAGE REFINEMENTS */
+
+.prodotti-layout {
+  position: relative;
+  background:
+    radial-gradient(
+      circle at top,
+      rgba(198,164,106,0.08),
+      transparent 34%
+    ),
+    var(--bg-main);
+}
+
+.brand-group {
+  overflow: hidden;
+}
+
+.brand-group:nth-child(even) {
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(255,255,255,0.015),
+      transparent
+    );
+}
+
+.group-header {
+  position: relative;
+}
+
+.group-header::before {
+  content: "";
+  display: block;
+  width: 58px;
+  height: 1px;
+  margin-bottom: 24px;
+  background: var(--accent-gold);
+  opacity: 0.7;
+}
+
+.section-subtitle {
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-size: 12px;
+}
+
+/* CHI SIAMO PAGE */
+
+.contact-header {
+  text-align: center;
+  margin-inline: auto;
+}
+
+.contact-header .section-description {
+  margin-inline: auto;
+}
+
+.contact-section .social-buttons {
+  margin-bottom: 60px;
+}
+
+/* ==========================================
+   FIX NAVBAR + HERO + PRODUCT NAV
+========================================== */
+
+
+/* 1 + 2. NAVBAR CENTRATA E HOVER PULITO */
+
+.menu {
+  grid-template-columns: 160px 1fr 160px;
+}
+
+.menu-links {
+  justify-self: center;
+  gap: clamp(24px, 3vw, 42px);
+}
+
+.menu-links > a,
+.menu-links .dropdown-toggle {
+  white-space: nowrap;
+  padding: 14px 0;
+}
+
+.mega-dropdown {
+  position: static;
+}
+
+.mega-menu {
+  top: calc(var(--navbar-height) - 4px);
+  left: 50%;
+  transform: translateX(-50%) translateY(14px);
+}
+
+.mega-dropdown:hover .mega-menu {
+  transform: translateX(-50%) translateY(0);
+}
+
+
+/* Evita che underline / hover dei link del mega menu coprano altro */
+
+.mega-column a::after {
+  display: none !important;
+}
+
+.mega-column a {
+  line-height: 1.35;
+  padding: 4px 0;
+}
+
+
+/* 3. HERO BOTTONI: SPAZIO CORRETTO DALLA LINEA */
+
+.hero-btns {
+  position: relative;
+  gap: 28px;
+}
+
+.hero-btns::before {
+  content: "";
+  width: 1px;
+  height: 42px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(231,210,176,0.45),
+    transparent
+  );
+  order: 2;
+}
+
+.hero-btns .btn-primary {
+  order: 1;
+}
+
+.hero-btns .btn-secondary {
+  order: 3;
+}
+
+.hero-btns .btn-primary,
+.hero-btns .btn-secondary {
+  margin: 0;
+}
+
+
+/* Mobile: niente linea tra i bottoni */
+
+@media (max-width: 768px) {
+  .hero-btns::before {
+    display: none;
+  }
+
+  .hero-btns {
+    gap: 14px;
+  }
+}
+
+
+/* 4. PRODUCT NAV SEMPRE VISIBILE SOPRA SEARCH */
+
+.product-nav {
+  position: sticky;
+  top: var(--navbar-height);
+  z-index: 950;
+}
+
+.search-section {
+  position: sticky;
+  top: calc(var(--navbar-height) + 48px);
+  z-index: 940;
+}
+
+
+/* Mobile: mostra una nav orizzontale scrollabile invece di nasconderla */
+
+@media (max-width: 768px) {
+  .product-nav {
+    display: block !important;
+    top: var(--navbar-height);
+    padding: 10px 0;
+  }
+
+  .product-nav-container {
+    justify-content: flex-start;
+    overflow-x: auto;
+    padding: 0 20px 8px;
+    gap: 20px;
+  }
+
+  .product-nav a {
+    flex: 0 0 auto;
+    font-size: 10px;
+  }
+
+  .search-section {
+    top: calc(var(--navbar-height) + 44px);
+  }
+}

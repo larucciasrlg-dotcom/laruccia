@@ -2,81 +2,102 @@
 <html lang="it">
 <head>
   <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chi Siamo - Laruccia</title>
-  <!-- ... stessi link ai font e css della index ... -->
-  <link rel="stylesheet" href="css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@300;600&family=Manrope:wght@300;500&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <title>Chi Siamo - Laruccia</title>
+
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@300;600&family=Manrope:wght@300;500&display=swap" rel="stylesheet">
 </head>
+
 <body>
+
   <div id="navbar"></div>
 
-<section class="history-section">
-    <div class="history-sticky">
-        
-        <!-- PARTE 1: IL COUNTDOWN -->
-        <div class="history-top">
-    <div class="history-line">
-        <span class="history-prefix">Insieme con voi dal</span>
-        <span id="year" class="history-counter">2026</span>
-    </div>
-</div>
+  <main>
 
-        <!-- PARTE 2 e 3: TESTO + IMMAGINE -->
+    <!-- STORIA -->
+    <section class="history-section">
+      <div class="history-sticky">
+
+        <div class="history-top fade-up">
+          <div class="history-line">
+            <span class="history-prefix">Insieme con voi dal</span>
+            <span id="year" class="history-counter">2026</span>
+          </div>
+        </div>
+
         <div class="history-content">
-            
-            <div class="history-text-wrapper">
-                <p class="history-description">
-                    Laruccia è una storia di famiglia che dal 1939 accompagna l’evoluzione dell’abitare.
-Da un piccolo punto vendita nel cuore di Polignano a Mare a uno showroom di oltre 800 mq dedicato a superfici, arredo bagno, parquet e materiali di alta gamma, selezionando alcuni dei marchi più autorevoli del settore.
-                </p>
-            </div>
 
-            <div class="history-visual">
-    <!-- Aggiunta la classe history-image per il selettore JS -->
-    <img src="img/ceramiche-laruccia-2.jpg" alt="Showroom Laruccia" class="history-image">
-</div>
+          <div class="history-text-wrapper fade-up stagger-1">
+            <p class="history-description">
+              Laruccia è una storia di famiglia che dal 1939 accompagna l’evoluzione dell’abitare.
+              Da un piccolo punto vendita nel cuore di Polignano a Mare a uno showroom di oltre 800 mq
+              dedicato a superfici, arredo bagno, parquet e materiali di alta gamma, selezionando alcuni
+              dei marchi più autorevoli del settore.
+            </p>
+          </div>
+
+          <div class="history-visual image-reveal stagger-2">
+            <img
+              src="img/ceramiche-laruccia-2.jpg"
+              alt="Showroom Laruccia"
+              class="history-image"
+              loading="lazy">
+          </div>
 
         </div>
-    </div>
-    
-</section>
+
+      </div>
+    </section>
 
 
+    <!-- SHOWROOM / CONTATTI -->
+    <section class="contact-section">
+      <div class="container">
 
-<!-- SEZIONE CONTATTI -->
-<section class="history-section">
-    <div class="container">
-        
-        <!-- TITOLO (STILE HISTORY) -->
-<div class="history-line">
-    <span class="history-prefix">Vieni a scoprire lo</span> 
-    <br>
-    <span class="history-counter showroom-title">Showroom</span>
-</div>
+        <header class="section-header contact-header">
+          <span class="section-label fade-up">Showroom</span>
 
+          <h2 class="section-title fade-up stagger-1">
+            Vieni a scoprire lo Showroom
+          </h2>
 
-        <div class="row justify-content-center">
-            <div class="col-lg-8 text-center">
-                
-                <!-- BLOCCO TESTO -->
-                <div class="social-buttons">
-                        <a href="https://wa.me/..." class="c-btn wa">WhatsApp</a>
-                        <a href="mailto:..." class="c-btn mail">Invia Email</a>
-                </div>
+          <p class="section-description fade-up stagger-2">
+            Ti aspettiamo a Polignano a Mare per accompagnarti nella scelta di superfici,
+            arredo bagno e soluzioni d’eccellenza per la tua casa.
+          </p>
+        </header>
 
-                <!-- MAPPA COME RETTANGOLO CENTRATO -->
-                <div class="c-modern-map-container-centered">
-                    <div class="c-modern-map-wrapper">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3011.9858229744905!2d17.24117667661656!3d40.98179127135421!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1347cb063fe66b4f%3A0xabec24e9d3dce139!2sGiuseppe%20Laruccia%20Srl!5e0!3m2!1sit!2sit!4v1778086827572!5m2!1sit!2sit" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                </div>
-            </div>
+        <div class="social-buttons fade-up stagger-3">
+          <a href="https://wa.me/39360997737" class="c-btn wa" target="_blank" rel="noopener noreferrer">
+            WhatsApp
+          </a>
+
+          <a href="mailto:info@laruccia.it" class="c-btn mail">
+            Invia Email
+          </a>
         </div>
-    </div>
-</section>
+
+        <div class="c-modern-map-container-centered fade-up stagger-4">
+          <div class="c-modern-map-wrapper">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3011.9858229744905!2d17.24117667661656!3d40.98179127135421!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1347cb063fe66b4f%3A0xabec24e9d3dce139!2sGiuseppe%20Laruccia%20Srl!5e0!3m2!1sit!2sit!4v1778086827572!5m2!1sit!2sit"
+              loading="lazy"
+              allowfullscreen
+              referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
 
   <div id="footer-placeholder"></div>
+
   <script src="js/script.js"></script>
+
 </body>
 </html>

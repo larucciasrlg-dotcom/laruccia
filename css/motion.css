@@ -1,0 +1,448 @@
+/* ==========================================
+   MOTION.CSS
+   Apple Luxury Motion System
+========================================== */
+
+
+/* ==========================================
+   1. GLOBAL MOTION SETTINGS
+========================================== */
+
+:root {
+
+  --motion-fast:
+    0.25s cubic-bezier(0.4, 0, 0.2, 1);
+
+  --motion-medium:
+    0.55s cubic-bezier(0.19, 1, 0.22, 1);
+
+  --motion-slow:
+    1s cubic-bezier(0.19, 1, 0.22, 1);
+
+  --motion-extra:
+    1.6s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+
+/* ==========================================
+   2. GPU ACCELERATION
+========================================== */
+
+.card,
+.category-card,
+.showcase-item,
+.btn-primary,
+.btn-secondary,
+img,
+video {
+  transform:
+    translateZ(0);
+
+  backface-visibility: hidden;
+}
+
+
+/* ==========================================
+   3. FADE UP
+========================================== */
+
+.fade-up {
+  opacity: 0;
+
+  transform:
+    translateY(40px);
+
+  transition:
+    opacity var(--motion-slow),
+    transform var(--motion-slow);
+
+  will-change:
+    opacity,
+    transform;
+}
+
+.fade-up.visible {
+  opacity: 1;
+
+  transform:
+    translateY(0);
+}
+
+
+/* ==========================================
+   4. FADE IN
+========================================== */
+
+.fade-in {
+  opacity: 0;
+
+  transition:
+    opacity var(--motion-slow);
+
+  will-change:
+    opacity;
+}
+
+.fade-in.visible {
+  opacity: 1;
+}
+
+
+/* ==========================================
+   5. SCALE IN
+========================================== */
+
+.scale-in {
+  opacity: 0;
+
+  transform:
+    scale(0.94);
+
+  transition:
+    opacity var(--motion-slow),
+    transform var(--motion-slow);
+}
+
+.scale-in.visible {
+  opacity: 1;
+
+  transform:
+    scale(1);
+}
+
+
+/* ==========================================
+   6. IMAGE REVEAL
+========================================== */
+
+.image-reveal {
+  position: relative;
+
+  overflow: hidden;
+}
+
+.image-reveal img {
+
+  transform:
+    scale(1.12);
+
+  transition:
+    transform 1.8s var(--ease-premium);
+}
+
+.image-reveal.visible img {
+
+  transform:
+    scale(1);
+}
+
+
+/* Reveal overlay */
+
+.image-reveal::after {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  background:
+    #050505;
+
+  transform-origin: top;
+
+  transition:
+    transform 1.4s var(--ease-premium);
+
+  z-index: 5;
+}
+
+.image-reveal.visible::after {
+
+  transform:
+    scaleY(0);
+}
+
+
+/* ==========================================
+   7. STAGGER SYSTEM
+========================================== */
+
+.stagger-1 {
+  transition-delay: 0.05s;
+}
+
+.stagger-2 {
+  transition-delay: 0.12s;
+}
+
+.stagger-3 {
+  transition-delay: 0.18s;
+}
+
+.stagger-4 {
+  transition-delay: 0.24s;
+}
+
+.stagger-5 {
+  transition-delay: 0.30s;
+}
+
+
+/* ==========================================
+   8. HOVER LIFT
+========================================== */
+
+.hover-lift {
+  transition:
+    transform var(--motion-medium),
+    box-shadow var(--motion-medium);
+}
+
+.hover-lift:hover {
+
+  transform:
+    translateY(-8px);
+}
+
+
+/* ==========================================
+   9. HOVER GLOW
+========================================== */
+
+.hover-glow {
+  position: relative;
+}
+
+.hover-glow::after {
+  content: "";
+
+  position: absolute;
+
+  inset: -20%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(198,164,106,0.14),
+      transparent 70%
+    );
+
+  opacity: 0;
+
+  transition:
+    opacity var(--motion-medium);
+
+  pointer-events: none;
+}
+
+.hover-glow:hover::after {
+  opacity: 1;
+}
+
+
+/* ==========================================
+   10. MAGNETIC BUTTON FEELING
+========================================== */
+
+.btn-primary,
+.btn-secondary {
+  transform-origin: center;
+
+  will-change:
+    transform;
+}
+
+.btn-primary:hover,
+.btn-secondary:hover {
+
+  transform:
+    translateY(-4px)
+    scale(1.015);
+}
+
+
+/* ==========================================
+   11. SMOOTH LINKS
+========================================== */
+
+a {
+  transition:
+    color var(--motion-fast),
+    opacity var(--motion-fast);
+}
+
+
+/* ==========================================
+   12. NAVBAR APPEAR
+========================================== */
+
+.navbar {
+  animation:
+    navbarReveal 1.2s var(--ease-premium);
+}
+
+@keyframes navbarReveal {
+
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(-20px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(0);
+  }
+}
+
+
+/* ==========================================
+   13. FLOATING MOTION
+========================================== */
+
+.float-soft {
+  animation:
+    floatSoft 6s ease-in-out infinite;
+}
+
+@keyframes floatSoft {
+
+  0% {
+    transform:
+      translateY(0px);
+  }
+
+  50% {
+    transform:
+      translateY(-10px);
+  }
+
+  100% {
+    transform:
+      translateY(0px);
+  }
+}
+
+
+/* ==========================================
+   14. PARALLAX LAYER
+========================================== */
+
+.parallax-soft {
+  transform:
+    translateY(var(--parallax-offset, 0));
+
+  transition:
+    transform 0.12s linear;
+}
+
+
+/* ==========================================
+   15. SMOOTH SCROLL SECTION
+========================================== */
+
+.smooth-section {
+  transform:
+    translateY(0);
+
+  transition:
+    transform var(--motion-extra);
+}
+
+
+/* ==========================================
+   16. CINEMATIC OVERLAY ANIMATION
+========================================== */
+
+.cinematic-overlay {
+  position: relative;
+
+  overflow: hidden;
+}
+
+.cinematic-overlay::after {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  background:
+    linear-gradient(
+      120deg,
+      transparent 0%,
+      rgba(255,255,255,0.04) 45%,
+      transparent 100%
+    );
+
+  transform:
+    translateX(-120%);
+
+  transition:
+    transform 1.6s var(--ease-premium);
+
+  pointer-events: none;
+}
+
+.cinematic-overlay:hover::after {
+
+  transform:
+    translateX(120%);
+}
+
+
+/* ==========================================
+   17. RESPONSIVE MOTION
+========================================== */
+
+@media (max-width: 768px) {
+
+  .hover-lift:hover,
+  .btn-primary:hover,
+  .btn-secondary:hover {
+
+    transform:
+      none;
+  }
+
+}
+
+
+/* ==========================================
+   18. REDUCED MOTION
+========================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+
+    animation: none !important;
+
+    transition: none !important;
+
+    scroll-behavior: auto !important;
+  }
+
+}
+
+
+body {
+  animation:
+    pageFade 1.2s ease;
+}
+
+@keyframes pageFade {
+
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+
+}

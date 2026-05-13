@@ -2,118 +2,139 @@
 <html lang="it">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Aggiunto per mobile -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#000000">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
   <title>Laruccia</title>
 
-  <!-- Font -->
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@300;600&family=Manrope:wght@300;500&display=swap" rel="stylesheet">
-  <!-- CSS (Percorso corretto senza / iniziale) -->
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@300;600&family=Manrope:wght@300;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
-
-  <!-- JS (INDISPENSABILE per caricare la navbar) -->
-  <script src="script.js" defer></script>
 </head>
 
 <body class="home">
 
-  <!-- NAVBAR -->
   <div id="navbar"></div>
 
-  <!-- HERO (FULL WIDTH - CORRETTA COSÌ) -->
-  <section class="hero">
-    
-<div class="hero-video-container">
-<video 
-    autoplay 
-    muted 
-    loop 
-    playsinline 
-    preload="auto" 
-    class="hero-video"> <!-- Rimosso l'attributo poster -->
-    <source src="img/video/videohero.mp4" type="video/mp4">
-</video>
-  <div class="hero-overlay"></div>
-</div>
+  <main>
 
-    <div class="hero-content-wrapper">
-      <div class="hero-content">
-        <h1 class="hero-logo">
-          <img src="img/logo-bianco.png" alt="Laruccia">
-        </h1>
+    <!-- HERO -->
+    <section class="hero">
 
-        <div class="hero-btns">
-          <a href="prodotti.html" class="btn-primary">Esplora le Collezioni</a>
-          <a href="chi-siamo.html" class="btn-secondary">Prenota una Visita</a>
-        </div>
-      </div>
-    </div>
+      <div class="hero-video-container">
+        <video
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="auto"
+          class="hero-video">
+          <source src="img/video/videohero.mp4" type="video/mp4">
+        </video>
 
-    <div class="scroll-indicator">
-      <div class="mouse"></div>
-      <span>Scopri di più</span>
-    </div>
-
-  </section>
-
-<!-- INTRO VELOCE IN HOME -->
-<section class="home-intro" style="padding: 100px 0; text-align: center; background: #000;">
-  <div class="container">
-    <h2 style="font-family: var(--font-titles); margin-bottom: 20px;">Oltre 75 anni di Design</h2>
-    <p style="max-width: 700px; margin: 0 auto 30px; opacity: 0.8;">
-      Dal 1939, Laruccia trasforma gli spazi con superfici e arredamenti d'eccellenza.
-    </p>
-    <a href="chi-siamo.html" class="btn-secondary">Scopri la nostra storia</a>
-  </div>
-</section>
-
-  <!-- CATEGORIE -->
-  <section class="home-categories">
-    
-    <!-- CONTAINER AGGIUNTO -->
-    <div class="container">
-
-      <div class="cat-header">
-        <h2>Collezioni</h2>
+        <div class="hero-overlay"></div>
       </div>
 
-      <div class="cat-grid">
+      <div class="hero-content-wrapper">
+        <div class="hero-content">
 
-        <div class="cat-card">
-          <img src="img/cerasa.jpg" alt="Arredo Bagno">
-          <div class="cat-overlay">
-            <h3>Arredo Bagno</h3>
-            <p>Wellness & Design</p>
+          <h1 class="hero-logo fade-up">
+            <img src="img/logo-bianco.png" alt="Laruccia">
+          </h1>
+
+          <div class="hero-btns fade-up stagger-1">
+            <a href="prodotti.html" class="btn-primary">Esplora le Collezioni</a>
+            <a href="chi-siamo.html" class="btn-secondary">Prenota una Visita</a>
           </div>
+
         </div>
+      </div>
 
-        <div class="cat-card">
-          <img src="img/kronos.jpg" alt="Superfici">
-          <div class="cat-overlay">
-            <h3>Superfici</h3>
-            <p>Ceramiche & Marmi</p>
-          </div>
-        </div>
+      <div class="scroll-indicator">
+        <div class="scroll-line"></div>
+        <span>Scopri di più</span>
+      </div>
 
-        <div class="cat-card">
-          <img src="img/effegibi.jpg" alt="Outdoor">
-          <div class="cat-overlay">
-            <h3>Soluzioni Outdoor</h3>
-            <p>Vivere l'esterno</p>
-          </div>
+    </section>
+
+
+    <!-- INTRO -->
+    <section class="home-intro section-lg">
+      <div class="container">
+
+        <header class="section-header home-intro-header">
+          <span class="section-label fade-up">Dal 1939</span>
+
+          <h2 class="section-title fade-up stagger-1">
+            Oltre 75 anni di Design
+          </h2>
+
+          <p class="section-description fade-up stagger-2">
+            Dal 1939, Laruccia trasforma gli spazi con superfici, arredo bagno e materiali d’eccellenza selezionati per ambienti contemporanei.
+          </p>
+        </header>
+
+        <div class="home-intro-action fade-up stagger-3">
+          <a href="chi-siamo.html" class="btn-secondary">
+            Scopri la nostra storia
+          </a>
         </div>
 
       </div>
+    </section>
 
-    </div>
 
-  </section>
+    <!-- CATEGORIE -->
+    <section class="home-categories section-lg">
+      <div class="container">
 
-  <!-- FOOTER -->
+        <header class="section-header home-categories-header">
+          <span class="section-label fade-up">Collezioni</span>
+
+          <h2 class="section-title fade-up stagger-1">
+            Ambienti da vivere
+          </h2>
+
+          <p class="section-description fade-up stagger-2">
+            Una selezione di superfici, arredi e soluzioni per progettare spazi eleganti, funzionali e senza tempo.
+          </p>
+        </header>
+
+        <div class="cat-grid">
+
+          <a href="prodotti.html#arredobagno" class="cat-card fade-up">
+            <img src="img/cerasa.jpg" alt="Arredo Bagno" loading="lazy">
+            <div class="cat-overlay">
+              <h3>Arredo Bagno</h3>
+              <p>Wellness & Design</p>
+            </div>
+          </a>
+
+          <a href="prodotti.html#ceramiche" class="cat-card fade-up stagger-1">
+            <img src="img/kronos.jpg" alt="Superfici" loading="lazy">
+            <div class="cat-overlay">
+              <h3>Superfici</h3>
+              <p>Ceramiche & Marmi</p>
+            </div>
+          </a>
+
+          <a href="prodotti.html#wellness" class="cat-card fade-up stagger-2">
+            <img src="img/effegibi.jpg" alt="Outdoor" loading="lazy">
+            <div class="cat-overlay">
+              <h3>Soluzioni Outdoor</h3>
+              <p>Vivere l’esterno</p>
+            </div>
+          </a>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
   <div id="footer-placeholder"></div>
 
-  <!-- JS -->
   <script src="js/script.js"></script>
 
 </body>

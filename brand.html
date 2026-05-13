@@ -1,50 +1,100 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dettaglio Brand - Laruccia</title>
-    <!-- Aggiungi ?v=1.1 alla fine per forzare l'aggiornamento estetico -->
-    <link rel="stylesheet" href="css/style.css?v=1.1">
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@300;600&family=Manrope:wght@300;500&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Dettaglio Brand - Laruccia</title>
+
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@300;600&family=Manrope:wght@300;500&display=swap" rel="stylesheet">
 </head>
+
 <body class="brand-detail-page">
 
-    <div id="navbar"></div>
-    <div id="lista-brand-ceramiche" class="brand-grid-mini"></div>
+  <div id="navbar"></div>
 
-    <main id="brand-content">
-        <section class="brand-hero">
-            <div class="container">
-                <div class="brand-hero-grid">
-                    <div class="brand-info-box">
-                        <h1 id="brand-title"></h1> <!-- Riempito da JS -->
-                        <div class="brand-description-wrapper">
-                            <p id="brand-description"></p> <!-- Riempito da JS -->
-                        </div>
-                        <a id="brand-link" href="#" target="_blank" class="btn-primary">
-                            Visita il sito ufficiale <span>→</span>
-                        </a>
-                    </div>
-                    <div class="brand-image-featured">
-                        <img id="brand-main-img" src="" alt=""> <!-- Riempito da JS -->
-                    </div>
-                </div>
+  <main class="brand-page">
+
+    <!-- HERO -->
+    <section class="brand-hero">
+      <div class="container">
+
+        <div class="brand-hero-grid">
+
+          <!-- INFO -->
+          <div class="brand-content">
+
+            <div class="brand-kicker fade-up">
+              Collezione Selezionata
             </div>
-        </section>
 
-        <section class="brand-gallery-section">
-            <div class="container">
-                <h2 class="section-title">Collezioni & Ispirazioni</h2>
-                <div id="brand-gallery" class="gallery-grid">
-                    <!-- Le immagini della galleria verranno inserite qui dal JS -->
-                </div>
+            <h1 id="brand-title" class="brand-title fade-up stagger-1"></h1>
+
+            <div class="brand-description-wrapper fade-up stagger-2">
+              <p id="brand-description" class="brand-description"></p>
             </div>
-        </section>
-    </main>
 
-    <div id="footer-placeholder"></div>
+            <div class="brand-actions fade-up stagger-3">
+              <a
+                id="brand-link"
+                href="#"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="brand-link">
+                Visita il sito ufficiale
+              </a>
+            </div>
 
-    <script src="js/script.js"></script>
+          </div>
+
+          <!-- IMAGE -->
+          <div class="brand-image-featured image-reveal stagger-2">
+            <img
+              id="brand-main-img"
+              class="brand-main-img"
+              src=""
+              alt="">
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- GALLERY -->
+    <section class="brand-gallery-section">
+      <div class="container">
+
+        <header class="gallery-header">
+
+          <span class="section-label fade-up">
+            Ispirazioni
+          </span>
+
+          <h2 class="gallery-title fade-up stagger-1">
+            Collezioni & Ambienti
+          </h2>
+
+          <p class="gallery-description fade-up stagger-2">
+            Una selezione di ambientazioni e superfici per raccontare il linguaggio estetico del brand.
+          </p>
+
+        </header>
+
+        <div id="brand-gallery" class="gallery-grid">
+          <!-- JS -->
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <div id="footer-placeholder"></div>
+
+  <script src="js/script.js"></script>
+
 </body>
 </html>
