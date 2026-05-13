@@ -368,29 +368,176 @@ document.addEventListener("keydown", event => {
 
 function initSearch() {
   const searchInput = document.getElementById("brandSearch");
+  const suggestionsBox = document.getElementById("searchSuggestions");
+
   if (!searchInput) return;
 
-  searchInput.addEventListener("input", event => {
-    const term = event.target.value.trim().toLowerCase();
+  const allCards = Array.from(document.querySelectorAll(".brand-card-mini"));
 
+  const brands = allCards
+    .map(card => {
+      const title = card.querySelector("h3")?.innerText.trim();
+      const link = card.querySelector("a")?.getAttribute("href");
+
+      return title && link ? { title, link, card } : null;
+    })
+    .filter(Boolean);
+
+  function normalizeText(text) {
+    return text
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/[^a-z0-9]/g, "");
+  }
+
+  function getSimilarity(a, b) {
+    a = normalizeText(a);
+    b = normalizeText(b);
+
+    if (!a || !b) return 0;
+    if (b.includes(a)) return 1;
+
+    const matrix = Array.from({ length: a.length + 1 }, () => []);
+
+    for (let i = 0; i <= a.length; i++) matrix[i][0] = i;
+    for (let j = 0; j <= b.length; j++) matrix[0][j] = j;
+
+    for (let i = 1; i <= a.length; i++) {
+      for (let j = 1; j <= b.length; j++) {
+        const cost = a[i - 1] === b[j - 1] ? 0 : 1;
+
+        matrix[i][j] = Math.min(
+          matrix[i - 1][j] + 1,
+          matrix[i][j - 1] + 1,
+          matrix[i - 1][j - 1] + cost
+        );
+      }
+    }
+
+    const distance = matrix[a.length][b.length];
+    const maxLength = Math.max(a.length, b.length);
+
+    return 1 - distance / maxLength;
+  }
+
+  function getMatches(term) {
+    if (!term) return [];
+
+    return brands
+      .map(brand => ({
+        ...brand,
+        score: getSimilarity(term, brand.title)
+      }))
+      .filter(brand => {
+        const normalizedTerm = normalizeText(term);
+        const normalizedTitle = normalizeText(brand.title);
+
+        return (
+          normalizedTitle.includes(normalizedTerm) ||
+          brand.score >= 0.42
+        );
+      })
+      .sort((a, b) => b.score - a.score)
+      .slice(0, 8);
+  }
+
+  function filterProducts(term) {
+    const normalizedTerm = normalizeText(term);
     const sections = document.querySelectorAll(".brand-group");
 
     sections.forEach(section => {
       const cards = section.querySelectorAll(".brand-card-mini");
-
       let visibleCount = 0;
 
       cards.forEach(card => {
-        const title = card.querySelector("h3")?.innerText.toLowerCase() || "";
-        const isVisible = title.includes(term);
+        const title = card.querySelector("h3")?.innerText || "";
+        const normalizedTitle = normalizeText(title);
 
-        card.hidden = term.length > 0 && !isVisible;
+        const isVisible =
+          normalizedTerm.length === 0 ||
+          normalizedTitle.includes(normalizedTerm) ||
+          getSimilarity(normalizedTerm, title) >= 0.42;
+
+        card.hidden = !isVisible;
 
         if (isVisible) visibleCount++;
       });
 
-      section.hidden = term.length > 0 && visibleCount === 0;
+      section.hidden = normalizedTerm.length > 0 && visibleCount === 0;
     });
+  }
+
+  function renderSuggestions(term) {
+    if (!suggestionsBox) return;
+
+    suggestionsBox.innerHTML = "";
+
+    if (!term) {
+      suggestionsBox.classList.remove("active");
+      return;
+    }
+
+    const matches = getMatches(term);
+
+    if (!matches.length) {
+      suggestionsBox.innerHTML = `
+        <div class="search-suggestion empty">
+          Nessun brand trovato
+        </div>
+      `;
+      suggestionsBox.classList.add("active");
+      return;
+    }
+
+    matches.forEach(brand => {
+      const item = document.createElement("button");
+      item.type = "button";
+      item.className = "search-suggestion";
+
+      const exactMatch = normalizeText(brand.title).includes(normalizeText(term));
+
+      item.innerHTML = `
+        <span>${brand.title}</span>
+        ${exactMatch ? "" : "<small>Forse cercavi questo</small>"}
+      `;
+
+      item.addEventListener("click", () => {
+        searchInput.value = brand.title;
+        suggestionsBox.classList.remove("active");
+
+        filterProducts(brand.title);
+
+        brand.card.scrollIntoView({
+          behavior: "smooth",
+          block: "center"
+        });
+      });
+
+      suggestionsBox.appendChild(item);
+    });
+
+    suggestionsBox.classList.add("active");
+  }
+
+  searchInput.addEventListener("input", event => {
+    const term = event.target.value.trim();
+
+    filterProducts(term);
+    renderSuggestions(term);
+  });
+
+  document.addEventListener("click", event => {
+    if (!event.target.closest(".search-wrapper")) {
+      suggestionsBox?.classList.remove("active");
+    }
+  });
+
+  searchInput.addEventListener("keydown", event => {
+    if (event.key === "Escape") {
+      suggestionsBox?.classList.remove("active");
+      searchInput.blur();
+    }
   });
 }
 
