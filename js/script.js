@@ -13,6 +13,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   initHistorySection();
   initProductCarousels();
   initScrollReveal();
+  initHeroParallax();
+  initSectionSpy();
 
   if (document.getElementById("brand-title")) {
     caricaBrand();
@@ -238,7 +240,38 @@ function initProductCarousels() {
       }
     }
 
-    updateArrowVisibility(track);
+    function updateArrowVisibility(track) {
+  const wrapper = track.closest(".figurine-wrapper");
+
+  if (!wrapper) return;
+
+  const leftArrow =
+    wrapper.querySelector(".scroll-arrow.left");
+
+  const rightArrow =
+    wrapper.querySelector(".scroll-arrow.right");
+
+  if (!leftArrow || !rightArrow) return;
+
+  const maxScroll =
+    track.scrollWidth - track.clientWidth;
+
+  /* LEFT */
+
+  if (track.scrollLeft <= 6) {
+    leftArrow.classList.add("is-hidden");
+  } else {
+    leftArrow.classList.remove("is-hidden");
+  }
+
+  /* RIGHT */
+
+  if (track.scrollLeft >= maxScroll - 6) {
+    rightArrow.classList.add("is-hidden");
+  } else {
+    rightArrow.classList.remove("is-hidden");
+  }
+}
 
     track.addEventListener(
       "scroll",
@@ -690,4 +723,44 @@ function initHeroParallax() {
     },
     { passive: true }
   );
+}
+
+
+/* ==========================================
+   PRODUCT NAV ACTIVE SECTION
+========================================== */
+
+function initSectionSpy() {
+  const navLinks =
+    document.querySelectorAll(".product-nav a");
+
+  const sections =
+    document.querySelectorAll(".brand-group");
+
+  if (!navLinks.length || !sections.length) return;
+
+  const observer = new IntersectionObserver(
+    entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+
+        const id = entry.target.getAttribute("id");
+
+        navLinks.forEach(link => {
+          link.classList.toggle(
+            "active",
+            link.getAttribute("href") === `#${id}`
+          );
+        });
+      });
+    },
+    {
+      threshold: 0.28,
+      rootMargin: "-20% 0px -60% 0px"
+    }
+  );
+
+  sections.forEach(section => {
+    observer.observe(section);
+  });
 }
