@@ -1,51 +1,72 @@
 /* ==========================================
    HERO.CSS
-   Cinematic Apple Luxury Hero
+   Laruccia Cinematic Hero
 ========================================== */
 
 
 /* ==========================================
-   1. HERO WRAPPER
+   HERO WRAPPER
 ========================================== */
 
 .hero {
   position: relative;
 
   width: 100%;
-  min-height: 100vh;
-
-  overflow: hidden;
+  min-height: 100svh;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
+  overflow: hidden;
   isolation: isolate;
 }
 
 
 /* ==========================================
-   2. HERO MEDIA
+   HERO MEDIA
 ========================================== */
 
-.hero-media {
+.hero-video-container,
+.hero-slides {
   position: absolute;
   inset: 0;
 
   z-index: -3;
 }
 
-.hero-media video,
-.hero-media img {
+.hero-video,
+.hero-slide img {
   width: 100%;
   height: 100%;
 
   object-fit: cover;
 }
 
+.hero-video {
+  filter:
+    brightness(0.72)
+    contrast(1.08)
+    saturate(0.92);
+}
+
+.hero-slide {
+  position: absolute;
+  inset: 0;
+
+  opacity: 0;
+
+  transition:
+    opacity 1.2s var(--ease-premium);
+}
+
+.hero-slide.active {
+  opacity: 1;
+}
+
 
 /* ==========================================
-   3. CINEMATIC OVERLAY
+   HERO OVERLAY
 ========================================== */
 
 .hero-overlay {
@@ -64,19 +85,13 @@
     );
 }
 
-/* ==========================================
-   HERO CINEMATIC LIGHT
-========================================== */
-
 .hero::before {
   content: "";
 
   position: absolute;
 
-  top: -30%;
+  top: -32%;
   left: 50%;
-
-  transform: translateX(-50%);
 
   width: 1400px;
   height: 1400px;
@@ -86,11 +101,14 @@
   background:
     radial-gradient(
       circle,
-      rgba(198,164,106,0.12),
+      rgba(198,164,106,0.11),
       transparent 70%
     );
 
   filter: blur(120px);
+
+  transform:
+    translateX(-50%);
 
   z-index: -1;
 
@@ -99,110 +117,20 @@
 
 
 /* ==========================================
-   VIDEO COLOR GRADING
+   HERO CONTENT
 ========================================== */
 
-.hero-video {
-  filter:
-    brightness(0.72)
-    contrast(1.08)
-    saturate(0.92);
-}
-
-
-/* ==========================================
-   HERO LOGO
-========================================== */
-
-.hero-logo {
-  display: flex;
-  justify-content: center;
-
-  margin-bottom: 40px;
-}
-
-.hero-logo img {
-  width: min(880px, 84vw);
-  height: auto;
-
-  filter:
-    drop-shadow(0 20px 60px rgba(0,0,0,0.45));
-
-  animation:
-    heroLogoFloat 7s ease-in-out infinite;
-}
-
-
-/* ==========================================
-   HERO CONTENT DEPTH
-========================================== */
-
-.hero-content {
+.hero-content-wrapper {
   position: relative;
-  z-index: 5;
+
+  width: 100%;
+
+  z-index: 2;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-
-
-/* ==========================================
-   HERO FLOAT
-========================================== */
-
-@keyframes heroLogoFloat {
-
-  0% {
-    transform:
-      translateY(0px);
-  }
-
-  50% {
-    transform:
-      translateY(-8px);
-  }
-
-  100% {
-    transform:
-      translateY(0px);
-  }
-
-}
-
-
-
-/* ==========================================
-   4. HERO GLOW
-========================================== */
-
-.hero-glow {
-  position: absolute;
-
-  top: -20%;
-  left: 50%;
-
-  transform: translateX(-50%);
-
-  width: 1200px;
-  height: 1200px;
-
-  border-radius: 50%;
-
-  background:
-    radial-gradient(
-      circle,
-      rgba(198,164,106,0.12),
-      transparent 70%
-    );
-
-  filter: blur(120px);
-
-  z-index: -1;
-
-  pointer-events: none;
-}
-
-
-/* ==========================================
-   5. HERO CONTENT
-========================================== */
 
 .hero-content {
   position: relative;
@@ -216,173 +144,121 @@
     clamp(24px, 5vw, 60px);
 
   padding-top:
-    calc(var(--navbar-height) + 40px);
+    calc(var(--navbar-height) + 34px);
 
   text-align: center;
 
-  z-index: 2;
+  z-index: 5;
 }
 
 
 /* ==========================================
-   6. HERO LABEL
+   HERO LOGO
 ========================================== */
 
-.hero-label {
-  display: inline-flex;
-  align-items: center;
-  gap: 14px;
-
-  margin-bottom: 30px;
-
-  color: var(--accent-gold-light);
-
-  font-size: 11px;
-  font-weight: 600;
-
-  text-transform: uppercase;
-
-  letter-spacing: 0.28em;
-
-  opacity: 0;
-
-  transform: translateY(20px);
-
-  animation:
-    heroFadeUp 1.2s var(--ease-premium) forwards;
-}
-
-.hero-label::before {
-  content: "";
-
-  width: 44px;
-  height: 1px;
-
-  background:
-    linear-gradient(
-      to right,
-      transparent,
-      var(--accent-gold)
-    );
-}
-
-.hero-label::after {
-  content: "";
-
-  width: 44px;
-  height: 1px;
-
-  background:
-    linear-gradient(
-      to left,
-      transparent,
-      var(--accent-gold)
-    );
-}
-
-
-/* ==========================================
-   7. HERO TITLE
-========================================== */
-
-.hero-title {
-  font-size:
-    clamp(4rem, 10vw, 8rem);
-
-  line-height: 0.9;
-
-  letter-spacing: -0.06em;
-
-  margin-bottom: 30px;
-
-  color: var(--text-primary);
-
-  text-wrap: balance;
-
-  opacity: 0;
-
-  transform: translateY(30px);
-
-  animation:
-    heroFadeUp 1.4s
-    0.15s
-    var(--ease-premium)
-    forwards;
-}
-
-
-/* Luxury Gradient */
-
-.hero-title .gradient-text {
-
-  background:
-    linear-gradient(
-      180deg,
-      #ffffff 0%,
-      #e7d2b0 100%
-    );
-
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-
-/* ==========================================
-   8. HERO DESCRIPTION
-========================================== */
-
-.hero-description {
-  max-width: 720px;
-
-  margin-inline: auto;
-  margin-bottom: 50px;
-
-  font-size:
-    clamp(1rem, 2vw, 1.2rem);
-
-  color: var(--text-secondary);
-
-  line-height: 1.9;
-
-  opacity: 0;
-
-  transform: translateY(30px);
-
-  animation:
-    heroFadeUp 1.6s
-    0.25s
-    var(--ease-premium)
-    forwards;
-}
-
-
-/* ==========================================
-   9. HERO ACTIONS
-========================================== */
-
-.hero-actions {
+.hero-logo {
   display: flex;
+  justify-content: center;
+
+  margin-bottom: 34px;
+}
+
+.hero-logo img {
+  width: min(880px, 84vw);
+  height: auto;
+
+  filter:
+    drop-shadow(0 20px 60px rgba(0,0,0,0.45));
+
+  animation:
+    heroLogoFloat 7s ease-in-out infinite;
+}
+
+@keyframes heroLogoFloat {
+
+  0% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+
+}
+
+
+/* ==========================================
+   HERO BUTTONS
+========================================== */
+
+.hero-btns {
+  position: relative;
+
+  display: grid;
+  grid-template-columns: 260px 1px 260px;
+
+  column-gap: 28px;
+
   align-items: center;
   justify-content: center;
 
-  gap: 18px;
+  margin-top: 10px;
+}
 
-  flex-wrap: wrap;
+.hero-btns .btn-primary,
+.hero-btns .btn-secondary {
+  width: 260px;
+  min-width: 260px;
 
-  opacity: 0;
+  margin: 0;
+}
 
-  transform: translateY(30px);
+.hero-btns .btn-primary {
+  grid-column: 1;
+}
 
-  animation:
-    heroFadeUp 1.8s
-    0.35s
-    var(--ease-premium)
-    forwards;
+.hero-btns .btn-secondary {
+  grid-column: 3;
+}
+
+
+/* linea centrale unica */
+
+.hero-btns::before {
+  content: "";
+
+  grid-column: 2;
+  grid-row: 1;
+
+  width: 1px;
+  height: 42px;
+
+  background:
+    linear-gradient(
+      to bottom,
+      transparent,
+      rgba(231,210,176,0.48),
+      transparent
+    );
+}
+
+
+/* elimina linee doppie ereditate dai bottoni */
+
+.hero-btns::after,
+.hero-btns .btn-primary::after,
+.hero-btns .btn-secondary::after {
+  display: none !important;
+  content: none !important;
 }
 
 
 /* ==========================================
-   10. PREMIUM BUTTONS
+   PREMIUM BUTTONS
 ========================================== */
 
 .btn-primary,
@@ -393,183 +269,96 @@
   align-items: center;
   justify-content: center;
 
-  min-width: 210px;
+  min-height: 56px;
 
   padding:
-    18px 38px;
+    0 34px;
 
-  border-radius: 18px;
+  border-radius:
+    999px;
 
   overflow: hidden;
-  isolation: isolate;
-
-  font-size: 11px;
-  font-weight: 600;
-
-  text-transform: uppercase;
-
-  letter-spacing: 0.24em;
-
-  transition:
-    transform var(--transition-medium),
-    box-shadow var(--transition-medium),
-    border-color var(--transition-medium),
-    background var(--transition-medium);
-
-  backdrop-filter:
-    blur(24px) saturate(180%);
-
-  -webkit-backdrop-filter:
-    blur(24px) saturate(180%);
-}
-
-
-/* Shared reflection */
-
-.btn-primary::before,
-.btn-secondary::before {
-  content: "";
-
-  position: absolute;
-  inset: 1px;
-
-  border-radius: inherit;
-
-  background:
-    linear-gradient(
-      180deg,
-      rgba(255,255,255,0.18),
-      rgba(255,255,255,0.06) 20%,
-      transparent 50%
-    );
-
-  pointer-events: none;
-}
-
-
-/* Shared shine */
-
-.btn-primary::after,
-.btn-secondary::after {
-  content: "";
-
-  position: absolute;
-
-  top: -150%;
-  left: -70%;
-
-  width: 40%;
-  height: 400%;
-
-  background:
-    linear-gradient(
-      90deg,
-      transparent,
-      rgba(255,255,255,0.18),
-      transparent
-    );
-
-  transform: rotate(25deg);
-
-  transition:
-    left 1.1s ease;
-
-  pointer-events: none;
-}
-
-.btn-primary:hover::after,
-.btn-secondary:hover::after {
-  left: 160%;
-}
-
-
-/* ==========================================
-   11. PRIMARY BUTTON
-========================================== */
-
-.btn-primary {
-
-  color: white;
-
-  background:
-    linear-gradient(
-      135deg,
-      rgba(255,255,255,0.16) 0%,
-      rgba(255,255,255,0.06) 30%,
-      rgba(198,164,106,0.16) 100%
-    );
-
-  border:
-    1px solid rgba(255,255,255,0.16);
-
-  box-shadow:
-    0 10px 30px rgba(0,0,0,0.28),
-    inset 0 1px 0 rgba(255,255,255,0.10);
-}
-
-.btn-primary:hover {
-
-  transform:
-    translateY(-4px)
-    scale(1.015);
-
-  border-color:
-    rgba(231,210,176,0.24);
-
-  box-shadow:
-    0 20px 50px rgba(0,0,0,0.42),
-    0 0 30px rgba(198,164,106,0.10),
-    inset 0 1px 0 rgba(255,255,255,0.16);
-}
-
-
-/* ==========================================
-   12. SECONDARY BUTTON
-========================================== */
-
-.btn-secondary {
 
   color:
     var(--text-primary);
 
+  font-family:
+    var(--font-body);
+
+  font-size: 11px;
+  font-weight: 600;
+
+  letter-spacing: 0.20em;
+  text-transform: uppercase;
+
   background:
-    rgba(255,255,255,0.04);
+    linear-gradient(
+      135deg,
+      rgba(255,255,255,0.10),
+      rgba(255,255,255,0.035),
+      rgba(198,164,106,0.08)
+    );
 
   border:
-    1px solid rgba(255,255,255,0.10);
+    1px solid rgba(255,255,255,0.12);
+
+  backdrop-filter:
+    blur(18px)
+    saturate(180%);
+
+  -webkit-backdrop-filter:
+    blur(18px)
+    saturate(180%);
 
   box-shadow:
+    0 12px 34px rgba(0,0,0,0.22),
     inset 0 1px 0 rgba(255,255,255,0.08);
+
+  transition:
+    transform var(--transition-medium),
+    background var(--transition-medium),
+    border-color var(--transition-medium),
+    box-shadow var(--transition-medium),
+    color var(--transition-medium);
 }
 
-.btn-secondary:hover {
-
-  transform:
-    translateY(-4px);
-
+.btn-primary {
   background:
-    rgba(255,255,255,0.08);
+    linear-gradient(
+      135deg,
+      rgba(198,164,106,0.20),
+      rgba(255,255,255,0.06),
+      rgba(198,164,106,0.12)
+    );
 
   border-color:
-    rgba(255,255,255,0.16);
+    rgba(231,210,176,0.22);
+}
+
+.btn-primary:hover,
+.btn-secondary:hover {
+  transform:
+    translateY(-3px);
+
+  border-color:
+    rgba(231,210,176,0.28);
 
   box-shadow:
-    0 18px 40px rgba(0,0,0,0.30),
+    0 18px 44px rgba(0,0,0,0.30),
+    0 0 28px rgba(198,164,106,0.10),
     inset 0 1px 0 rgba(255,255,255,0.12);
 }
 
 
 /* ==========================================
-   13. SCROLL INDICATOR
+   SCROLL INDICATOR
 ========================================== */
 
 .scroll-indicator {
   position: absolute;
 
-  bottom: 34px;
   left: 50%;
-
-  transform: translateX(-50%);
+  bottom: 34px;
 
   display: flex;
   flex-direction: column;
@@ -577,129 +366,109 @@
 
   gap: 12px;
 
-  color: var(--text-muted);
+  transform:
+    translateX(-50%);
+
+  color:
+    rgba(255,255,255,0.54);
 
   font-size: 10px;
   font-weight: 600;
 
+  letter-spacing: 0.22em;
   text-transform: uppercase;
 
-  letter-spacing: 0.24em;
-
-  z-index: 2;
-
-  opacity: 0;
-
-  animation:
-    fadeIn 2s 1.4s forwards;
+  z-index: 3;
 }
 
 .scroll-line {
-  position: relative;
-
   width: 1px;
-  height: 70px;
-
-  background:
-    rgba(255,255,255,0.12);
-
-  overflow: hidden;
-}
-
-.scroll-line::after {
-  content: "";
-
-  position: absolute;
-
-  top: -40%;
-  left: 0;
-
-  width: 100%;
-  height: 40%;
+  height: 46px;
 
   background:
     linear-gradient(
       to bottom,
-      transparent,
-      var(--accent-gold),
+      rgba(231,210,176,0.65),
       transparent
     );
 
   animation:
-    scrollMove 2s infinite;
+    scrollLinePulse 1.8s ease-in-out infinite;
 }
 
-
-/* ==========================================
-   14. ANIMATIONS
-========================================== */
-
-@keyframes heroFadeUp {
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-}
-
-@keyframes fadeIn {
-
-  to {
-    opacity: 1;
-  }
-
-}
-
-@keyframes scrollMove {
+@keyframes scrollLinePulse {
 
   0% {
-    transform: translateY(0);
+    transform: scaleY(0.45);
+    opacity: 0.35;
+  }
+
+  50% {
+    transform: scaleY(1);
+    opacity: 1;
   }
 
   100% {
-    transform: translateY(260%);
+    transform: scaleY(0.45);
+    opacity: 0.35;
   }
 
 }
 
 
 /* ==========================================
-   15. RESPONSIVE
+   NO HERO EMPTY PAGES
 ========================================== */
 
-@media (max-width: 992px) {
+.hero.no-hero {
+  min-height: var(--navbar-height);
+  height: var(--navbar-height);
 
-  .hero-title {
-    letter-spacing: -0.04em;
-  }
-
-  .hero-actions {
-    flex-direction: column;
-  }
-
-  .btn-primary,
-  .btn-secondary {
-    width: 100%;
-    max-width: 340px;
-  }
-
+  background:
+    var(--bg-main);
 }
 
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
 
 @media (max-width: 768px) {
 
   .hero {
-    min-height: 92vh;
+    min-height: 92svh;
   }
 
-  .hero-title {
-    font-size:
-      clamp(3rem, 14vw, 5rem);
+  .hero-content {
+    padding-top:
+      calc(var(--navbar-height) + 20px);
   }
 
-  .hero-description {
-    line-height: 1.7;
+  .hero-logo {
+    margin-bottom: 28px;
+  }
+
+  .hero-logo img {
+    width: 88vw;
+  }
+
+  .hero-btns {
+    display: flex;
+    flex-direction: column;
+
+    gap: 14px;
+
+    width: 100%;
+  }
+
+  .hero-btns::before {
+    display: none;
+  }
+
+  .hero-btns .btn-primary,
+  .hero-btns .btn-secondary {
+    width: min(100%, 340px);
+    min-width: unset;
   }
 
   .scroll-indicator {
@@ -707,4 +476,3 @@
   }
 
 }
-

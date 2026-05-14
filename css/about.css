@@ -1,0 +1,502 @@
+/* ==========================================
+   5. HISTORY / CHI SIAMO
+========================================== */
+
+.history-section {
+  position: relative;
+  padding-block: clamp(100px, 12vw, 180px);
+  background: linear-gradient(to bottom, #050505, #0b0b0c);
+  overflow: hidden;
+  text-align: center;
+}
+
+.history-sticky {
+  width: 100%;
+  max-width: var(--container-lg);
+  margin-inline: auto;
+  padding-inline: clamp(24px, 5vw, 60px);
+}
+
+.history-top {
+  margin-bottom: 70px;
+}
+
+.history-line {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.18em;
+
+  font-family: var(--font-titles);
+  font-size: clamp(2.8rem, 8vw, 7rem);
+  line-height: 0.95;
+  letter-spacing: -0.06em;
+}
+
+.history-line::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -28px;
+  width: 140px;
+  height: 1px;
+  transform: translateX(-50%);
+  background: linear-gradient(to right, transparent, var(--accent-gold), transparent);
+}
+
+.history-prefix {
+  color: var(--text-primary);
+  font-weight: 300;
+}
+
+.history-counter,
+#year {
+  color: var(--accent-gold-light);
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 0 30px rgba(198,164,106,0.14);
+}
+
+.showroom-title {
+  color: var(--text-primary);
+  font-weight: 700;
+}
+
+.history-content {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: clamp(50px, 8vw, 120px);
+  align-items: center;
+  text-align: left;
+}
+
+.history-description {
+  max-width: 680px;
+  color: var(--text-secondary);
+  font-size: clamp(1.05rem, 1.5vw, 1.35rem);
+  line-height: 1.9;
+  font-weight: 300;
+}
+
+.history-description strong {
+  color: var(--accent-gold-light);
+  font-weight: 500;
+}
+
+.history-visual {
+  position: relative;
+  min-height: 560px;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-xl);
+}
+
+.history-visual::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.45), transparent 50%);
+}
+
+.history-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.contact-header {
+  text-align: center;
+  margin-inline: auto;
+}
+
+.contact-header .section-description {
+  margin-inline: auto;
+}
+
+.contact-section .social-buttons {
+  margin-bottom: 60px;
+}
+
+
+/* ==========================================
+   6. CONTACT / MAP
+========================================== */
+
+.contact-section,
+.c-modern-layout {
+  position: relative;
+  padding-block: clamp(100px, 12vw, 180px);
+  background: var(--bg-main);
+}
+
+.social-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 28px;
+  flex-wrap: wrap;
+  margin-top: 44px;
+}
+
+.c-btn {
+  position: relative;
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  padding-bottom: 12px;
+  transition: color var(--transition-fast);
+}
+
+.c-btn::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1px;
+  background: var(--accent-gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--transition-medium);
+}
+
+.c-btn:hover {
+  color: var(--accent-gold-light);
+}
+
+.c-btn:hover::after {
+  transform: scaleX(1);
+}
+
+.c-modern-map-container-centered {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  margin: 70px auto;
+}
+
+.c-modern-map-container-centered::before {
+  content: "";
+  position: absolute;
+  width: 520px;
+  height: 520px;
+  border-radius: 50%;
+  background: rgba(198,164,106,0.10);
+  filter: blur(120px);
+  pointer-events: none;
+}
+
+.c-modern-map-wrapper {
+  position: relative;
+  width: min(900px, 86vw);
+  height: min(620px, 70vh);
+  min-height: 420px;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.03);
+  box-shadow: var(--shadow-xl);
+  z-index: 2;
+}
+
+.c-modern-map-wrapper iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  filter: grayscale(1) invert(0.9) contrast(1.1);
+}
+
+.c-modern-map-wrapper::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.22), transparent 50%);
+  pointer-events: none;
+}
+
+
+/* ==========================================
+   7. PRODUCTS PAGE / PRODUCT NAV
+========================================== */
+
+
+.group-header {
+  position: relative;
+  max-width: 850px;
+  margin-bottom: 46px;
+}
+
+.group-header::before {
+  content: "";
+  display: block;
+  width: 58px;
+  height: 1px;
+  margin-bottom: 24px;
+  background: var(--accent-gold);
+  opacity: 0.7;
+}
+
+.group-header h2.section-title {
+  font-size: clamp(3rem, 7vw, 5.5rem);
+  line-height: 0.95;
+  margin-bottom: 18px;
+}
+
+.section-subtitle {
+  color: var(--accent-gold);
+  font-size: clamp(12px, 1vw, 14px);
+  line-height: 1.4;
+  margin-bottom: 16px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.group-description {
+  max-width: 620px;
+  color: var(--text-secondary) !important;
+  font-size: 15px !important;
+  line-height: 1.8 !important;
+  font-weight: 300 !important;
+}
+
+
+/* ==========================================
+   9. HOME PAGE
+========================================== */
+
+.home-intro,
+.home-categories {
+  position: relative;
+  padding-block: clamp(100px, 12vw, 170px);
+}
+
+.home-categories {
+  background: var(--bg-secondary);
+}
+
+.home-intro-header,
+.home-categories-header {
+  text-align: center;
+  margin-inline: auto;
+}
+
+.home-intro-header .section-description,
+.home-categories-header .section-description {
+  margin-inline: auto;
+}
+
+.home-intro-action {
+  display: flex;
+  justify-content: center;
+}
+
+.intro-container {
+  max-width: var(--container-lg);
+  margin-inline: auto;
+  padding-inline: clamp(24px, 5vw, 60px);
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: clamp(50px, 8vw, 100px);
+  align-items: center;
+}
+
+.label-superior {
+  display: block;
+  margin-bottom: 20px;
+  color: var(--accent-gold);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+
+.intro-content h2 {
+  font-size: clamp(3rem, 6vw, 5.5rem);
+  line-height: 0.95;
+  margin-bottom: 36px;
+}
+
+.intro-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 36px;
+}
+
+.intro-text p {
+  color: var(--text-secondary);
+  line-height: 1.9;
+  margin-bottom: 24px;
+}
+
+.link-scopri {
+  color: var(--text-primary);
+  border-bottom: 1px solid rgba(198,164,106,0.55);
+  padding-bottom: 6px;
+}
+
+.feature-item {
+  margin-bottom: 24px;
+}
+
+.feature-item strong {
+  display: block;
+  color: var(--accent-gold-light);
+  margin-bottom: 6px;
+}
+
+.feature-item span {
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+.cat-header h2 {
+  text-align: center;
+  font-size: clamp(2rem, 4vw, 3rem);
+  margin-bottom: 56px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.cat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.cat-card {
+  position: relative;
+  display: block;
+  height: 540px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.cat-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1.2s var(--ease-premium);
+}
+
+.cat-card:hover img {
+  transform: scale(1.07);
+}
+
+.cat-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 34px;
+  background: linear-gradient(to top, rgba(0,0,0,0.82), transparent 60%);
+}
+
+.cat-overlay h3 {
+  font-size: 2rem;
+  margin-bottom: 8px;
+}
+
+.cat-overlay p {
+  color: var(--accent-gold);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+
+/* ==========================================
+   11. ACCESSIBILITY / SCROLLBAR
+========================================== */
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid rgba(198,164,106,0.45);
+  outline-offset: 4px;
+}
+
+::selection {
+  background: rgba(198,164,106,0.28);
+  color: white;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #050505;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.16);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(198,164,106,0.38);
+}
+
+
+/* ==========================================
+   12. RESPONSIVE
+========================================== */
+
+@media (max-width: 992px) {
+
+  .history-content {
+    grid-template-columns: 1fr;
+
+    gap: 60px;
+  }
+
+  .history-description {
+    max-width: 100%;
+  }
+
+}
+
+@media (max-width: 768px) {
+
+  .history-section {
+    padding:
+      100px 0;
+  }
+
+  .history-top {
+    margin-bottom: 70px;
+  }
+
+  .history-line {
+    gap: 10px;
+  }
+
+  .showroom-title {
+    margin-top: 6px;
+  }
+
+  .history-description p {
+    font-size: 14px;
+    line-height: 1.9;
+  }
+
+  .social-buttons {
+    gap: 14px;
+  }
+
+  .c-btn {
+    width: 54px;
+    height: 54px;
+  }
+
+  .c-modern-map iframe {
+    height: 420px;
+  }
+
+}

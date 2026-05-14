@@ -1,655 +1,517 @@
 /* ==========================================
-   SHOWCASE.CSS
-   Products • Categories • Carousels
+   PRODUCTS PAGE / PRODUCT NAV
 ========================================== */
 
-
-/* ==========================================
-   1. SHOWCASE SECTION
-========================================== */
-
-.showcase-section {
+.prodotti-layout {
   position: relative;
 
-  padding-block:
-    clamp(100px, 12vw, 180px);
-
-  overflow: hidden;
+  background:
+    radial-gradient(circle at top, rgba(198,164,106,0.08), transparent 34%),
+    var(--bg-main);
 }
 
+.prodotti-container {
+  padding-block: clamp(100px, 12vw, 180px);
+}
 
-/* ==========================================
-   2. SHOWCASE HEADER
-========================================== */
+.product-nav {
+  position: sticky;
+  top: var(--navbar-height);
+  z-index: 950;
 
-.showcase-header {
+  display: block;
+
+  padding: 14px 0;
+
+  background: rgba(5,5,5,0.66);
+
+  backdrop-filter: blur(22px) saturate(180%);
+  -webkit-backdrop-filter: blur(22px) saturate(180%);
+
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.product-nav-container {
   display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
+  justify-content: center;
 
-  gap: 40px;
+  gap: 28px;
 
-  margin-bottom: 70px;
+  overflow-x: auto;
+  white-space: nowrap;
+
+  scrollbar-width: none;
+
+  padding-inline: 20px;
 }
 
-.showcase-header-content {
-  max-width: 760px;
+.product-nav-container::-webkit-scrollbar {
+  display: none;
 }
 
-.showcase-label {
-
-  display: inline-flex;
-  align-items: center;
-
-  gap: 14px;
-
-  margin-bottom: 24px;
-
-  color:
-    var(--accent-gold);
+.product-nav a {
+  color: var(--text-muted);
 
   font-size: 11px;
   font-weight: 600;
 
+  letter-spacing: 0.18em;
   text-transform: uppercase;
 
-  letter-spacing: 0.24em;
+  transition: color var(--transition-fast);
 }
 
-.showcase-label::before {
-
-  content: "";
-
-  width: 40px;
-  height: 1px;
-
-  background:
-    rgba(198,164,106,0.5);
-}
-
-
-/* Title */
-
-.showcase-title {
-
-  margin-bottom: 22px;
-
-  font-size:
-    clamp(3rem, 6vw, 5.5rem);
-
-  line-height: 0.95;
-
-  letter-spacing: -0.05em;
-}
-
-
-/* Description */
-
-.showcase-description {
-
-  max-width: 620px;
-
-  color:
-    var(--text-secondary);
-
-  line-height: 1.9;
+.product-nav a:hover,
+.product-nav a.active {
+  color: var(--accent-gold-light);
 }
 
 
 /* ==========================================
-   3. SHOWCASE ACTION
+   BRAND GROUPS
 ========================================== */
 
-.showcase-action {
-  flex-shrink: 0;
-}
-
-
-/* ==========================================
-   4. CATEGORY GRID
-========================================== */
-
-.category-grid {
-  display: grid;
-
-  grid-template-columns:
-    repeat(3, minmax(0, 1fr));
-
-  gap: 30px;
-}
-
-
-/* ==========================================
-   5. CATEGORY CARD
-========================================== */
-
-.category-card {
+.brand-group {
   position: relative;
 
-  min-height: 640px;
+  padding-block: clamp(80px, 10vw, 130px);
 
-  border-radius:
-    var(--radius-xl);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
 
   overflow: hidden;
-
-  isolation: isolate;
-
-  background:
-    #0d0d0f;
-
-  transition:
-    transform var(--transition-medium),
-    box-shadow var(--transition-medium);
 }
 
-
-/* Hover */
-
-.category-card:hover {
-
-  transform:
-    translateY(-10px);
-
-  box-shadow:
-    0 30px 70px rgba(0,0,0,0.45);
-}
-
-
-/* ==========================================
-   6. CATEGORY IMAGE
-========================================== */
-
-.category-image {
-  position: absolute;
-  inset: 0;
-}
-
-.category-image img {
-  width: 100%;
-  height: 100%;
-
-  object-fit: cover;
-
-  transition:
-    transform 1.6s var(--ease-premium),
-    filter 1.6s var(--ease-premium);
-}
-
-
-/* Overlay */
-
-.category-image::after {
-  content: "";
-
-  position: absolute;
-  inset: 0;
-
+.brand-group:nth-child(even) {
   background:
     linear-gradient(
-      to top,
-      rgba(0,0,0,0.82) 5%,
-      rgba(0,0,0,0.22) 45%,
-      rgba(0,0,0,0.08) 100%
+      to bottom,
+      rgba(255,255,255,0.015),
+      transparent
     );
 }
 
+.group-header {
+  position: relative;
 
-/* Hover image */
+  max-width: 850px;
 
-.category-card:hover .category-image img {
-
-  transform:
-    scale(1.06);
-
-  filter:
-    contrast(1.04)
-    saturate(1.02);
+  margin-bottom: 46px;
 }
 
+.group-header::before {
+  content: "";
 
-/* ==========================================
-   7. CATEGORY CONTENT
-========================================== */
+  display: block;
 
-.category-content {
-  position: absolute;
+  width: 58px;
+  height: 1px;
 
-  inset: 0;
+  margin-bottom: 24px;
 
-  display: flex;
-  flex-direction: column;
+  background: var(--accent-gold);
 
-  justify-content: flex-end;
-
-  padding: 38px;
-
-  z-index: 2;
+  opacity: 0.7;
 }
 
-
-/* Category number */
-
-.category-number {
+.group-header h2.section-title {
+  font-size: clamp(3rem, 7vw, 5.5rem);
+  line-height: 0.95;
 
   margin-bottom: 18px;
-
-  color:
-    rgba(255,255,255,0.36);
-
-  font-size: 12px;
-  font-weight: 600;
-
-  letter-spacing: 0.22em;
-
-  text-transform: uppercase;
 }
 
+.section-subtitle {
+  color: var(--accent-gold);
 
-/* Category title */
-
-.category-title {
+  font-size: clamp(12px, 1vw, 14px);
+  line-height: 1.4;
 
   margin-bottom: 16px;
 
-  font-size:
-    clamp(2rem, 4vw, 3rem);
+  font-weight: 500;
 
-  line-height: 0.95;
-
-  letter-spacing: -0.04em;
-}
-
-
-/* Category description */
-
-.category-description {
-
-  max-width: 90%;
-
-  margin-bottom: 26px;
-
-  color:
-    rgba(255,255,255,0.72);
-
-  line-height: 1.8;
-}
-
-
-/* ==========================================
-   8. CATEGORY LINK
-========================================== */
-
-.category-link {
-  display: inline-flex;
-  align-items: center;
-
-  gap: 12px;
-
-  width: fit-content;
-
-  color:
-    var(--accent-gold-light);
-
-  font-size: 12px;
-  font-weight: 600;
-
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-
-  letter-spacing: 0.18em;
-
-  transition:
-    gap var(--transition-medium),
-    opacity var(--transition-fast);
 }
 
-.category-link:hover {
-  gap: 18px;
+.group-description {
+  max-width: 620px;
+
+  color: var(--text-secondary) !important;
+
+  font-size: 15px !important;
+  line-height: 1.8 !important;
+  font-weight: 300 !important;
 }
 
 
 /* ==========================================
-   9. HORIZONTAL SHOWCASE
+   BRAND CAROUSEL
 ========================================== */
 
-.horizontal-showcase {
+.figurine-wrapper {
   position: relative;
 }
 
-
-/* Track */
-
-.showcase-track {
-  display: flex;
+.brand-figurine-track {
+  display: flex !important;
+  flex-wrap: nowrap !important;
 
   gap: 24px;
 
-  overflow-x: auto;
-
-  padding-bottom: 12px;
+  overflow-x: auto !important;
 
   scroll-snap-type: x proximity;
-
   scrollbar-width: none;
 
   -webkit-overflow-scrolling: touch;
+
+  padding: 16px 0 34px;
 }
 
-.showcase-track::-webkit-scrollbar {
+.brand-figurine-track::-webkit-scrollbar {
   display: none;
 }
 
 
 /* ==========================================
-   10. SHOWCASE ITEM
+   BRAND CARD MINI
 ========================================== */
 
-.showcase-item {
+.brand-card-mini {
   position: relative;
 
-  flex:
-    0 0 360px;
+  flex: 0 0 330px !important;
 
-  min-height: 520px;
+  height: 460px !important;
 
-  border-radius:
-    var(--radius-xl);
+  border-radius: var(--radius-lg);
 
   overflow: hidden;
 
   scroll-snap-align: start;
 
-  background:
-    rgba(255,255,255,0.03);
+  background: rgba(255,255,255,0.03);
 
-  border:
-    1px solid rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.07);
 
   transition:
     transform var(--transition-medium),
-    border-color var(--transition-medium);
+    border-color var(--transition-medium),
+    box-shadow var(--transition-medium);
 }
 
+.brand-card-mini:hover {
+  transform: translateY(-10px);
 
-/* Hover */
+  border-color: rgba(255,255,255,0.14);
 
-.showcase-item:hover {
-
-  transform:
-    translateY(-8px);
-
-  border-color:
-    rgba(255,255,255,0.14);
+  box-shadow:
+    0 28px 60px rgba(0,0,0,0.38);
 }
 
-
-/* ==========================================
-   11. SHOWCASE MEDIA
-========================================== */
-
-.showcase-media {
-  position: relative;
+.brand-card-mini a {
+  display: block;
 
   width: 100%;
   height: 100%;
 }
 
-.showcase-media img {
+.brand-card-mini img {
   width: 100%;
   height: 100%;
 
   object-fit: cover;
 
+  opacity: 0.78;
+
   transition:
-    transform 1.4s var(--ease-premium);
+    transform 1.2s var(--ease-premium),
+    opacity 1.2s var(--ease-premium);
+
+  will-change: transform;
+
+  backface-visibility: hidden;
 }
 
-.showcase-item:hover .showcase-media img {
+.brand-card-mini:hover img {
+  transform: scale(1.07);
 
-  transform:
-    scale(1.06);
+  opacity: 1;
 }
 
-
-/* Overlay */
-
-.showcase-media::after {
-
-  content: "";
-
+.brand-card-overlay {
   position: absolute;
   inset: 0;
+
+  display: flex;
+  align-items: flex-end;
+
+  padding: 28px;
 
   background:
     linear-gradient(
       to top,
-      rgba(0,0,0,0.84),
-      rgba(0,0,0,0.18) 45%,
+      rgba(0,0,0,0.88) 8%,
+      rgba(0,0,0,0.20) 55%,
       transparent
     );
 }
 
+.brand-card-overlay h3 {
+  color: var(--text-primary);
 
-/* ==========================================
-   12. SHOWCASE INFO
-========================================== */
+  font-family: var(--font-titles);
 
-.showcase-info {
-  position: absolute;
-
-  left: 0;
-  bottom: 0;
-
-  width: 100%;
-
-  padding: 28px;
-
-  z-index: 2;
-}
-
-
-/* Meta */
-
-.showcase-meta {
-
-  margin-bottom: 12px;
-
-  color:
-    rgba(255,255,255,0.44);
-
-  font-size: 11px;
-  font-weight: 600;
-
-  letter-spacing: 0.20em;
-
-  text-transform: uppercase;
-}
-
-
-/* Name */
-
-.showcase-name {
-
-  margin-bottom: 14px;
-
-  font-size:
-    1.8rem;
-
+  font-size: 1.45rem;
   line-height: 1;
+
+  letter-spacing: -0.03em;
 }
 
 
 /* ==========================================
-   13. SHOWCASE NAVIGATION
+   CAROUSEL ARROWS
 ========================================== */
 
-.showcase-nav {
+.scroll-arrow,
+.nav-btn {
   position: absolute;
 
   top: 50%;
-  left: 0;
 
-  width: 100%;
-
-  transform:
-    translateY(-50%);
-
-  pointer-events: none;
-
-  z-index: 10;
-}
-
-
-/* Arrows */
-
-.showcase-arrow {
-  position: absolute;
-
-  width: 58px;
-  height: 58px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  width: 56px;
+  height: 56px;
 
   border-radius: 50%;
 
-  background:
-    rgba(255,255,255,0.06);
+  transform: translateY(-50%);
 
-  border:
-    1px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.10);
 
-  backdrop-filter:
-    blur(20px);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
 
-  -webkit-backdrop-filter:
-    blur(20px);
+  color: var(--text-primary);
 
-  box-shadow:
-    0 10px 30px rgba(0,0,0,0.24);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   cursor: pointer;
 
-  pointer-events: auto;
+  z-index: 10;
+
+  opacity: 0;
 
   transition:
+    opacity var(--transition-medium),
     transform var(--transition-medium),
     background var(--transition-medium),
     border-color var(--transition-medium);
 }
 
-
-/* Hover */
-
-.showcase-arrow:hover {
-
-  transform:
-    scale(1.06);
-
-  background:
-    rgba(255,255,255,0.10);
-
-  border-color:
-    rgba(255,255,255,0.14);
+.figurine-wrapper:hover .scroll-arrow {
+  opacity: 1;
 }
 
+.scroll-arrow:hover,
+.nav-btn:hover {
+  background: rgba(255,255,255,0.10);
 
-/* Left / Right */
+  border-color: rgba(231,210,176,0.22);
 
-.showcase-arrow.prev {
+  transform:
+    translateY(-50%)
+    scale(1.05);
+}
+
+.scroll-arrow.left,
+.prev {
   left: -28px;
 }
 
-.showcase-arrow.next {
+.scroll-arrow.right,
+.next {
   right: -28px;
+}
+
+.scroll-arrow.is-hidden {
+  opacity: 0 !important;
+  pointer-events: none;
 }
 
 
 /* ==========================================
-   14. SHOWCASE DOTS
+   PNG LUXURY ARROW
 ========================================== */
 
-.showcase-dots {
+.arrow {
+  display: block;
+
+  width: 22px;
+  height: 22px;
+
+  background:
+    url("../img/arrow.png")
+    center/contain
+    no-repeat;
+
+  filter:
+    brightness(0)
+    invert(1)
+    opacity(0.92);
+
+  transition:
+    transform var(--transition-medium),
+    opacity var(--transition-medium);
+
+  will-change: transform;
+}
+
+.right-arrow {
+  transform: rotate(0deg);
+}
+
+.scroll-arrow.left .arrow {
+  transform: rotate(180deg);
+}
+
+
+/* movimento continuo */
+
+.scroll-arrow.right:hover .arrow {
+  animation:
+    arrowMoveRight 1s cubic-bezier(0, 0.6, 1, 0.4) infinite;
+}
+
+.scroll-arrow.left:hover .arrow {
+  animation:
+    arrowMoveLeft 1s cubic-bezier(0, 0.6, 1, 0.4) infinite;
+}
+
+@keyframes arrowMoveRight {
+  0% {
+    transform: translateX(8px);
+  }
+
+  100% {
+    transform: translateX(-8px);
+  }
+}
+
+@keyframes arrowMoveLeft {
+  0% {
+    transform:
+      rotate(180deg)
+      translateX(8px);
+  }
+
+  100% {
+    transform:
+      rotate(180deg)
+      translateX(-8px);
+  }
+}
+
+
+/* ==========================================
+   CAROUSEL DOTS
+========================================== */
+
+.carousel-dots,
+.slider-dots {
   display: flex;
   justify-content: center;
 
   gap: 10px;
 
-  margin-top: 36px;
+  margin-top: 28px;
 }
 
-.showcase-dot {
+.dot,
+.slider-dot {
   width: 8px;
   height: 8px;
 
   border-radius: 50%;
 
-  background:
-    rgba(255,255,255,0.18);
+  background: rgba(255,255,255,0.20);
+
+  cursor: pointer;
 
   transition:
     transform var(--transition-fast),
     background var(--transition-fast);
 }
 
-.showcase-dot.active {
+.dot.active,
+.dot:hover,
+.slider-dot.active,
+.slider-dot:hover {
+  background: var(--accent-gold);
 
-  transform:
-    scale(1.4);
-
-  background:
-    var(--accent-gold);
+  transform: scale(1.45);
 }
 
 
 /* ==========================================
-   15. RESPONSIVE
+   PRODUCTS RESPONSIVE
 ========================================== */
-
-@media (max-width: 1200px) {
-
-  .category-grid {
-    grid-template-columns:
-      repeat(2, minmax(0, 1fr));
-  }
-
-}
-
-
-@media (max-width: 992px) {
-
-  .showcase-header {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .category-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .category-card {
-    min-height: 560px;
-  }
-
-}
-
 
 @media (max-width: 768px) {
 
-  .showcase-item {
-    flex:
-      0 0 82vw;
+  .product-nav {
+    display: block !important;
 
-    min-height: 480px;
+    top: var(--navbar-height);
+
+    padding: 10px 0;
   }
 
-  .showcase-arrow {
-    display: none;
+  .product-nav-container {
+    justify-content: flex-start;
+
+    overflow-x: auto;
+
+    padding: 0 20px 8px;
+
+    gap: 20px;
   }
 
-  .category-content {
-    padding: 28px;
+  .product-nav a {
+    flex: 0 0 auto;
+
+    font-size: 10px;
+  }
+
+  .brand-group {
+    padding-block: 70px;
+
+    scroll-margin-top:
+      calc(var(--navbar-height) + 80px);
+  }
+
+  .brand-card-mini {
+    flex: 0 0 76vw !important;
+
+    height: 430px !important;
+  }
+
+  .scroll-arrow,
+  .nav-btn,
+  .slider-dots,
+  .carousel-dots {
+    display: none !important;
+  }
+
+}
+
+@media (max-width: 480px) {
+
+  .brand-card-mini {
+    flex-basis: 82vw !important;
   }
 
 }

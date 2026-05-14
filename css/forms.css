@@ -1,117 +1,22 @@
 /* ==========================================
-   FORMS.CSS
-   Search • Inputs • Filters • Chips
-========================================== */
-
-
-/* ==========================================
-   1. FORM BASE
-========================================== */
-
-input,
-textarea,
-select {
-  width: 100%;
-
-  border: none;
-  outline: none;
-
-  background: transparent;
-
-  color: var(--text-primary);
-
-  font-family: var(--font-body);
-}
-
-input::placeholder,
-textarea::placeholder {
-  color: var(--text-muted);
-}
-
-
-/* ==========================================
-   2. INPUT GLASS
-========================================== */
-
-.input-glass {
-  position: relative;
-
-  width: 100%;
-
-  min-height: 58px;
-
-  padding:
-    0 22px;
-
-  border-radius: 18px;
-
-  background:
-    rgba(255,255,255,0.045);
-
-  border:
-    1px solid rgba(255,255,255,0.08);
-
-  backdrop-filter:
-    blur(22px) saturate(180%);
-
-  -webkit-backdrop-filter:
-    blur(22px) saturate(180%);
-
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,0.06);
-
-  transition:
-    background var(--transition-medium),
-    border-color var(--transition-medium),
-    box-shadow var(--transition-medium),
-    transform var(--transition-medium);
-}
-
-.input-glass:focus {
-  background:
-    rgba(255,255,255,0.07);
-
-  border-color:
-    rgba(198,164,106,0.26);
-
-  box-shadow:
-    0 0 0 4px rgba(198,164,106,0.06),
-    inset 0 1px 0 rgba(255,255,255,0.08);
-
-  transform:
-    translateY(-1px);
-}
-
-
-/* ==========================================
-   3. SEARCH SECTION
+   SEARCH SECTION
 ========================================== */
 
 .search-section {
   position: sticky;
+  top: calc(var(--navbar-height) + 48px);
 
-  top: var(--navbar-height);
+  z-index: 940;
 
-  z-index: 900;
+  padding: 14px 0;
 
-  padding:
-    14px 0;
+  background: rgba(5,5,5,0.55);
 
-  background:
-    rgba(5,5,5,0.55);
+  backdrop-filter: blur(22px) saturate(180%);
+  -webkit-backdrop-filter: blur(22px) saturate(180%);
 
-  backdrop-filter:
-    blur(22px) saturate(180%);
-
-  -webkit-backdrop-filter:
-    blur(22px) saturate(180%);
-
-  border-bottom:
-    1px solid rgba(255,255,255,0.06);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
 }
-
-
-/* Container */
 
 .search-container {
   width: 100%;
@@ -119,12 +24,8 @@ textarea::placeholder {
 
   margin-inline: auto;
 
-  padding-inline:
-    clamp(20px, 5vw, 60px);
+  padding-inline: clamp(20px, 5vw, 60px);
 }
-
-
-/* Wrapper */
 
 .search-wrapper {
   position: relative;
@@ -134,42 +35,30 @@ textarea::placeholder {
   margin-inline: auto;
 }
 
-
-/* Icon */
-
 .search-icon {
   position: absolute;
 
   left: 20px;
   top: 50%;
 
-  transform:
-    translateY(-50%);
+  transform: translateY(-50%);
 
-  color:
-    var(--text-muted);
+  color: var(--text-muted);
 
   pointer-events: none;
 
   z-index: 2;
 }
 
-
-/* Search input */
-
 #brandSearch {
   width: 100%;
-
   height: 58px;
 
-  padding:
-    0 22px 0 52px;
+  padding: 0 22px 0 52px;
 
-  border-radius:
-    999px;
+  border-radius: 999px;
 
-  color:
-    var(--text-primary);
+  color: var(--text-primary);
 
   background:
     linear-gradient(
@@ -178,14 +67,10 @@ textarea::placeholder {
       rgba(255,255,255,0.035)
     );
 
-  border:
-    1px solid rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.08);
 
-  backdrop-filter:
-    blur(24px) saturate(180%);
-
-  -webkit-backdrop-filter:
-    blur(24px) saturate(180%);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
 
   box-shadow:
     0 12px 30px rgba(0,0,0,0.22),
@@ -194,15 +79,11 @@ textarea::placeholder {
   font-size: 15px;
 
   transition:
-    width var(--transition-medium),
     background var(--transition-medium),
     border-color var(--transition-medium),
     box-shadow var(--transition-medium),
     transform var(--transition-medium);
 }
-
-
-/* Focus */
 
 #brandSearch:focus {
   background:
@@ -212,304 +93,140 @@ textarea::placeholder {
       rgba(255,255,255,0.05)
     );
 
-  border-color:
-    rgba(198,164,106,0.26);
+  border-color: rgba(198,164,106,0.26);
 
   box-shadow:
     0 18px 40px rgba(0,0,0,0.32),
     0 0 0 4px rgba(198,164,106,0.06),
     inset 0 1px 0 rgba(255,255,255,0.10);
 
-  transform:
-    scale(1.015);
+  transform: scale(1.015);
 }
-
-
-/* Hover */
 
 .search-wrapper:hover #brandSearch {
-  border-color:
-    rgba(255,255,255,0.16);
+  border-color: rgba(255,255,255,0.16);
 }
 
 
 /* ==========================================
-   4. FILTER BAR
+   SEARCH AUTOCOMPLETE
 ========================================== */
 
-.filter-bar {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.search-suggestions {
+  position: absolute;
 
-  gap: 12px;
+  top: calc(100% + 12px);
+  left: 0;
 
-  flex-wrap: wrap;
+  width: 100%;
+  max-height: 320px;
 
-  margin-bottom: 50px;
-}
+  overflow-y: auto;
 
+  padding: 10px;
 
-/* ==========================================
-   5. FILTER BUTTONS
-========================================== */
+  border-radius: 22px;
 
-.filter-btn {
-  position: relative;
+  background: rgba(8,8,9,0.82);
+  border: 1px solid rgba(255,255,255,0.10);
 
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
 
-  min-height: 44px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.35);
 
-  padding:
-    0 20px;
+  opacity: 0;
+  visibility: hidden;
 
-  border-radius:
-    999px;
-
-  color:
-    var(--text-secondary);
-
-  background:
-    rgba(255,255,255,0.04);
-
-  border:
-    1px solid rgba(255,255,255,0.07);
-
-  font-size: 11px;
-  font-weight: 600;
-
-  letter-spacing:
-    0.18em;
-
-  text-transform:
-    uppercase;
-
-  cursor:
-    pointer;
+  transform: translateY(8px);
 
   transition:
-    color var(--transition-fast),
-    background var(--transition-medium),
-    border-color var(--transition-medium),
-    transform var(--transition-medium);
+    opacity var(--transition-medium),
+    transform var(--transition-medium),
+    visibility var(--transition-medium);
+
+  z-index: 999;
 }
 
-.filter-btn:hover {
-  color:
-    var(--text-primary);
+.search-suggestions.active {
+  opacity: 1;
+  visibility: visible;
 
-  background:
-    rgba(255,255,255,0.07);
-
-  transform:
-    translateY(-2px);
+  transform: translateY(0);
 }
 
-.filter-btn.active {
-  color:
-    var(--text-primary);
+.search-suggestion {
+  width: 100%;
 
-  background:
-    linear-gradient(
-      135deg,
-      rgba(255,255,255,0.13),
-      rgba(198,164,106,0.12)
-    );
-
-  border-color:
-    rgba(198,164,106,0.24);
-}
-
-
-/* ==========================================
-   6. CHIPS
-========================================== */
-
-.chips {
   display: flex;
   align-items: center;
+  justify-content: space-between;
 
-  gap: 10px;
+  padding: 14px 16px;
 
-  flex-wrap: wrap;
-}
+  border-radius: 14px;
 
-.chip {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+  color: var(--text-secondary);
 
-  min-height: 36px;
-
-  padding:
-    0 14px;
-
-  border-radius:
-    999px;
-
-  background:
-    rgba(255,255,255,0.04);
-
-  border:
-    1px solid rgba(255,255,255,0.06);
-
-  color:
-    var(--text-muted);
-
-  font-size: 10px;
+  font-size: 13px;
   font-weight: 600;
 
-  text-transform:
-    uppercase;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 
-  letter-spacing:
-    0.14em;
+  transition:
+    background var(--transition-fast),
+    color var(--transition-fast),
+    transform var(--transition-fast);
 }
 
-.chip.gold {
-  color:
-    var(--accent-gold-light);
+.search-suggestion:hover {
+  background: rgba(255,255,255,0.07);
 
-  border-color:
-    rgba(198,164,106,0.18);
+  color: var(--accent-gold-light);
 
-  background:
-    rgba(198,164,106,0.07);
+  transform: translateX(4px);
 }
 
+.search-suggestion.empty {
+  cursor: default;
 
-/* ==========================================
-   7. CONTACT FORM
-========================================== */
-
-.contact-form {
-  display: grid;
-
-  gap: 18px;
+  opacity: 0.55;
 }
 
-.form-row {
-  display: grid;
+.search-suggestion.empty:hover {
+  transform: none;
 
-  grid-template-columns:
-    repeat(2, minmax(0, 1fr));
-
-  gap: 18px;
+  background: transparent;
 }
 
-.form-field {
-  position: relative;
+.search-suggestion small {
+  color: rgba(231,210,176,0.52);
+
+  font-size: 8px;
+  font-weight: 500;
+
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+
+  opacity: 0.72;
+
+  transition: opacity var(--transition-fast);
 }
 
-.form-field textarea {
-  min-height: 160px;
-
-  padding-top:
-    20px;
-
-  resize: vertical;
+.search-suggestion:hover small {
+  opacity: 0.92;
 }
 
 
 /* ==========================================
-   8. LABELS
-========================================== */
-
-.form-label {
-  display: inline-block;
-
-  margin-bottom: 10px;
-
-  color:
-    var(--text-muted);
-
-  font-size: 11px;
-  font-weight: 600;
-
-  text-transform:
-    uppercase;
-
-  letter-spacing:
-    0.18em;
-}
-
-
-/* ==========================================
-   9. SELECT
-========================================== */
-
-.select-glass {
-  appearance: none;
-
-  min-height:
-    58px;
-
-  padding:
-    0 48px 0 22px;
-
-  border-radius:
-    18px;
-
-  background:
-    rgba(255,255,255,0.045);
-
-  border:
-    1px solid rgba(255,255,255,0.08);
-
-  color:
-    var(--text-primary);
-
-  cursor:
-    pointer;
-}
-
-
-/* ==========================================
-   10. RESPONSIVE
+   SEARCH RESPONSIVE
 ========================================== */
 
 @media (max-width: 768px) {
 
   .search-section {
-    top: var(--navbar-height);
-
-    padding:
-      10px 0;
-  }
-
-  #brandSearch {
-    height: 54px;
-
-    font-size: 16px;
-  }
-
-  .filter-bar {
-    justify-content: flex-start;
-
-    overflow-x: auto;
-
-    flex-wrap: nowrap;
-
-    padding-bottom: 8px;
-
-    scrollbar-width: none;
-  }
-
-  .filter-bar::-webkit-scrollbar {
-    display: none;
-  }
-
-  .filter-btn {
-    flex:
-      0 0 auto;
-  }
-
-  .form-row {
-    grid-template-columns:
-      1fr;
+    top: calc(var(--navbar-height) + 44px);
   }
 
 }

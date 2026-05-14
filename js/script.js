@@ -911,3 +911,113 @@ function initSectionSpy() {
     observer.observe(section);
   });
 }
+
+/* ==========================================
+   GDPR COOKIE SYSTEM
+========================================== */
+
+const cookieBanner = document.getElementById("cookieBanner");
+
+const acceptCookies = document.getElementById("acceptCookies");
+const rejectCookies = document.getElementById("rejectCookies");
+
+const COOKIE_KEY = "laruccia_cookie_choice";
+
+
+/* ==========================================
+   LOAD ANALYTICS
+========================================== */
+
+function loadGoogleAnalytics() {
+
+  if (window.gaLoaded) return;
+
+  window.gaLoaded = true;
+
+  const script = document.createElement("script");
+
+  script.async = true;
+
+  script.src =
+    "https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX";
+
+  document.head.appendChild(script);
+
+  window.dataLayer = window.dataLayer || [];
+
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+
+  window.gtag = gtag;
+
+  gtag("js", new Date());
+
+  gtag("config", "G-XXXXXXXXXX", {
+    anonymize_ip: true
+  });
+
+}
+
+
+/* ==========================================
+   SHOW BANNER
+========================================== */
+
+function showCookieBanner() {
+
+  if (!localStorage.getItem(COOKIE_KEY)) {
+
+    setTimeout(() => {
+      cookieBanner?.classList.add("active");
+    }, 1200);
+
+  }
+
+}
+
+
+/* ==========================================
+   ACCEPT
+========================================== */
+
+acceptCookies?.addEventListener("click", () => {
+
+  localStorage.setItem(COOKIE_KEY, "accepted");
+
+  cookieBanner?.classList.remove("active");
+
+  loadGoogleAnalytics();
+
+});
+
+
+/* ==========================================
+   REJECT
+========================================== */
+
+rejectCookies?.addEventListener("click", () => {
+
+  localStorage.setItem(COOKIE_KEY, "rejected");
+
+  cookieBanner?.classList.remove("active");
+
+});
+
+
+/* ==========================================
+   INITIALIZE
+========================================== */
+
+const savedCookieChoice =
+  localStorage.getItem(COOKIE_KEY);
+
+if (savedCookieChoice === "accepted") {
+
+  loadGoogleAnalytics();
+
+} else if (!savedCookieChoice) {
+
+  showCookieBanner();
+
+}
