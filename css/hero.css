@@ -250,7 +250,9 @@
 /* elimina linee doppie ereditate dai bottoni */
 
 .hero-btns::after,
+.hero-btns .btn-primary::before,
 .hero-btns .btn-primary::after,
+.hero-btns .btn-secondary::before,
 .hero-btns .btn-secondary::after {
   display: none !important;
   content: none !important;
@@ -369,48 +371,86 @@
   transform:
     translateX(-50%);
 
+  z-index: 3;
+
+  opacity: 0.82;
+}
+
+.scroll-indicator span {
   color:
-    rgba(255,255,255,0.54);
+    rgba(255,255,255,0.56);
 
   font-size: 10px;
   font-weight: 600;
 
   letter-spacing: 0.22em;
   text-transform: uppercase;
-
-  z-index: 3;
 }
 
-.scroll-line {
-  width: 1px;
-  height: 46px;
 
-  background:
-    linear-gradient(
-      to bottom,
-      rgba(231,210,176,0.65),
-      transparent
-    );
+.scroll-chevron {
+  position: relative;
+
+  width: 18px;
+  height: 18px;
 
   animation:
-    scrollLinePulse 1.8s ease-in-out infinite;
+    chevronFloat 2.2s ease-in-out infinite;
 }
 
-@keyframes scrollLinePulse {
+.scroll-chevron span {
+  position: absolute;
+
+  width: 10px;
+  height: 10px;
+
+  border-right:
+    1px solid rgba(231,210,176,0.75);
+
+  border-bottom:
+    1px solid rgba(231,210,176,0.75);
+
+  transform:
+    rotate(45deg);
+
+  left: 50%;
+
+  margin-left: -5px;
+}
+
+.scroll-chevron span:first-child {
+  top: 0;
+
+  opacity: 0.45;
+}
+
+.scroll-chevron span:last-child {
+  top: 6px;
+
+  opacity: 1;
+}
+
+@keyframes chevronFloat {
 
   0% {
-    transform: scaleY(0.45);
-    opacity: 0.35;
+    transform:
+      translateY(0);
+
+    opacity: 0.7;
   }
 
   50% {
-    transform: scaleY(1);
+    transform:
+      translateY(6px);
+
     opacity: 1;
   }
 
   100% {
-    transform: scaleY(0.45);
-    opacity: 0.35;
+    transform:
+      translateY(0);
+
+    opacity: 0.7;
   }
 
 }

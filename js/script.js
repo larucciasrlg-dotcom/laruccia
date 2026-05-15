@@ -13,8 +13,10 @@ document.addEventListener("DOMContentLoaded", async () => {
   initHistorySection();
   initProductCarousels();
   initScrollReveal();
-  initHeroParallax();
-  initSectionSpy();
+  initCookieBanner();
+
+  if (typeof initHeroParallax === "function") initHeroParallax();
+  if (typeof initSectionSpy === "function") initSectionSpy();
 
   if (document.getElementById("brand-title")) {
     caricaBrand();
@@ -542,282 +544,32 @@ function initSearch() {
 }
 
 
-/* ==========================================
-   BRAND DATA
-   INCOLLA QUI IL TUO OGGETTO brandData ATTUALE
-========================================== */
+function initCookieBanner() {
+  const cookieBanner = document.getElementById("cookieBanner");
+  const acceptCookies = document.getElementById("acceptCookies");
+  const rejectCookies = document.getElementById("rejectCookies");
 
-const brandData = {
-    "41zero42": {
-        nome: "41zero42",
-        descrizione: "Nel nostro showroom selezioniamo solo partner che sanno guardare oltre. 41zero42 rappresenta l'avanguardia del design ceramico italiano: un team creativo che fonde ricerca tecnologica e massima libertà estetica. Dalle texture materiche ai pattern grafici più audaci, le soluzioni di 41zero42 sono pensate per i progettisti che ricercano un linguaggio unico e distintivo. Venite a scoprire come la contaminazione di stili e l'eccellenza del Made in Italy possono ridefinire i vostri spazi abitativi.",
-        imgPrincipale: "img/prodotti/ceramiche/ceramiche_41zero42.webp",
-        sito: "https://www.41zero42.com",
-        gallery: ["img/41-1.jpg", "img/41-2.jpg"]
-    },
-    "Abk": { // AGGIUNGI QUESTO
-        nome: "Abk",
-        descrizione: "Vieni a scoprire ABK, il brand che porta l’eleganza contemporanea nel cuore della tua casa. Ogni collezione ABK è pensata per offrire un’esperienza di arredo completa: pavimenti, rivestimenti e grandi lastre che dialogano tra loro in una perfetta armonia cromatica e materica. Che tu stia cercando il calore del legno, la raffinatezza del marmo o il carattere industriale del gres porcellanato, ABK ti permette di personalizzare ogni spazio con uno stile unico e sofisticato, sempre rigorosamente Made in Italy.",
-        imgPrincipale: "img/prodotti/ceramiche/ceramiche_abk.webp",
-        sito: "https://www.abk.it",
-        gallery: ["img/abk-1.jpg", "img/abk-2.jpg"]
-    },
+  if (!cookieBanner) return;
 
-    "Argenta": {
-        nome: "Argenta",
-        descrizione: "Argenta Ceramica combina la tradizione ceramica con una visione fresca e contemporanea. È il brand ideale per chi cerca varietà e concretezza: dai grandi formati alle texture più ricercate, Argenta trasforma i pavimenti e i rivestimenti in elementi d'arredo versatili, pensati per rendere ogni spazio armonioso e funzionale. Scopri nel nostro showroom come la qualità e il design accessibile di Argenta possono valorizzare la tua casa.",
-        imgPrincipale: "img/prodotti/ceramiche/ceramiche_argenta.webp",
-        sito: "https://www.argentaceramica.com",
-        gallery: ["img/argenta-1.jpg", "img/argenta-2.jpg"]
-    },
+  const COOKIE_KEY = "laruccia_cookie_choice";
 
-    "Arpa": {
-        nome: "Arpa",
-        descrizione: "Arpa Ceramiche è il punto di riferimento per chi ricerca un gres porcellanato che unisca estetica contemporanea e massima funzionalità. Con una gamma di prodotti che spazia dal gusto classico al design moderno, Arpa offre soluzioni versatili per ogni esigenza abitativa, garantendo sempre elevati standard di resistenza e facilità di manutenzione. Vieni a scoprire nel nostro showroom la varietà di finiture e formati firmati Arpa, pensati per valorizzare con stile ogni tuo progetto.",
-        imgPrincipale: "img/prodotti/ceramiche/ceramiche_arpa.webp",
-        sito: "https://www.arpaceramiche.it",
-        gallery: ["img/arpa-1.jpg", "img/arpa-2.jpg"]
-    },
-
-    "CeramicheDagostino": {
-        nome: "Ceramiche D'Agostino",
-        descrizione: "Tradizione e innovazione nella produzione di superfici ceramiche italiane.",
-        imgPrincipale: "img/prodotti/ceramiche/ceramiche_ceramichedagostino.webp",
-        sito: "https://www.agostinoceramiche.com/",
-        gallery: ["img/cerdag-1.jpg", "img/cerdag-2.jpg"]
-    },
-
-    "Cerdisa": {
-        nome: "Cerdisa",
-        descrizione: "Soluzioni ceramiche per ambienti moderni e contemporanei.",
-        imgPrincipale: "img/prodotti/ceramiche/ceramiche_cerdisa.webp",
-        sito: "https://www.ricchetti-group.com/it",
-        gallery: ["img/cerdisa-1.jpg", "img/cerdisa-2.jpg"]
-    },
-
-    "Cerdomus": {
-        nome: "Cerdomus",
-        descrizione: "Collezioni in gres porcellanato dal design elegante e ricercato.",
-        imgPrincipale: "img/prodotti/ceramiche/ceramiche_cerdomus.webp",
-        sito: "https://www.cerdomus.com",
-        gallery: ["img/cerdomus-1.jpg", "img/cerdomus-2.jpg"]
-    },
-
-    "Dado": {
-        nome: "Dado Ceramica",
-        descrizione: "Produzione italiana di gres porcellanato e rivestimenti ceramici.",
-        imgPrincipale: "img/prodotti/ceramiche/ceramiche_dadoceramica.webp",
-        sito: "https://www.dadoceramica.it",
-        gallery: ["img/dado-1.jpg", "img/dado-2.jpg"]
-    },
-
-    "DecoratoriBassanesi": {
-        nome: "Decoratori Bassanesi",
-        descrizione: "Ceramiche artistiche e decorative dal forte carattere artigianale.",
-        imgPrincipale: "img/prodotti/ceramiche/ceramiche_decoratoribassanesi.webp",
-        sito: "https://www.decoratoribassanesi.it",
-        gallery: ["img/decoratori-1.jpg", "img/decoratori-2.jpg"]
-    },
-
-    "Evoluzioni": {
-        nome: "Evoluzioni",
-        descrizione: "Superfici ceramiche innovative per interior design contemporaneo.",
-        imgPrincipale: "img/prodotti/ceramiche/ceramiche_evoluzioni.webp",
-        sito: "https://www.evoluzioni-ceramiche.it",
-        gallery: ["img/evoluzioni-1.jpg", "img/evoluzioni-2.jpg"]
-    },
-
-    "Flaviker": {
-        nome: "Flaviker",
-        descrizione: "Lastre e superfici ceramiche di design per architettura moderna.",
-        imgPrincipale: "img/prodotti/ceramiche/ceramiche_flaviker.webp",
-        sito: "https://www.flavikerpisa.it",
-        gallery: ["img/flaviker-1.jpg", "img/flaviker-2.jpg"]
-    },
-
-    "FloorItalia": {
-        nome: "Floor Italia",
-        descrizione: "Pavimenti e rivestimenti in gres porcellanato Made in Italy.",
-        imgPrincipale: "img/prodotti/ceramiche/ceramiche_flooritalia.webp",
-        sito: "https://www.flooritalia.it",
-        gallery: ["img/flooritalia-1.jpg", "img/flooritalia-2.jpg"]
-    },
-
-    "Florim": {
-        nome: "Florim",
-        descrizione: "Leader internazionale nelle superfici ceramiche di alta gamma.",
-        imgPrincipale: "img/prodotti/ceramiche/ceramiche_florim.webp",
-        sito: "https://www.florim.com",
-        gallery: ["img/florim-1.jpg", "img/florim-2.jpg"]
-    },
-
-    "FrancescoDeMaio": {
-        nome: "Francesco De Maio",
-        descrizione: "Maioliche artistiche artigianali della tradizione vietrese.",
-        imgPrincipale: "img/prodotti/ceramiche/ceramiche_francescodemaio.webp",
-        sito: "https://www.francescodemaio.it",
-        gallery: ["img/demaio-1.jpg", "img/demaio-2.jpg"]
-    },
-
-    "IlCavallino": {
-        nome: "Il Cavallino",
-        descrizione: "Ceramiche decorative italiane dal gusto classico e contemporaneo.",
-        imgPrincipale: "img/prodotti/ceramiche/ceramiche_ilcavallino.webp",
-        sito: "https://www.ilcavallino.it",
-        gallery: ["img/cavallino-1.jpg", "img/cavallino-2.jpg"]
-    },
-
-    "Imso": {
-        nome: "Imso",
-        descrizione: "Superfici ceramiche per ambienti residenziali e commerciali.",
-        imgPrincipale: "img/prodotti/ceramiche/ceramiche_imso.webp",
-        sito: "https://www.imso.it",
-        gallery: ["img/imso-1.jpg", "img/imso-2.jpg"]
-    },
-
-    "Kronos": {
-        nome: "Kronos",
-        descrizione: "Gres porcellanato innovativo per indoor e outdoor.",
-        imgPrincipale: "img/prodotti/ceramiche/ceramiche_kronos.webp",
-        sito: "https://kronosceramiche.com",
-        gallery: ["img/kronos-1.jpg", "img/kronos-2.jpg"]
-    },
-
-    "Ktl": {
-        nome: "Ktl",
-        descrizione: "Soluzioni ceramiche moderne per architettura e design.",
-        imgPrincipale: "img/prodotti/ceramiche/ceramiche_ktl.webp",
-        sito: "https://www.ktlceramiche.it",
-        gallery: ["img/ktl-1.jpg", "img/ktl-2.jpg"]
-    },
-
-    "Laminam": {
-        nome: "Laminam",
-        descrizione: "Grandi lastre ceramiche innovative per architettura e arredo.",
-        imgPrincipale: "img/prodotti/ceramiche/ceramiche_laminam.webp",
-        sito: "https://www.laminam.com",
-        gallery: ["img/laminam-1.jpg", "img/laminam-2.jpg"]
-    },
-
-    "Mariner": {
-        nome: "Mariner",
-        descrizione: "Ceramiche italiane per pavimenti e rivestimenti di qualità.",
-        imgPrincipale: "img/prodotti/ceramiche/ceramiche_mariner.webp",
-        sito: "https://www.mariner.it",
-        gallery: ["img/mariner-1.jpg", "img/mariner-2.jpg"]
-    },
-
-    "Piemme": {
-        nome: "Ceramiche Piemme",
-        descrizione: "Design italiano e innovazione tecnologica nelle superfici ceramiche.",
-        imgPrincipale: "img/prodotti/ceramiche/ceramiche_piemme.webp",
-        sito: "https://www.ceramichepiemme.it",
-        gallery: ["img/piemme-1.jpg", "img/piemme-2.jpg"]
-    },
-
-    "Provenza": {
-        nome: "Provenza",
-        descrizione: "Superfici in gres porcellanato dallo stile raffinato e naturale.",
-        imgPrincipale: "img/prodotti/ceramiche/ceramiche_provenza.webp",
-        sito: "https://www.provenzafloors.com",
-        gallery: ["img/provenza-1.jpg", "img/provenza-2.jpg"]
-    },
-
-    "Ricchetti": {
-        nome: "Ricchetti",
-        descrizione: "Tradizione ceramica italiana con collezioni eleganti e contemporanee.",
-        imgPrincipale: "img/prodotti/ceramiche/ceramiche_ricchetti.webp",
-        sito: "https://www.ricchetti-group.com",
-        gallery: ["img/ricchetti-1.jpg", "img/ricchetti-2.jpg"]
-    },
-
-    "Saime": {
-        nome: "Saime",
-        descrizione: "Pavimenti e rivestimenti ceramici per ambienti moderni.",
-        imgPrincipale: "img/prodotti/ceramiche/ceramiche_saime.webp",
-        sito: "https://www.saimeceramiche.it",
-        gallery: ["img/saime-1.jpg", "img/saime-2.jpg"]
-    },
-
-    "Settecento": {
-        nome: "Settecento",
-        descrizione: "Manifattura ceramica italiana dal forte carattere decorativo.",
-        imgPrincipale: "img/prodotti/ceramiche/ceramiche_settecento.webp",
-        sito: "https://www.settecento.com",
-        gallery: ["img/settecento-1.jpg", "img/settecento-2.jpg"]
-    },
-
-    "StudioOneEquipe": {
-        nome: "Studio One Equipe",
-        descrizione: "Ceramiche decorative e superfici creative Made in Italy.",
-        imgPrincipale: "img/prodotti/ceramiche/ceramiche_studiooneequipe.webp",
-        sito: "https://www.equipeceramicas.com",
-        gallery: ["img/studioone-1.jpg", "img/studioone-2.jpg"]
-    },
-
-    "Artesia": {
-        nome: "Artesia",
-        descrizione: "blabla",
-        imgPrincipale: "img/prodotti/pietre/pietre_artesia.webp",
-        sito: "https://www.artesia.it",
-        gallery: ["img/artesia.jpg", "img/artesia2.jpg"]
-    },
-    // E così via per tutti gli altri...
-};
-
-
-/* ==========================================
-   BRAND DETAIL PAGE
-========================================== */
-
-function caricaBrand() {
-  const params = new URLSearchParams(window.location.search);
-  const brandKey = params.get("name");
-
-  if (!brandKey || !brandData[brandKey]) return;
-
-  const data = brandData[brandKey];
-
-  document.title = `${data.nome} - Laruccia`;
-
-  const title = document.getElementById("brand-title");
-  const description = document.getElementById("brand-description");
-  const mainImg = document.getElementById("brand-main-img");
-  const link = document.getElementById("brand-link");
-  const gallery = document.getElementById("brand-gallery");
-
-  if (title) title.innerText = data.nome;
-  if (description) description.innerText = data.descrizione;
-
-  if (mainImg) {
-    mainImg.src = data.imgPrincipale;
-    mainImg.alt = `Ambientazione ${data.nome}`;
+  if (!localStorage.getItem(COOKIE_KEY)) {
+    setTimeout(() => {
+      cookieBanner.classList.add("active");
+    }, 1200);
   }
 
-  if (link) {
-    link.href = data.sito;
-    link.target = "_blank";
-    link.rel = "noopener noreferrer";
-  }
+  acceptCookies?.addEventListener("click", () => {
+    localStorage.setItem(COOKIE_KEY, "accepted");
+    cookieBanner.classList.remove("active");
+  });
 
-  if (gallery && Array.isArray(data.gallery)) {
-    gallery.innerHTML = "";
-
-    data.gallery.forEach(imgUrl => {
-      const item = document.createElement("div");
-      item.className = "gallery-item";
-
-      item.innerHTML = `
-        <img 
-          src="${imgUrl}" 
-          alt="Collezione ${data.nome}" 
-          loading="lazy">
-      `;
-
-      gallery.appendChild(item);
-    });
-  }
+  rejectCookies?.addEventListener("click", () => {
+    localStorage.setItem(COOKIE_KEY, "rejected");
+    cookieBanner.classList.remove("active");
+  });
 }
+
 
 /* ==========================================
    SCROLL REVEAL
