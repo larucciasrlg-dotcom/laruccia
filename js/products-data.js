@@ -9,7 +9,7 @@ const productSections = [
       { name: "Abk", slug: "Abk", image: "img/prodotti/ceramiche/ceramiche_abk.webp", alt: "Abk" },
       { name: "Argenta", slug: "Argenta", image: "img/prodotti/ceramiche/ceramiche_argenta.webp", alt: "Argenta" },
       { name: "Arpa", slug: "Arpa", image: "img/prodotti/ceramiche/ceramiche_arpa.webp", alt: "Arpa" },
-      { name: "Ceramiche D'Agostino", slug: "CeramicheDagostino", image: "img/prodotti/ceramiche/ceramiche_ceramichedagostino.webp", alt: "Ceramiche D'agostino" },
+      { name: "Antiche Fornaci D'Agostino", slug: "AnticheFornaciDAgostino", image: "img/prodotti/ceramiche/ceramiche_antiche-fornaci-dagostino.webp", alt: "Antiche Fornaci D'agostino" },
       { name: "Cerdisa", slug: "Cerdisa", image: "img/prodotti/ceramiche/ceramiche_cerdisa.webp", alt: "Cerdisa" },
       { name: "Cerdomus", slug: "Cerdomus", image: "img/prodotti/ceramiche/ceramiche_cerdomus.webp", alt: "Cerdomus" },
       { name: "Dado Ceramica", slug: "Dado", image: "img/prodotti/ceramiche/ceramiche_dadoceramica.webp", alt: "Dado" },

@@ -103,27 +103,40 @@ const brandData = {
     ]
 },
 
-"CeramicheDagostino": {
-    nome: "Ceramiche D'Agostino",
+"AnticheFornaciDAgostino": {
+    nome: "Antiche Fornaci D'Agostino",
+
     categorie: ["Ceramiche"],
-    descrizione: "Ceramiche D’Agostino interpreta il gres porcellanato attraverso superfici eleganti e funzionali, selezionate per valorizzare ambienti contemporanei con materiali resistenti, versatili e dal forte impatto estetico.",
-    imgPrincipale: "img/prodotti/ceramiche/ceramiche_ceramichedagostino.webp",
-    sito: "https://www.agostinoceramiche.com/",
+
+    descrizione: "Antiche Fornaci D’Agostino custodisce la tradizione ceramica mediterranea reinterpretandola attraverso superfici decorative dal forte valore materico e artistico. Colore, artigianalità e ricerca contemporanea danno vita a collezioni uniche capaci di raccontare il territorio, la cultura e l’eleganza del Made in Italy.",
+
+    imgPrincipale: "img/prodotti/ceramiche/ceramiche_antiche-fornaci-dagostino.webp",
+
+    sito: "https://www.fornacidagostino.com/",
+
     gallery: [
         {
-            nome: "Astral",
-            img: "img/brand/ceramiche-dagostino/astral.webp",
-            link: "https://www.ceramicasantagostino.it/en/collections"
+            nome: "Riflessi di Cava",
+
+            img: "img/brand/antiche-ceramiche-dagostino/riflessi-di-cava.webp",
+
+            link: "https://www.fornacidagostino.com/riflessi-di-cava"
         },
+
         {
-            nome: "Baystone",
-            img: "img/brand/ceramiche-dagostino/baystone.webp",
-            link: "https://www.ceramicasantagostino.it/en/collections"
+            nome: "Perle d'Italia",
+
+            img: "img/brand/antiche-ceramiche-dagostino/perle-ditalia.webp",
+
+            link: "https://www.fornacidagostino.com/perle-d-italia"
         },
+
         {
-            nome: "Akoya",
-            img: "img/brand/ceramiche-dagostino/akoya.webp",
-            link: "https://www.ceramicasantagostino.it/en/cataloghi"
+            nome: "Pietracotta",
+
+            img: "img/brand/antiche-ceramiche-dagostino/pietracotta.webp",
+
+            link: "https://www.fornacidagostino.com/pietracotta"
         }
     ]
 },
@@ -1935,7 +1948,7 @@ const brandCategories = {
   "Abk": ["Ceramiche"],
   "Argenta": ["Ceramiche"],
   "Arpa": ["Ceramiche"],
-  "CeramicheDagostino": ["Ceramiche"],
+  "AnticheFornaciDAgostino": ["Ceramiche"],
   "Cerdisa": ["Ceramiche"],
   "Cerdomus": ["Ceramiche"],
   "Dado": ["Ceramiche"],
@@ -2079,6 +2092,8 @@ if (collectionsLink) {
   collectionsLink.href = data.sito;
 }
 
+  renderBrandNavigation(brandKey);
+
   if (title) title.innerText = data.nome;
   if (description) description.innerText = data.descrizione;
 
@@ -2122,4 +2137,44 @@ data.gallery.forEach(itemData => {
   gallery.appendChild(item);
 });
   }
+}
+
+function renderBrandNavigation(currentBrandKey) {
+  const prevLink = document.getElementById("brand-prev-link");
+  const nextLink = document.getElementById("brand-next-link");
+  const prevName = document.getElementById("brand-prev-name");
+  const nextName = document.getElementById("brand-next-name");
+
+  if (!prevLink || !nextLink || !prevName || !nextName) return;
+
+  const brandKeys = Object.keys(brandData);
+  const currentIndex = brandKeys.indexOf(currentBrandKey);
+
+  if (brandKeys.length < 2 || currentIndex === -1) {
+    prevLink.hidden = true;
+    nextLink.hidden = true;
+    return;
+  }
+
+  const prevKey =
+    brandKeys[(currentIndex - 1 + brandKeys.length) % brandKeys.length];
+
+  const nextKey =
+    brandKeys[(currentIndex + 1) % brandKeys.length];
+
+  prevLink.href = `brand.html?name=${prevKey}`;
+  nextLink.href = `brand.html?name=${nextKey}`;
+
+  prevName.innerText = brandData[prevKey].nome;
+  nextName.innerText = brandData[nextKey].nome;
+
+  prevLink.setAttribute(
+    "aria-label",
+    `Passa alla collezione precedente: ${brandData[prevKey].nome}`
+  );
+
+  nextLink.setAttribute(
+    "aria-label",
+    `Passa alla prossima collezione: ${brandData[nextKey].nome}`
+  );
 }

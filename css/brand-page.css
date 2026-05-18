@@ -709,6 +709,248 @@
   transform: translateX(6px);
 }
 
+.brand-page-nav {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, 260px);
+
+  justify-content:
+    center;
+
+  gap: 14px;
+
+  margin-top: 36px;
+}
+
+.brand-nav-link {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 12px;
+
+  width: 260px;
+  min-height: 66px;
+  max-height: 66px;
+
+  padding:
+    12px 14px;
+
+  border-radius:
+    8px;
+
+  color:
+    var(--text-primary);
+
+  background:
+    rgba(255,255,255,0.045);
+
+  border:
+    1px solid rgba(255,255,255,0.11);
+
+  box-shadow:
+    0 10px 26px rgba(0,0,0,0.16);
+
+  transition:
+    transform var(--transition-medium),
+    border-color var(--transition-medium),
+    background var(--transition-medium),
+    box-shadow var(--transition-medium);
+}
+
+.brand-nav-link::before {
+  content: "";
+
+  position: absolute;
+  inset: 0 auto 0 0;
+
+  width: 3px;
+
+  border-radius:
+    8px 0 0 8px;
+
+  background:
+    var(--accent-gold);
+
+  opacity: 0.48;
+
+  transition:
+    opacity var(--transition-medium);
+}
+
+.brand-nav-link-next::before {
+  inset:
+    0 0 0 auto;
+
+  border-radius:
+    0 8px 8px 0;
+}
+
+.brand-nav-link:hover {
+  transform:
+    translateY(-2px);
+
+  border-color:
+    rgba(231,210,176,0.30);
+
+  background:
+    rgba(255,255,255,0.075);
+
+  box-shadow:
+    0 14px 32px rgba(0,0,0,0.22);
+}
+
+.brand-nav-link:hover::before {
+  opacity: 0.9;
+}
+
+.brand-nav-link-prev {
+  text-align: left;
+}
+
+.brand-nav-link-next {
+  text-align: right;
+}
+
+.brand-nav-text {
+  display: grid;
+
+  gap: 4px;
+
+  flex: 1 1 auto;
+
+  width: 0;
+  min-width: 0;
+}
+
+.brand-nav-link-prev .brand-nav-text {
+  text-align: left;
+}
+
+.brand-nav-link-next .brand-nav-text {
+  text-align: right;
+}
+
+.brand-nav-text small {
+  display: block;
+
+  color:
+    var(--accent-gold);
+
+  overflow: hidden;
+
+  font-size: 8px;
+  font-weight: 700;
+
+  letter-spacing:
+    0.10em;
+
+  line-height: 1.25;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  text-transform:
+    uppercase;
+}
+
+.brand-nav-text strong {
+  display: block;
+
+  color:
+    var(--text-primary);
+
+  font-family:
+    "Fraunces", serif;
+
+  font-size:
+    1.05rem;
+
+  font-weight: 600;
+  line-height: 1;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.brand-nav-arrow {
+  position: relative;
+
+  flex: 0 0 32px;
+
+  width: 32px;
+  height: 32px;
+
+  border-radius:
+    50%;
+
+  background:
+    rgba(198,164,106,0.10);
+
+  border:
+    1px solid rgba(198,164,106,0.22);
+
+  color:
+    var(--accent-gold);
+
+  transition:
+    background var(--transition-medium),
+    border-color var(--transition-medium),
+    transform var(--transition-medium);
+}
+
+.brand-nav-arrow::before {
+  content: "";
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  width: 10px;
+  height: 10px;
+
+  border-top:
+    1.5px solid currentColor;
+
+  border-right:
+    1.5px solid currentColor;
+
+  transform:
+    translate(-62%, -50%) rotate(45deg);
+}
+
+.brand-nav-link-prev .brand-nav-arrow::before {
+  transform:
+    translate(-38%, -50%) rotate(225deg);
+}
+
+.brand-nav-link:hover .brand-nav-arrow::before {
+  color:
+    var(--accent-gold);
+}
+
+.brand-nav-link:hover .brand-nav-arrow {
+  background:
+    rgba(198,164,106,0.16);
+
+  border-color:
+    rgba(198,164,106,0.38);
+}
+
+.brand-nav-link-next:hover .brand-nav-arrow {
+  transform:
+    translateX(2px);
+}
+
+.brand-nav-link-prev:hover .brand-nav-arrow {
+  transform:
+    translateX(-2px);
+}
+
 @media (max-width: 992px) {
   .brand-hero-grid {
     grid-template-columns: 1fr;
@@ -717,5 +959,32 @@
   .brand-image-featured {
     width: 100%;
     justify-self: stretch;
+  }
+}
+
+@media (max-width: 768px) {
+  .brand-page-nav {
+    grid-template-columns:
+      minmax(0, 1fr);
+
+    gap: 12px;
+
+    margin-top: 28px;
+  }
+
+  .brand-nav-link,
+  .brand-nav-link-next {
+    width: 100%;
+    max-width: 330px;
+    min-height: 64px;
+    max-height: 64px;
+    margin-inline: auto;
+
+    text-align: left;
+  }
+
+  .brand-nav-link-next {
+    flex-direction:
+      row-reverse;
   }
 }
